@@ -10,7 +10,8 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { UsuarioEntity } from './entities/usuario.entity';
 
 @ApiTags('users')
 @Controller('users')
@@ -18,42 +19,46 @@ export class UsersController {
   constructor(private readonly repository: UsersService) {}
 
   @Post()
-  @ApiResponse({
-    status: 201,
-    description: 'El registro fue creado exitosamente',
+  @ApiOkResponse({
+    status: 200,
+    type: UsuarioEntity,
   })
   create(@Body() createDTO: CreateUserDto) {
     return this.repository.create(createDTO);
   }
 
   @Get()
-  @ApiResponse({
+  @ApiOkResponse({
     status: 200,
-    description: 'Se obtuvieron los datos correctamente.',
+    type: [UsuarioEntity],
   })
   findAll() {
     return this.repository.findAll();
   }
 
   @Get(':id')
-  @ApiResponse({
+  @ApiOkResponse({
     status: 200,
-    description: 'Se obtuvo el registro correctamente.',
+    type: UsuarioEntity,
   })
   findOne(@Param('id') id: string) {
     return this.repository.findOne(id);
   }
 
   @Patch(':id')
-  @ApiResponse({
+  @ApiOkResponse({
     status: 200,
-    description: 'Se actualizo el registro correctamente.',
+    type: UsuarioEntity,
   })
   update(@Param('id') id: string, @Body() updateDTO: UpdateUserDto) {
     return this.repository.update(id, updateDTO);
   }
 
   @Delete(':id')
+  @ApiOkResponse({
+    status: 200,
+    type: UsuarioEntity,
+  })
   remove(@Param('id') id: string) {
     return this.repository.remove(id);
   }
