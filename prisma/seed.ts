@@ -8,6 +8,7 @@ async function main() {
       usuario: 'admin',
       email: 'admin@mail.com',
       password: 'adminsupersecret',
+      rol: 'ADMIN',
     },
   });
 }
