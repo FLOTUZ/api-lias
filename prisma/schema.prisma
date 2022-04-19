@@ -14,6 +14,8 @@ model Aseguradora {
   expediente String       @db.VarChar(20)
   Asistencia Asistencia[]
   Ticket     Ticket[]
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime?
 }
 
 model Asistencia {
@@ -22,6 +24,8 @@ model Asistencia {
   aseguradoraId Int?
   Aseguradora   Aseguradora? @relation(fields: [aseguradoraId], references: [id])
   Ticket        Ticket[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime?
 }
 
 model Ciudad {
@@ -29,41 +33,41 @@ model Ciudad {
   nombre    String    @db.VarChar(100)
   latitud   Float?
   longitud  Float?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime?
+  createdAt DateTime? @default(now())
+  updatedAt DateTime  @updatedAt
   Tecnico   Tecnico[]
 }
 
 model Imagen {
-  id                Int      @id @unique @default(autoincrement())
+  id                Int       @id @unique @default(autoincrement())
   checkin           String?
   solucion          String?
   checkout          String?
   firma_conformidad String?
-  ticketId          Int      @unique
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime
-  Ticket            Ticket   @relation(fields: [ticketId], references: [id])
+  ticketId          Int       @unique
+  createdAt         DateTime? @default(now())
+  updatedAt         DateTime  @updatedAt
+  Ticket            Ticket    @relation(fields: [ticketId], references: [id])
 }
 
 model Seguimiento {
-  id                   Int      @id @unique @default(autoincrement())
+  id                   Int       @id @unique @default(autoincrement())
   nombre_asesor_seguro Int
   detalles             String
   fecha_seguimiento    DateTime
   ticketId             Int
   usuarioId            Int
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime
-  Ticket               Ticket   @relation(fields: [ticketId], references: [id])
-  Usuario              Usuario  @relation(fields: [usuarioId], references: [id])
+  createdAt            DateTime? @default(now())
+  updatedAt            DateTime  @updatedAt
+  Ticket               Ticket    @relation(fields: [ticketId], references: [id])
+  Usuario              Usuario   @relation(fields: [usuarioId], references: [id])
 }
 
 model Servicio {
   id        Int       @id @unique @default(autoincrement())
   nombre    String    @db.VarChar(100)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime?
+  createdAt DateTime? @default(now())
+  updatedAt DateTime  @updatedAt
   tipo      String
   Ticket    Ticket[]
   Tecnico   Tecnico[]
@@ -78,8 +82,8 @@ model Tecnico {
   telefono         String     @db.VarChar(10)
   usuarioId        Int        @unique
   ciudadId         Int
-  createdAt        DateTime   @default(now())
-  updatedAt        DateTime?
+  createdAt        DateTime?  @default(now())
+  updatedAt        DateTime   @updatedAt
   Usuario          Usuario    @relation(fields: [usuarioId], references: [id])
   Ticket           Ticket[]
   Ciudad           Ciudad[]
@@ -122,8 +126,8 @@ model Ticket {
   hora_cierre               DateTime
   casetas                   Int
   costo_gpo_lias            Decimal       @db.Money
-  createdAt                 DateTime      @default(now())
-  updatedAt                 DateTime
+  createdAt                 DateTime?     @default(now())
+  updatedAt                 DateTime      @updatedAt
   estado                    String        @default("NUEVO")
   Aseguradora               Aseguradora   @relation(fields: [aseguradoraId], references: [id])
   Asistencia                Asistencia    @relation(fields: [asistenciaId], references: [id])
@@ -136,23 +140,25 @@ model Ticket {
 }
 
 model Usuario {
-  id            Int           @id @unique @default(autoincrement())
-  usuario       String        @unique @db.VarChar(20)
-  email         String        @unique @db.VarChar(100)
-  password      String
-  inactivo      Boolean?      @default(false)
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime?
-  rol           String        @default("USUARIO")
-  Seguimiento   Seguimiento[]
-  Tecnico       Tecnico?
-  Ticket        Ticket[]
+  id          Int           @id @unique @default(autoincrement())
+  usuario     String        @unique @db.VarChar(20)
+  email       String        @unique @db.VarChar(100)
+  password    String
+  inactivo    Boolean?      @default(false)
+  createdAt   DateTime?     @default(now())
+  updatedAt   DateTime      @updatedAt
+  rol         String        @default("USUARIO")
+  Seguimiento Seguimiento[]
+  Tecnico     Tecnico?
+  Ticket      Ticket[]
 }
 
 model UsuarioFinal {
-  id               Int      @id @unique @default(autoincrement())
-  nombre           String   @db.VarChar(50)
-  apellido_paterno String   @db.VarChar(50)
-  apellido_materno String   @db.VarChar(50)
+  id               Int       @id @unique @default(autoincrement())
+  nombre           String    @db.VarChar(50)
+  apellido_paterno String    @db.VarChar(50)
+  apellido_materno String    @db.VarChar(50)
   Ticket           Ticket[]
+  createdAt        DateTime? @default(now())
+  updatedAt        DateTime  @updatedAt
 }

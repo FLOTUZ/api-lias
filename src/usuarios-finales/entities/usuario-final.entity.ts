@@ -13,4 +13,10 @@ export class UsuarioFinalEntity implements UsuarioFinal {
 
   @ApiProperty()
   apellido_materno: string;
+
+  @ApiProperty({ required: false })
+  createdAt: Date;
+
+  @ApiProperty({ required: false })
+  updatedAt: Date;
 }
