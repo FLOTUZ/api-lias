@@ -1,0 +1,158 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Aseguradora {
+  id         Int          @id @unique @default(autoincrement())
+  nombre     String
+  telefono   String
+  expediente String       @db.VarChar(20)
+  Asistencia Asistencia[]
+  Ticket     Ticket[]
+}
+
+model Asistencia {
+  id            Int          @id @unique @default(autoincrement())
+  nombre        String
+  aseguradoraId Int?
+  Aseguradora   Aseguradora? @relation(fields: [aseguradoraId], references: [id])
+  Ticket        Ticket[]
+}
+
+model Ciudad {
+  id        Int       @id @unique @default(autoincrement())
+  nombre    String    @db.VarChar(100)
+  latitud   Float?
+  longitud  Float?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime?
+  Tecnico   Tecnico[]
+}
+
+model Imagen {
+  id                Int      @id @unique @default(autoincrement())
+  checkin           String?
+  solucion          String?
+  checkout          String?
+  firma_conformidad String?
+  ticketId          Int      @unique
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime
+  Ticket            Ticket   @relation(fields: [ticketId], references: [id])
+}
+
+model Seguimiento {
+  id                   Int      @id @unique @default(autoincrement())
+  nombre_asesor_seguro Int
+  detalles             String
+  fecha_seguimiento    DateTime
+  ticketId             Int
+  usuarioId            Int
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime
+  Ticket               Ticket   @relation(fields: [ticketId], references: [id])
+  Usuario              Usuario  @relation(fields: [usuarioId], references: [id])
+}
+
+model Servicio {
+  id        Int       @id @unique @default(autoincrement())
+  nombre    String    @db.VarChar(100)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime?
+  tipo      String
+  Ticket    Ticket[]
+  Tecnico   Tecnico[]
+}
+
+model Tecnico {
+  id               Int        @id @unique @default(autoincrement())
+  nombre           String     @db.VarChar(50)
+  apellido_paterno String     @db.VarChar(50)
+  apellido_materno String     @db.VarChar(50)
+  calificacion     Decimal    @default(0.0) @db.Decimal(2, 1)
+  telefono         String     @db.VarChar(10)
+  usuarioId        Int        @unique
+  ciudadId         Int
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime?
+  Usuario          Usuario    @relation(fields: [usuarioId], references: [id])
+  Ticket           Ticket[]
+  Ciudad           Ciudad[]
+  Servicio         Servicio[]
+}
+
+model Ticket {
+  id                        Int           @id @unique @default(autoincrement())
+  num_expediente            Int           @unique
+  asistencia_vial           Boolean
+  servicioId                Int
+  fecha_llamada             DateTime
+  hora_llamada              DateTime
+  nombre_asesor_aseguradora String
+  nombre_asesor_gpo_lias    String
+  usuarioFinalId            Int?
+  titulo_ticket             String
+  asistenciaId              Int
+  aseguradoraId             Int
+  problematica              String
+  ciudad                    String
+  colonia                   String
+  calle                     String
+  numero_domicilio          String
+  banderazo                 Decimal?      @db.Money
+  total_salida              Decimal       @db.Money
+  cobertura                 String
+  cotizacion_gpo_lias       String
+  deducible                 Decimal       @db.Money
+  kilometraje               Int
+  total                     Decimal       @db.Money
+  anticipo                  String
+  comentarios_cotizacion    String
+  tecnicoId                 Int
+  solucion_tecnico          String
+  hora_contacto             DateTime
+  costo_materiales          Decimal       @db.Money
+  costo_mano_obra           Decimal       @db.Money
+  cotizacion_total_tecnico  String        @db.VarChar(255)
+  hora_cierre               DateTime
+  casetas                   Int
+  costo_gpo_lias            Decimal       @db.Money
+  createdAt                 DateTime      @default(now())
+  updatedAt                 DateTime
+  estado                    String        @default("NUEVO")
+  Aseguradora               Aseguradora   @relation(fields: [aseguradoraId], references: [id])
+  Asistencia                Asistencia    @relation(fields: [asistenciaId], references: [id])
+  Servicio                  Servicio      @relation(fields: [servicioId], references: [id])
+  Tecnico                   Tecnico       @relation(fields: [tecnicoId], references: [id])
+  UsuarioFinal              UsuarioFinal? @relation(fields: [usuarioFinalId], references: [id])
+  Imagen                    Imagen?
+  Seguimiento               Seguimiento[]
+  Usuario                   Usuario[]
+}
+
+model Usuario {
+  id            Int           @id @unique @default(autoincrement())
+  usuario       String        @unique @db.VarChar(20)
+  email         String        @unique @db.VarChar(100)
+  password      String
+  inactivo      Boolean?      @default(false)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime?
+  rol           String        @default("USUARIO")
+  Seguimiento   Seguimiento[]
+  Tecnico       Tecnico?
+  Ticket        Ticket[]
+}
+
+model UsuarioFinal {
+  id               Int      @id @unique @default(autoincrement())
+  nombre           String   @db.VarChar(50)
+  apellido_paterno String   @db.VarChar(50)
+  apellido_materno String   @db.VarChar(50)
+  Ticket           Ticket[]
+}
