@@ -52,7 +52,7 @@ model Imagen {
 
 model Seguimiento {
   id                   Int       @id @unique @default(autoincrement())
-  nombre_asesor_seguro Int
+  nombre_asesor_seguro String
   detalles             String
   fecha_seguimiento    DateTime
   ticketId             Int
