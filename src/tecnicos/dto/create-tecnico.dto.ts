@@ -1,25 +1,35 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Decimal } from '@prisma/client/runtime';
+import { IsDecimal, IsInt, IsNotEmpty, IsPhoneNumber } from 'class-validator';
 
 export class CreateTecnicoDto {
   @ApiProperty()
+  @IsNotEmpty()
   nombre: string;
 
+  @IsNotEmpty()
   @ApiProperty()
   apellido_paterno: string;
 
+  @IsNotEmpty()
   @ApiProperty()
   apellido_materno: string;
 
+  @IsDecimal()
   @ApiProperty({ type: 'number', required: false })
   calificacion: Decimal;
 
+  @IsPhoneNumber('MX')
   @ApiProperty()
   telefono: string;
 
+  @IsInt()
+  @IsNotEmpty()
   @ApiProperty({ required: true })
   usuarioId: number;
 
+  @IsInt()
+  @IsNotEmpty()
   @ApiProperty({ required: true })
   ciudadId: number;
 }
