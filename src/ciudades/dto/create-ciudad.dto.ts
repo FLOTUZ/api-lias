@@ -1,12 +1,23 @@
 import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsLatitude,
+  IsLongitude,
+  IsNotEmpty,
+  IsOptional,
+} from 'class-validator';
 
 export class CreateCiudadDto {
+  @IsNotEmpty()
   @ApiProperty()
   nombre: string;
 
-  @ApiProperty()
+  @IsOptional()
+  @IsLatitude()
+  @ApiProperty({ required: false })
   latitud: number;
 
-  @ApiProperty()
+  @IsOptional()
+  @IsLongitude()
+  @ApiProperty({ required: false })
   longitud: number;
 }
