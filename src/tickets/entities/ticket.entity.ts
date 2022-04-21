@@ -85,7 +85,7 @@ export class TicketEntity implements Ticket {
   tecnicoId: number;
 
   @ApiProperty()
-  solucion_tecnico: string;
+  cotizacionTecnicoId: number;
 
   @ApiProperty()
   hora_cierre: Date;

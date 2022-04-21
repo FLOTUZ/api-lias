@@ -129,10 +129,8 @@ export class CreateTicketDto {
   @ApiProperty({ required: true })
   tecnicoId: number;
 
-  @IsOptional()
   @ApiProperty()
-  @ApiProperty({ required: false })
-  solucion_tecnico: string;
+  cotizacionTecnicoId: number;
 
   @IsOptional()
   @ApiProperty({ required: false })

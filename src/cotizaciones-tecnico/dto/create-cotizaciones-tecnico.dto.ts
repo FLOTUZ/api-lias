@@ -5,7 +5,7 @@ import { IsDate, IsDecimal, IsNotEmpty } from 'class-validator';
 export class CreateCotizacionTecnicoDto {
   @IsNotEmpty()
   @ApiProperty()
-  desgloseCotizacion: string;
+  solucion_tecnico: string;
 
   @IsNotEmpty()
   @IsDate()

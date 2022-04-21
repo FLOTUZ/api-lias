@@ -7,7 +7,7 @@ export class CotizacionesTecnicoEntity implements CotizacionTecnico {
   id: number;
 
   @ApiProperty()
-  desgloseCotizacion: string;
+  solucion_tecnico: string;
 
   @ApiProperty({ type: 'number' })
   fecha_contacto: Date;
