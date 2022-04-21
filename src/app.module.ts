@@ -9,6 +9,7 @@ import { SeguimientosModule } from './seguimientos/seguimientos.module';
 import { ImagenesModule } from './imagenes/imagenes.module';
 import { CiudadesModule } from './ciudades/ciudades.module';
 import { AsistenciasModule } from './asistencias/asistencias.module';
+import { AseguradorasModule } from './aseguradoras/aseguradoras.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { AsistenciasModule } from './asistencias/asistencias.module';
     ImagenesModule,
     CiudadesModule,
     AsistenciasModule,
+    AseguradorasModule,
   ],
 })
 export class AppModule {}

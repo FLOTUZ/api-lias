@@ -4,6 +4,6 @@ import { AsistenciasController } from './asistencias.controller';
 
 @Module({
   controllers: [AsistenciasController],
-  providers: [AsistenciasService]
+  providers: [AsistenciasService],
 })
 export class AsistenciasModule {}
