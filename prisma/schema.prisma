@@ -119,10 +119,6 @@ model Ticket {
   comentarios_cotizacion    String
   tecnicoId                 Int
   solucion_tecnico          String
-  hora_contacto             DateTime
-  costo_materiales          Decimal       @db.Money
-  costo_mano_obra           Decimal       @db.Money
-  cotizacion_total_tecnico  String        @db.VarChar(255)
   hora_cierre               DateTime
   casetas                   Int
   costo_gpo_lias            Decimal       @db.Money
@@ -137,6 +133,17 @@ model Ticket {
   Imagen                    Imagen?
   Seguimiento               Seguimiento[]
   Usuario                   Usuario[]
+}
+
+model CotizacionTecnico {
+  id                 Int       @id @unique @default(autoincrement())
+  desgloseCotizacion String
+  fecha_contacto     DateTime
+  costo_mano_obra    Decimal   @db.Money
+  costo_materiales   Decimal   @db.Money
+  total_cotizacion   Decimal   @db.Money
+  createdAt          DateTime? @default(now())
+  updatedAt          DateTime? @updatedAt
 }
 
 model Usuario {

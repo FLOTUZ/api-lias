@@ -10,6 +10,7 @@ import { ImagenesModule } from './imagenes/imagenes.module';
 import { CiudadesModule } from './ciudades/ciudades.module';
 import { AsistenciasModule } from './asistencias/asistencias.module';
 import { AseguradorasModule } from './aseguradoras/aseguradoras.module';
+import { CotizacionesTecnicoModule } from './cotizaciones-tecnico/cotizaciones-tecnico.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { AseguradorasModule } from './aseguradoras/aseguradoras.module';
     CiudadesModule,
     AsistenciasModule,
     AseguradorasModule,
+    CotizacionesTecnicoModule,
   ],
 })
 export class AppModule {}

@@ -88,18 +88,6 @@ export class TicketEntity implements Ticket {
   solucion_tecnico: string;
 
   @ApiProperty()
-  hora_contacto: Date;
-
-  @ApiProperty({ type: 'number' })
-  costo_materiales: Decimal;
-
-  @ApiProperty({ type: 'number' })
-  costo_mano_obra: Decimal;
-
-  @ApiProperty()
-  cotizacion_total_tecnico: string;
-
-  @ApiProperty()
   hora_cierre: Date;
 
   @ApiProperty()
