@@ -91,8 +91,8 @@ model Tecnico {
 }
 
 model Ticket {
-  id                        Int      @id @unique @default(autoincrement())
-  num_expediente            String   @unique
+  id                        Int                @id @unique @default(autoincrement())
+  num_expediente            String             @unique
   asistencia_vial           Boolean
   servicioId                Int
   fecha_llamada             DateTime
@@ -108,33 +108,31 @@ model Ticket {
   colonia                   String
   calle                     String
   numero_domicilio          String
-  banderazo                 Decimal? @db.Money
-  total_salida              Decimal  @db.Money
+  banderazo                 Decimal?           @db.Money
+  total_salida              Decimal            @db.Money
   cobertura                 String
   cotizacion_gpo_lias       String
-  deducible                 Decimal  @db.Money
+  deducible                 Decimal            @db.Money
   kilometraje               Int
-  total                     Decimal  @db.Money
+  total                     Decimal            @db.Money
   anticipo                  String
   comentarios_cotizacion    String
   tecnicoId                 Int
-  cotizacionTecnicoId       Int
-  hora_cierre       DateTime
-  casetas           Int
-  costo_gpo_lias    Decimal           @db.Money
-  createdAt         DateTime?         @default(now())
-  updatedAt         DateTime?         @updatedAt
-  estado            String            @default("NUEVO")
-  Aseguradora       Aseguradora       @relation(fields: [aseguradoraId], references: [id])
-  Asistencia        Asistencia        @relation(fields: [asistenciaId], references: [id])
-  Servicio          Servicio          @relation(fields: [servicioId], references: [id])
-  Tecnico           Tecnico           @relation(fields: [tecnicoId], references: [id])
-  UsuarioFinal      UsuarioFinal?     @relation(fields: [usuarioFinalId], references: [id])
-  Imagen            Imagen?
-  Seguimiento       Seguimiento[]
-  Usuario           Usuario[]
-  CotizacionTecnico CotizacionTecnico @relation(fields: [cotizacionTecnicoId], references: [id])
-
+  hora_cierre               DateTime
+  casetas                   Int
+  costo_gpo_lias            Decimal            @db.Money
+  createdAt                 DateTime?          @default(now())
+  updatedAt                 DateTime?          @updatedAt
+  estado                    String             @default("NUEVO")
+  Aseguradora               Aseguradora        @relation(fields: [aseguradoraId], references: [id])
+  Asistencia                Asistencia         @relation(fields: [asistenciaId], references: [id])
+  Servicio                  Servicio           @relation(fields: [servicioId], references: [id])
+  Tecnico                   Tecnico            @relation(fields: [tecnicoId], references: [id])
+  UsuarioFinal              UsuarioFinal?      @relation(fields: [usuarioFinalId], references: [id])
+  Imagen                    Imagen?
+  Seguimiento               Seguimiento[]
+  Usuario                   Usuario[]
+  CotizacionTecnico         CotizacionTecnico?
 }
 
 model CotizacionTecnico {
@@ -144,9 +142,11 @@ model CotizacionTecnico {
   costo_mano_obra  Decimal   @db.Money
   costo_materiales Decimal   @db.Money
   total_cotizacion Decimal   @db.Money
+  ticketId         Int       @unique
   createdAt        DateTime? @default(now())
   updatedAt        DateTime? @updatedAt
-  Ticket           Ticket[]
+  Ticket           Ticket    @relation(fields: [ticketId], references: [id])
+
 }
 
 model Usuario {

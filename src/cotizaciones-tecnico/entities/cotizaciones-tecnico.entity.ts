@@ -22,6 +22,9 @@ export class CotizacionesTecnicoEntity implements CotizacionTecnico {
   total_cotizacion: Decimal;
 
   @ApiProperty()
+  ticketId: number;
+
+  @ApiProperty()
   createdAt: Date;
 
   @ApiProperty()

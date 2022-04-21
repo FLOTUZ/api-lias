@@ -26,4 +26,7 @@ export class CreateCotizacionTecnicoDto {
   @IsDecimal()
   @ApiProperty({ type: 'number' })
   total_cotizacion: Decimal;
+
+  @ApiProperty()
+  ticketId: number;
 }
