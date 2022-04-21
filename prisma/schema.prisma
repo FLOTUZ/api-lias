@@ -39,15 +39,13 @@ model Ciudad {
 }
 
 model Imagen {
-  id                Int       @id @unique @default(autoincrement())
-  checkin           String?
-  solucion          String?
-  checkout          String?
-  firma_conformidad String?
-  ticketId          Int       @unique
-  createdAt         DateTime? @default(now())
-  updatedAt         DateTime? @updatedAt
-  Ticket            Ticket    @relation(fields: [ticketId], references: [id])
+  id                  Int                @id @unique @default(autoincrement())
+  url                 String
+  descripcion         String
+  cotizacionTecnicoId Int?
+  createdAt           DateTime?          @default(now())
+  updatedAt           DateTime?          @updatedAt
+  CotizacionTecnico   CotizacionTecnico? @relation(fields: [cotizacionTecnicoId], references: [id])
 }
 
 model Seguimiento {
@@ -129,24 +127,23 @@ model Ticket {
   Servicio                  Servicio           @relation(fields: [servicioId], references: [id])
   Tecnico                   Tecnico            @relation(fields: [tecnicoId], references: [id])
   UsuarioFinal              UsuarioFinal?      @relation(fields: [usuarioFinalId], references: [id])
-  Imagen                    Imagen?
   Seguimiento               Seguimiento[]
   Usuario                   Usuario[]
   CotizacionTecnico         CotizacionTecnico?
 }
 
 model CotizacionTecnico {
-  id               Int       @id @unique @default(autoincrement())
-  solucion_tecnico String
-  fecha_contacto   DateTime
-  costo_mano_obra  Decimal   @db.Money
-  costo_materiales Decimal   @db.Money
-  total_cotizacion Decimal   @db.Money
-  ticketId         Int       @unique
-  createdAt        DateTime? @default(now())
-  updatedAt        DateTime? @updatedAt
-  Ticket           Ticket    @relation(fields: [ticketId], references: [id])
-
+  id                  Int       @id @unique @default(autoincrement())
+  solucion_tecnico    String
+  fecha_contacto      DateTime
+  costo_mano_obra     Decimal   @db.Money
+  costo_materiales    Decimal   @db.Money
+  total_cotizacion    Decimal   @db.Money
+  ticketId            Int       @unique
+  createdAt           DateTime? @default(now())
+  updatedAt           DateTime? @updatedAt
+  Ticket              Ticket    @relation(fields: [ticketId], references: [id])
+  ImagenJustificacion Imagen[]
 }
 
 model Usuario {

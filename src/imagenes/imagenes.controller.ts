@@ -11,7 +11,7 @@ import { ImagenesService } from './imagenes.service';
 import { CreateImagenDto } from './dto/create-imagen.dto';
 import { UpdateImagenDto } from './dto/update-imagen.dto';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { ImagenEntity } from './entities/imagene.entity';
+import { ImagenEntity } from './entities/imagen.entity';
 
 @Controller('imagenes')
 @ApiTags('imagenes')

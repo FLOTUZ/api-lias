@@ -2,39 +2,20 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsUrl } from 'class-validator';
 
 export class CreateImagenDto {
-  @IsOptional()
+  @IsNotEmpty()
   @IsUrl()
   @ApiProperty({
     required: false,
     example: 'http://localhost:3000/imagenes/1.jpg',
   })
-  checkin: string;
+  @ApiProperty()
+  url: string;
 
   @IsOptional()
-  @IsUrl()
-  @ApiProperty({
-    required: false,
-    example: 'http://localhost:3000/imagenes/1.jpg',
-  })
-  solucion: string;
-
-  @IsUrl()
-  @IsOptional()
-  @ApiProperty({
-    required: false,
-    example: 'http://localhost:3000/imagenes/1.jpg',
-  })
-  checkout: string;
-
-  @IsUrl()
-  @IsOptional()
-  @ApiProperty({
-    required: false,
-    example: 'http://localhost:3000/imagenes/1.jpg',
-  })
-  firma_conformidad: string;
+  @ApiProperty({ required: false })
+  cotizacionTecnicoId?: number;
 
   @IsNotEmpty()
   @ApiProperty()
-  ticketId: number;
+  descripcion: string;
 }

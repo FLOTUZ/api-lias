@@ -6,19 +6,13 @@ export class ImagenEntity implements Imagen {
   id: number;
 
   @ApiProperty()
-  checkin: string;
+  url: string;
 
   @ApiProperty()
-  solucion: string;
+  descripcion: string;
 
-  @ApiProperty()
-  checkout: string;
-
-  @ApiProperty()
-  firma_conformidad: string;
-
-  @ApiProperty()
-  ticketId: number;
+  @ApiProperty({required: false})
+  cotizacionTecnicoId: number;
 
   @ApiProperty()
   createdAt: Date;
