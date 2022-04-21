@@ -7,7 +7,7 @@ export class TicketEntity implements Ticket {
   id: number;
 
   @ApiProperty()
-  num_expediente: number;
+  num_expediente: string;
 
   @ApiProperty()
   asistencia_vial: boolean;

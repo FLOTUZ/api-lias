@@ -15,8 +15,7 @@ import {
 export class CreateTicketDto {
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
-  num_expediente: number;
+  num_expediente: string;
 
   @IsOptional()
   @IsBoolean()

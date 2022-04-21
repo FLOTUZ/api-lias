@@ -92,7 +92,7 @@ model Tecnico {
 
 model Ticket {
   id                        Int           @id @unique @default(autoincrement())
-  num_expediente            Int           @unique
+  num_expediente            String        @unique
   asistencia_vial           Boolean
   servicioId                Int
   fecha_llamada             DateTime
