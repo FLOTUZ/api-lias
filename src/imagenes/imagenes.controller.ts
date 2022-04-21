@@ -8,8 +8,8 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ImagenesService } from './imagenes.service';
-import { CreateImageneDto } from './dto/create-imagene.dto';
-import { UpdateImageneDto } from './dto/update-imagene.dto';
+import { CreateImagenDto } from './dto/create-imagen.dto';
+import { UpdateImagenDto } from './dto/update-imagen.dto';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { ImagenEntity } from './entities/imagene.entity';
 
@@ -23,7 +23,7 @@ export class ImagenesController {
     status: 201,
     type: ImagenEntity,
   })
-  create(@Body() createImageneDto: CreateImageneDto) {
+  create(@Body() createImageneDto: CreateImagenDto) {
     return this.imagenesService.create(createImageneDto);
   }
 
@@ -50,7 +50,7 @@ export class ImagenesController {
     status: 200,
     type: ImagenEntity,
   })
-  update(@Param('id') id: string, @Body() updateImageneDto: UpdateImageneDto) {
+  update(@Param('id') id: string, @Body() updateImageneDto: UpdateImagenDto) {
     return this.imagenesService.update(id, updateImageneDto);
   }
 
