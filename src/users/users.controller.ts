@@ -10,7 +10,7 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { UsuarioEntity } from './entities/usuario.entity';
 
 @ApiTags('users')
@@ -19,8 +19,7 @@ export class UsersController {
   constructor(private readonly repository: UsersService) {}
 
   @Post()
-  @ApiOkResponse({
-    status: 200,
+  @ApiCreatedResponse({
     type: UsuarioEntity,
   })
   create(@Body() createDTO: CreateUserDto) {
@@ -55,10 +54,7 @@ export class UsersController {
   }
 
   @Delete(':id')
-  @ApiOkResponse({
-    status: 200,
-    type: UsuarioEntity,
-  })
+  @ApiOkResponse({ type: UsuarioEntity })
   remove(@Param('id') id: string) {
     return this.repository.remove(id);
   }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 import { CreateUserDto } from './dto/create-user.dto';
@@ -17,7 +17,14 @@ export class UsersService {
   }
 
   findOne(id: string) {
-    return this.prisma.usuario.findUnique({ where: { id: Number(id) } });
+    const user = this.prisma.usuario.findUnique({
+      where: { id: Number(id) },
+    });
+
+    if (!user) {
+      return new NotFoundException(`This register did #${id} not exist`);
+    }
+    return user;
   }
 
   update(id: string, updateDTO: UpdateUserDto) {
