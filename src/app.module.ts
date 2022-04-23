@@ -11,6 +11,7 @@ import { CiudadesModule } from './ciudades/ciudades.module';
 import { AsistenciasModule } from './asistencias/asistencias.module';
 import { AseguradorasModule } from './aseguradoras/aseguradoras.module';
 import { CotizacionesTecnicoModule } from './cotizaciones-tecnico/cotizaciones-tecnico.module';
+import { AcuerdosConformidadModule } from './acuerdos-conformidad/acuerdos-conformidad.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { CotizacionesTecnicoModule } from './cotizaciones-tecnico/cotizaciones-t
     AsistenciasModule,
     AseguradorasModule,
     CotizacionesTecnicoModule,
+    AcuerdosConformidadModule,
   ],
 })
 export class AppModule {}
