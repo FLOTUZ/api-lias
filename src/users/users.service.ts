@@ -16,15 +16,16 @@ export class UsersService {
     return this.prisma.usuario.findMany({});
   }
 
-  findOne(id: string) {
-    const user = this.prisma.usuario.findUnique({
+  async findOne(id: string) {
+    const response = await this.prisma.usuario.findUnique({
       where: { id: Number(id) },
     });
 
-    if (!user) {
+    if (response == null) {
       return new NotFoundException(`This register did #${id} not exist`);
+    } else {
+      return response;
     }
-    return user;
   }
 
   update(id: string, updateDTO: UpdateUserDto) {

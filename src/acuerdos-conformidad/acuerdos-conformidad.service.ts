@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateAcuerdosConformidadDto } from './dto/create-acuerdos-conformidad.dto';
 import { UpdateAcuerdosConformidadDto } from './dto/update-acuerdos-conformidad.dto';
@@ -15,10 +15,15 @@ export class AcuerdosConformidadService {
     return this.prisma.acuerdoConformidad.findMany({});
   }
 
-  findOne(id: string) {
-    return this.prisma.acuerdoConformidad.findUnique({
+  async findOne(id: string) {
+    const response = await this.prisma.acuerdoConformidad.findUnique({
       where: { id: Number(id) },
     });
+    if (response == null) {
+      return new NotFoundException();
+    } else {
+      return response;
+    }
   }
 
   update(id: string, updateDTO: UpdateAcuerdosConformidadDto) {

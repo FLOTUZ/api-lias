@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
@@ -15,8 +15,16 @@ export class TicketsService {
     return this.prisma.ticket.findMany({});
   }
 
-  findOne(id: string) {
-    return this.prisma.ticket.findUnique({ where: { id: Number(id) } });
+  async findOne(id: string) {
+    const response = await this.prisma.ticket.findUnique({
+      where: { id: Number(id) },
+    });
+
+    if (response == null) {
+      return new NotFoundException(`This register did #${id} not exist`);
+    } else {
+      return response;
+    }
   }
 
   update(id: string, updateDTO: UpdateTicketDto) {

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTecnicoDto } from './dto/create-tecnico.dto';
 import { UpdateTecnicoDto } from './dto/update-tecnico.dto';
@@ -15,8 +15,16 @@ export class TecnicosService {
     return this.prisma.tecnico.findMany({});
   }
 
-  findOne(id: string) {
-    return this.prisma.tecnico.findUnique({ where: { id: Number(id) } });
+  async findOne(id: string) {
+    const response = await this.prisma.tecnico.findUnique({
+      where: { id: Number(id) },
+    });
+
+    if (response == null) {
+      return new NotFoundException(`This register did #${id} not exist`);
+    } else {
+      return response;
+    }
   }
 
   update(id: string, updateDTO: UpdateTecnicoDto) {
