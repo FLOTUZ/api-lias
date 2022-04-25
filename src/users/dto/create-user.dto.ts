@@ -12,7 +12,7 @@ export enum TipoUsuario {
   'ADMIN' = 'ADMIN',
   'USUARIO' = 'USUARIO',
   'TECNICO' = 'TECNICO',
-  'CAPTURADOR' = 'CAPTURADOR',
+  'CAPTURISTA' = 'CAPTURISTA',
 }
 
 export class CreateUserDto {
@@ -41,7 +41,7 @@ export class CreateUserDto {
   @IsEnum(TipoUsuario)
   @IsNotEmpty()
   @ApiProperty({
-    enum: ['ADMIN', 'USUARIO', 'TECNICO', 'CAPTURADOR'],
+    enum: ['ADMIN', 'USUARIO', 'TECNICO', 'CAPTURISTA'],
     example: 'USUARIO',
   })
   rol: string;
