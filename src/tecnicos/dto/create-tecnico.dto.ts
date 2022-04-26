@@ -1,6 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Decimal } from '@prisma/client/runtime';
-import { IsDecimal, IsInt, IsNotEmpty, IsPhoneNumber } from 'class-validator';
+import {
+  IsDecimal,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsPhoneNumber,
+} from 'class-validator';
 
 export class CreateTecnicoDto {
   @ApiProperty()
@@ -16,6 +22,7 @@ export class CreateTecnicoDto {
   apellido_materno: string;
 
   @IsDecimal()
+  @IsOptional()
   @ApiProperty({ type: 'number', required: false })
   calificacion: Decimal;
 
