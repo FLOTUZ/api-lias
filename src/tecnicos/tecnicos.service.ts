@@ -8,11 +8,14 @@ export class TecnicosService {
   constructor(private prisma: PrismaService) {}
 
   create(createDTO: CreateTecnicoDto) {
-    return this.prisma.tecnico.create({ data: createDTO });
+    return this.prisma.tecnico.create({
+      data: createDTO,
+      include: { Servicio: true },
+    });
   }
 
   findAll() {
-    return this.prisma.tecnico.findMany({});
+    return this.prisma.tecnico.findMany({ include: { Servicio: true } });
   }
 
   async findOne(id: string) {
@@ -36,5 +39,15 @@ export class TecnicosService {
 
   remove(id: string) {
     return this.prisma.tecnico.delete({ where: { id: Number(id) } });
+  }
+
+  agregarServiciosATecnico(idTecnico: string, servicios: number[]) {
+    return this.prisma.tecnico.update({
+      include: { Servicio: true },
+      where: { id: Number(idTecnico) },
+      data: {
+        Servicio: { connect: servicios.map((id) => ({ id: Number(id) })) },
+      },
+    });
   }
 }
