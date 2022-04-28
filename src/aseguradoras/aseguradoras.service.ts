@@ -12,7 +12,9 @@ export class AseguradorasService {
   }
 
   findAll() {
-    return this.prisma.aseguradora.findMany({});
+    return this.prisma.aseguradora.findMany({
+      include: { Asistencia: true },
+    });
   }
 
   async findOne(id: string) {
