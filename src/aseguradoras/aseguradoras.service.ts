@@ -17,6 +17,7 @@ export class AseguradorasService {
 
   async findOne(id: string) {
     const response = await this.prisma.aseguradora.findUnique({
+      include: { Asistencia: true },
       where: { id: Number(id) },
     });
 
