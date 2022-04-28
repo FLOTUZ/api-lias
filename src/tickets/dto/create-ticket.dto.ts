@@ -163,15 +163,6 @@ export class CreateTicketDto {
   @ApiProperty({ type: 'number' })
   costo_gpo_lias: Decimal;
 
-  @IsOptional()
-  @ApiProperty({ required: false })
-  createdAt?: Date;
-
-  @IsDate()
-  @IsOptional()
-  @ApiProperty({ required: false })
-  updatedAt?: Date;
-
   @IsNotEmpty()
   @IsEnum({ enum: ['NUEVO', 'PENDIENTE', 'EN PROCESO', 'CERRADO'] })
   @ApiProperty({ enum: ['NUEVO', 'PENDIENTE', 'EN PROCESO', 'CERRADO'] })
