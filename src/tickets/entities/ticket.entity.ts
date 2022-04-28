@@ -28,9 +28,6 @@ export class TicketEntity implements Ticket {
   nombre_asesor_gpo_lias: string;
 
   @ApiProperty()
-  usuarioFinalId: number;
-
-  @ApiProperty()
   titulo_ticket: string;
 
   @ApiProperty()
@@ -82,12 +79,6 @@ export class TicketEntity implements Ticket {
   comentarios_cotizacion: string;
 
   @ApiProperty()
-  tecnicoId: number;
-
-  @ApiProperty()
-  cotizacionTecnicoId: number;
-
-  @ApiProperty()
   hora_cierre: Date;
 
   @ApiProperty()
@@ -97,11 +88,12 @@ export class TicketEntity implements Ticket {
   costo_gpo_lias: Decimal;
 
   @ApiProperty()
+  estado: string;
+
+  @ApiProperty()
   createdAt: Date;
 
   @ApiProperty()
   updatedAt: Date;
 
-  @ApiProperty()
-  estado: string;
 }

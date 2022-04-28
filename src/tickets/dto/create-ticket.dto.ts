@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Ticket } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime';
 
 import {
@@ -43,11 +44,6 @@ export class CreateTicketDto {
   @IsNotEmpty()
   @ApiProperty()
   nombre_asesor_gpo_lias: string;
-
-  @IsNotEmpty()
-  @IsNumber()
-  @ApiProperty({ required: true })
-  usuarioFinalId: number | null;
 
   @IsNotEmpty()
   @ApiProperty({})
@@ -126,35 +122,6 @@ export class CreateTicketDto {
 
   @IsNotEmpty()
   @IsInt()
-  @ApiProperty({ required: true })
-  tecnicoId: number;
-
-  @ApiProperty()
-  cotizacionTecnicoId: number;
-
-  @IsOptional()
-  @ApiProperty({ required: false })
-  hora_contacto: Date;
-
-  @IsNotEmpty()
-  @ApiProperty({ type: 'number' })
-  costo_materiales: Decimal;
-
-  @IsNotEmpty()
-  @IsDecimal()
-  @ApiProperty({ type: 'number' })
-  costo_mano_obra: Decimal;
-
-  @IsNotEmpty()
-  @ApiProperty()
-  cotizacion_total_tecnico: string;
-
-  @IsNotEmpty()
-  @ApiProperty()
-  hora_cierre: Date;
-
-  @IsNotEmpty()
-  @IsInt()
   @ApiProperty()
   casetas: number;
 
@@ -167,4 +134,8 @@ export class CreateTicketDto {
   @IsEnum({ enum: ['NUEVO', 'PENDIENTE', 'EN PROCESO', 'CERRADO'] })
   @ApiProperty({ enum: ['NUEVO', 'PENDIENTE', 'EN PROCESO', 'CERRADO'] })
   estado: string;
+
+  @IsOptional()
+  @ApiProperty()
+  hora_cierre: Date;
 }
