@@ -4,6 +4,6 @@ import { AcuerdosConformidadController } from './acuerdos-conformidad.controller
 
 @Module({
   controllers: [AcuerdosConformidadController],
-  providers: [AcuerdosConformidadService]
+  providers: [AcuerdosConformidadService],
 })
 export class AcuerdosConformidadModule {}

@@ -9,7 +9,9 @@ describe('AcuerdosConformidadService', () => {
       providers: [AcuerdosConformidadService],
     }).compile();
 
-    service = module.get<AcuerdosConformidadService>(AcuerdosConformidadService);
+    service = module.get<AcuerdosConformidadService>(
+      AcuerdosConformidadService,
+    );
   });
 
   it('should be defined', () => {

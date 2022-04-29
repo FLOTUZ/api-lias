@@ -11,7 +11,9 @@ describe('AcuerdosConformidadController', () => {
       providers: [AcuerdosConformidadService],
     }).compile();
 
-    controller = module.get<AcuerdosConformidadController>(AcuerdosConformidadController);
+    controller = module.get<AcuerdosConformidadController>(
+      AcuerdosConformidadController,
+    );
   });
 
   it('should be defined', () => {

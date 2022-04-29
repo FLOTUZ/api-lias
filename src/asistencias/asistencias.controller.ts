@@ -65,4 +65,10 @@ export class AsistenciasController {
   remove(@Param('id') id: string) {
     return this.asistenciasService.remove(id);
   }
+
+  @Get('aseguradora/:id')
+  @ApiOkResponse()
+  getAsistenciaByAseguradora(@Param('id') id: number) {
+    return this.asistenciasService.getAsistenciaByAseguradora(id);
+  }
 }

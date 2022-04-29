@@ -11,7 +11,9 @@ describe('CotizacionesTecnicoController', () => {
       providers: [CotizacionesTecnicoService],
     }).compile();
 
-    controller = module.get<CotizacionesTecnicoController>(CotizacionesTecnicoController);
+    controller = module.get<CotizacionesTecnicoController>(
+      CotizacionesTecnicoController,
+    );
   });
 
   it('should be defined', () => {

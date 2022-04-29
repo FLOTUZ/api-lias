@@ -4,6 +4,6 @@ import { CotizacionesTecnicoController } from './cotizaciones-tecnico.controller
 
 @Module({
   controllers: [CotizacionesTecnicoController],
-  providers: [CotizacionesTecnicoService]
+  providers: [CotizacionesTecnicoService],
 })
 export class CotizacionesTecnicoModule {}
