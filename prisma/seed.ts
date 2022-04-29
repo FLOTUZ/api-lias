@@ -60,6 +60,35 @@ async function main() {
     },
   });
 
+  //--------------SERVICIOS------------------
+
+  await prisma.servicio.create({
+    data: {
+      nombre: 'Plomeria',
+      tipo: 'DOMESTICO',
+    },
+  });
+
+  await prisma.servicio.create({
+    data: {
+      nombre: 'Electricidad',
+      tipo: 'DOMESTICO',
+    },
+  });
+
+  await prisma.servicio.create({
+    data: {
+      nombre: 'Grua',
+      tipo: 'VIAL',
+    },
+  });
+  await prisma.servicio.create({
+    data: {
+      nombre: 'Mecanico',
+      tipo: 'VIAL',
+    },
+  });
+
   //--------------CIUDADES------------------
   await prisma.ciudad.create({
     data: {
