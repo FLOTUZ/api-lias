@@ -28,6 +28,9 @@ export class TicketEntity implements Ticket {
   nombre_asesor_gpo_lias: string;
 
   @ApiProperty()
+  nombre_usuario_final: string;
+
+  @ApiProperty()
   titulo_ticket: string;
 
   @ApiProperty()
@@ -95,5 +98,4 @@ export class TicketEntity implements Ticket {
 
   @ApiProperty()
   updatedAt: Date;
-
 }

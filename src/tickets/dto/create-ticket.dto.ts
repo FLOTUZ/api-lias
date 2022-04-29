@@ -1,5 +1,4 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Ticket } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime';
 
 import {
@@ -44,6 +43,10 @@ export class CreateTicketDto {
   @IsNotEmpty()
   @ApiProperty()
   nombre_asesor_gpo_lias: string;
+
+  @IsNotEmpty()
+  @ApiProperty()
+  nombre_usuario_final: string;
 
   @IsNotEmpty()
   @ApiProperty({})
