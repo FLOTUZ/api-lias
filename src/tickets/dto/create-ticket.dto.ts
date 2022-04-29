@@ -135,7 +135,10 @@ export class CreateTicketDto {
 
   @IsNotEmpty()
   @IsEnum({ enum: ['NUEVO', 'PENDIENTE', 'EN PROCESO', 'CERRADO'] })
-  @ApiProperty({ enum: ['NUEVO', 'PENDIENTE', 'EN PROCESO', 'CERRADO'] })
+  @ApiProperty({
+    enum: ['NUEVO', 'PENDIENTE', 'EN PROCESO', 'CERRADO'],
+    default: 'NUEVO',
+  })
   estado: string;
 
   @IsOptional()
