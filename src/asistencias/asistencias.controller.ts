@@ -70,7 +70,7 @@ export class AsistenciasController {
   @ApiOkResponse({
     type: [AsistenciaEntity],
   })
-  getAsistenciaByAseguradora(@Param('id') id: number) {
+  getAsistenciaByAseguradora(@Param('id') id: string) {
     return this.asistenciasService.getAsistenciaByAseguradora(id);
   }
 }

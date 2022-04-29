@@ -38,7 +38,7 @@ export class AsistenciasService {
     return this.prisma.asistencia.delete({ where: { id: Number(id) } });
   }
 
-  getAsistenciaByAseguradora(idAseguradora: number) {
+  getAsistenciaByAseguradora(idAseguradora: string) {
     return this.prisma.asistencia.findMany({
       where: { aseguradoraId: { equals: Number(idAseguradora) } },
     });
