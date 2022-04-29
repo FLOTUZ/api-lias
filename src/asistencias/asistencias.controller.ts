@@ -67,7 +67,9 @@ export class AsistenciasController {
   }
 
   @Get('aseguradora/:id')
-  @ApiOkResponse()
+  @ApiOkResponse({
+    type: [AsistenciaEntity],
+  })
   getAsistenciaByAseguradora(@Param('id') id: number) {
     return this.asistenciasService.getAsistenciaByAseguradora(id);
   }
