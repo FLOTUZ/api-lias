@@ -93,7 +93,6 @@ model Ticket {
   asistencia_vial           Boolean
   servicioId                Int
   fecha_llamada             DateTime
-  hora_llamada              DateTime
   nombre_asesor_aseguradora String
   nombre_asesor_gpo_lias    String
   nombre_usuario_final      String
@@ -107,14 +106,13 @@ model Ticket {
   numero_domicilio          String
   banderazo                 Decimal?           @db.Money
   total_salida              Decimal            @db.Money
-  cobertura                 String
-  cotizacion_gpo_lias       String
+  cobertura                 Decimal            @db.Money
+  cotizacion_gpo_lias       String?
   deducible                 Decimal            @db.Money
   kilometraje               Int
   total                     Decimal            @db.Money
-  anticipo                  String
-  comentarios_cotizacion    String
-  hora_cierre               DateTime
+  anticipo                  Decimal            @db.Money
+  hora_cierre               DateTime?
   casetas                   Int
   costo_gpo_lias            Decimal            @db.Money
   estado                    String             @default("NUEVO")

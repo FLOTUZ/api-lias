@@ -3,14 +3,21 @@ import { Decimal } from '@prisma/client/runtime';
 
 import {
   IsBoolean,
-  IsDate,
-  IsDecimal,
+  IsDateString,
   IsEnum,
   IsInt,
+  IsMilitaryTime,
   IsNotEmpty,
   IsNumber,
   IsOptional,
 } from 'class-validator';
+
+export enum EstadoTicket {
+  'NUEVO' = 'NUEVO',
+  'PENDIENTE' = 'PENDIENTE',
+  'EN PROCESO' = 'EN PROCESO',
+  'CERRADO' = 'CERRADO',
+}
 
 export class CreateTicketDto {
   @ApiProperty()
@@ -27,14 +34,10 @@ export class CreateTicketDto {
   @ApiProperty({ required: true })
   servicioId: number;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   @ApiProperty()
   fecha_llamada: Date;
-
-  @IsNotEmpty()
-  @ApiProperty()
-  hora_llamada: Date;
 
   @IsNotEmpty()
   @ApiProperty()
@@ -83,20 +86,18 @@ export class CreateTicketDto {
   numero_domicilio: string;
 
   @IsOptional()
-  @IsDecimal()
   @ApiProperty({ type: 'number', required: false })
   banderazo: Decimal;
 
   @IsNotEmpty()
-  @IsDecimal()
   @ApiProperty({ type: 'number' })
   total_salida: Decimal;
 
   @IsNotEmpty()
-  @ApiProperty()
-  cobertura: string;
+  @ApiProperty({ type: 'number' })
+  cobertura: Decimal;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   cotizacion_gpo_lias: string;
 
@@ -110,18 +111,12 @@ export class CreateTicketDto {
   kilometraje: number;
 
   @IsNotEmpty()
-  @IsDecimal()
   @ApiProperty({ type: 'number' })
   total: Decimal;
 
   @IsNotEmpty()
-  @ApiProperty()
-  anticipo: string;
-
-  @IsOptional()
-  @ApiProperty()
-  @ApiProperty({ required: false })
-  comentarios_cotizacion: string;
+  @ApiProperty({ type: 'number' })
+  anticipo: Decimal;
 
   @IsNotEmpty()
   @IsInt()
@@ -129,12 +124,11 @@ export class CreateTicketDto {
   casetas: number;
 
   @IsNotEmpty()
-  @IsDecimal()
   @ApiProperty({ type: 'number' })
   costo_gpo_lias: Decimal;
 
   @IsNotEmpty()
-  @IsEnum({ enum: ['NUEVO', 'PENDIENTE', 'EN PROCESO', 'CERRADO'] })
+  @IsEnum(EstadoTicket)
   @ApiProperty({
     enum: ['NUEVO', 'PENDIENTE', 'EN PROCESO', 'CERRADO'],
     default: 'NUEVO',

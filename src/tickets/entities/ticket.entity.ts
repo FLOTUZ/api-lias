@@ -19,9 +19,6 @@ export class TicketEntity implements Ticket {
   fecha_llamada: Date;
 
   @ApiProperty()
-  hora_llamada: Date;
-
-  @ApiProperty()
   nombre_asesor_aseguradora: string;
 
   @ApiProperty()
@@ -60,8 +57,8 @@ export class TicketEntity implements Ticket {
   @ApiProperty({ type: 'number' })
   total_salida: Decimal;
 
-  @ApiProperty()
-  cobertura: string;
+  @ApiProperty({ type: 'number' })
+  cobertura: Decimal;
 
   @ApiProperty()
   cotizacion_gpo_lias: string;
@@ -75,11 +72,8 @@ export class TicketEntity implements Ticket {
   @ApiProperty({ type: 'number' })
   total: Decimal;
 
-  @ApiProperty()
-  anticipo: string;
-
-  @ApiProperty()
-  comentarios_cotizacion: string;
+  @ApiProperty({ type: 'number' })
+  anticipo: Decimal;
 
   @ApiProperty()
   hora_cierre: Date;
