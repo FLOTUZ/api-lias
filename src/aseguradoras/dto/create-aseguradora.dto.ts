@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsPhoneNumber } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 export class CreateAseguradoraDto {
   @IsNotEmpty()
@@ -7,7 +7,6 @@ export class CreateAseguradoraDto {
   nombre: string;
 
   @IsNotEmpty()
-  @IsPhoneNumber()
   @ApiProperty()
   telefono: string;
 

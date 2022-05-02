@@ -9,7 +9,7 @@ datasource db {
 
 model Aseguradora {
   id         Int          @id @unique @default(autoincrement())
-  nombre     String
+  nombre     String       @unique
   telefono   String
   expediente String       @db.VarChar(20)
   Asistencia Asistencia[]
@@ -63,7 +63,7 @@ model Seguimiento {
 
 model Servicio {
   id        Int       @id @unique @default(autoincrement())
-  nombre    String    @db.VarChar(100)
+  nombre    String    @unique @db.VarChar(100)
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
   tipo      String
