@@ -47,4 +47,9 @@ export class TicketsController {
   remove(@Param('id') id: string) {
     return this.ticketsService.remove(id);
   }
+
+  @Post(':id/servicios')
+  addServicesToTecnico(@Param('id') id: string, @Body() servicios: number[]) {
+    return this.ticketsService.agregarServicioATicket(id, servicios);
+  }
 }

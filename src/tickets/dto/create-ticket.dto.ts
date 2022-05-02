@@ -6,7 +6,6 @@ import {
   IsDateString,
   IsEnum,
   IsInt,
-  IsMilitaryTime,
   IsNotEmpty,
   IsNumber,
   IsOptional,
@@ -28,11 +27,6 @@ export class CreateTicketDto {
   @IsBoolean()
   @ApiProperty({ required: true })
   asistencia_vial: boolean;
-
-  @IsNotEmpty()
-  @IsNumber()
-  @ApiProperty({ required: true })
-  servicioId: number;
 
   @IsDateString()
   @IsNotEmpty()

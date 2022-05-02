@@ -13,9 +13,6 @@ export class TicketEntity implements Ticket {
   asistencia_vial: boolean;
 
   @ApiProperty()
-  servicioId: number;
-
-  @ApiProperty()
   fecha_llamada: Date;
 
   @ApiProperty()

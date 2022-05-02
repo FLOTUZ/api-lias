@@ -37,4 +37,14 @@ export class TicketsService {
   remove(id: string) {
     return this.prisma.ticket.delete({ where: { id: Number(id) } });
   }
+
+  async agregarServicioATicket(idTicket: string, servicios: number[]) {
+    return this.prisma.ticket.update({
+      include: { Servicio: true },
+      where: { id: Number(idTicket) },
+      data: {
+        Servicio: { connect: servicios.map((id) => ({ id: Number(id) })) },
+      },
+    });
+  }
 }

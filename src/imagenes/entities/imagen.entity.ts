@@ -11,7 +11,7 @@ export class ImagenEntity implements Imagen {
   @ApiProperty()
   descripcion: string;
 
-  @ApiProperty({required: false})
+  @ApiProperty({ required: false })
   cotizacionTecnicoId: number;
 
   @ApiProperty()

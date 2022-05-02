@@ -91,7 +91,6 @@ model Ticket {
   id                        Int                @id @unique @default(autoincrement())
   num_expediente            String             @unique
   asistencia_vial           Boolean
-  servicioId                Int
   fecha_llamada             DateTime
   nombre_asesor_aseguradora String
   nombre_asesor_gpo_lias    String
@@ -120,7 +119,7 @@ model Ticket {
   updatedAt                 DateTime?          @updatedAt
   Aseguradora               Aseguradora        @relation(fields: [aseguradoraId], references: [id])
   Asistencia                Asistencia         @relation(fields: [asistenciaId], references: [id])
-  Servicio                  Servicio           @relation(fields: [servicioId], references: [id])
+  Servicio                  Servicio[]
   Seguimiento               Seguimiento[]
   Usuario                   Usuario[]
   CotizacionTecnico         CotizacionTecnico?

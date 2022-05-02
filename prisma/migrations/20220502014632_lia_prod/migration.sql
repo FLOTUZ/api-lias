@@ -4,6 +4,8 @@ CREATE TABLE "Aseguradora" (
     "nombre" TEXT NOT NULL,
     "telefono" TEXT NOT NULL,
     "expediente" VARCHAR(20) NOT NULL,
+    "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3),
 
     CONSTRAINT "Aseguradora_pkey" PRIMARY KEY ("id")
 );
@@ -13,6 +15,8 @@ CREATE TABLE "Asistencia" (
     "id" SERIAL NOT NULL,
     "nombre" TEXT NOT NULL,
     "aseguradoraId" INTEGER,
+    "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3),
 
     CONSTRAINT "Asistencia_pkey" PRIMARY KEY ("id")
 );
@@ -23,7 +27,7 @@ CREATE TABLE "Ciudad" (
     "nombre" VARCHAR(100) NOT NULL,
     "latitud" DOUBLE PRECISION,
     "longitud" DOUBLE PRECISION,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3),
 
     CONSTRAINT "Ciudad_pkey" PRIMARY KEY ("id")
@@ -32,13 +36,11 @@ CREATE TABLE "Ciudad" (
 -- CreateTable
 CREATE TABLE "Imagen" (
     "id" SERIAL NOT NULL,
-    "checkin" TEXT,
-    "solucion" TEXT,
-    "checkout" TEXT,
-    "firma_conformidad" TEXT,
-    "ticketId" INTEGER NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "url" TEXT NOT NULL,
+    "descripcion" TEXT NOT NULL,
+    "cotizacionTecnicoId" INTEGER,
+    "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3),
 
     CONSTRAINT "Imagen_pkey" PRIMARY KEY ("id")
 );
@@ -46,13 +48,13 @@ CREATE TABLE "Imagen" (
 -- CreateTable
 CREATE TABLE "Seguimiento" (
     "id" SERIAL NOT NULL,
-    "nombre_asesor_seguro" INTEGER NOT NULL,
+    "nombre_asesor_seguro" TEXT NOT NULL,
     "detalles" TEXT NOT NULL,
     "fecha_seguimiento" TIMESTAMP(3) NOT NULL,
     "ticketId" INTEGER NOT NULL,
     "usuarioId" INTEGER NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3),
 
     CONSTRAINT "Seguimiento_pkey" PRIMARY KEY ("id")
 );
@@ -61,7 +63,7 @@ CREATE TABLE "Seguimiento" (
 CREATE TABLE "Servicio" (
     "id" SERIAL NOT NULL,
     "nombre" VARCHAR(100) NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3),
     "tipo" TEXT NOT NULL,
 
@@ -78,7 +80,7 @@ CREATE TABLE "Tecnico" (
     "telefono" VARCHAR(10) NOT NULL,
     "usuarioId" INTEGER NOT NULL,
     "ciudadId" INTEGER NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3),
 
     CONSTRAINT "Tecnico_pkey" PRIMARY KEY ("id")
@@ -87,14 +89,12 @@ CREATE TABLE "Tecnico" (
 -- CreateTable
 CREATE TABLE "Ticket" (
     "id" SERIAL NOT NULL,
-    "num_expediente" INTEGER NOT NULL,
+    "num_expediente" TEXT NOT NULL,
     "asistencia_vial" BOOLEAN NOT NULL,
-    "servicioId" INTEGER NOT NULL,
     "fecha_llamada" TIMESTAMP(3) NOT NULL,
-    "hora_llamada" TIMESTAMP(3) NOT NULL,
     "nombre_asesor_aseguradora" TEXT NOT NULL,
     "nombre_asesor_gpo_lias" TEXT NOT NULL,
-    "usuarioFinalId" INTEGER,
+    "nombre_usuario_final" TEXT NOT NULL,
     "titulo_ticket" TEXT NOT NULL,
     "asistenciaId" INTEGER NOT NULL,
     "aseguradoraId" INTEGER NOT NULL,
@@ -105,27 +105,56 @@ CREATE TABLE "Ticket" (
     "numero_domicilio" TEXT NOT NULL,
     "banderazo" MONEY,
     "total_salida" MONEY NOT NULL,
-    "cobertura" TEXT NOT NULL,
-    "cotizacion_gpo_lias" TEXT NOT NULL,
+    "cobertura" MONEY NOT NULL,
+    "cotizacion_gpo_lias" TEXT,
     "deducible" MONEY NOT NULL,
     "kilometraje" INTEGER NOT NULL,
     "total" MONEY NOT NULL,
-    "anticipo" TEXT NOT NULL,
-    "comentarios_cotizacion" TEXT NOT NULL,
-    "tecnicoId" INTEGER NOT NULL,
-    "solucion_tecnico" TEXT NOT NULL,
-    "hora_contacto" TIMESTAMP(3) NOT NULL,
-    "costo_materiales" MONEY NOT NULL,
-    "costo_mano_obra" MONEY NOT NULL,
-    "cotizacion_total_tecnico" VARCHAR(255) NOT NULL,
-    "hora_cierre" TIMESTAMP(3) NOT NULL,
+    "anticipo" MONEY NOT NULL,
+    "hora_cierre" TIMESTAMP(3),
     "casetas" INTEGER NOT NULL,
     "costo_gpo_lias" MONEY NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
     "estado" TEXT NOT NULL DEFAULT E'NUEVO',
+    "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3),
 
     CONSTRAINT "Ticket_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "CotizacionTecnico" (
+    "id" SERIAL NOT NULL,
+    "solucion_tecnico" TEXT NOT NULL,
+    "fecha_contacto" TIMESTAMP(3) NOT NULL,
+    "costo_mano_obra" MONEY NOT NULL,
+    "costo_materiales" MONEY NOT NULL,
+    "total_cotizacion" MONEY NOT NULL,
+    "ticketId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3),
+
+    CONSTRAINT "CotizacionTecnico_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "AcuerdoConformidad" (
+    "id" SERIAL NOT NULL,
+    "expediente" TEXT NOT NULL,
+    "fecha_acuerdo" TIMESTAMP(3) NOT NULL,
+    "problema" TEXT NOT NULL,
+    "asistencia" TEXT NOT NULL,
+    "nombre_asesor" TEXT NOT NULL,
+    "descripcion_problema" TEXT NOT NULL,
+    "direccion" TEXT NOT NULL,
+    "usuario_final" TEXT NOT NULL,
+    "hora_recepcion_servicio" TIMESTAMP(3) NOT NULL,
+    "hora_llegada_servicio" TIMESTAMP(3) NOT NULL,
+    "hora_finalizacion_servicio" TIMESTAMP(3) NOT NULL,
+    "acuerdo_firmado" TEXT,
+    "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3),
+
+    CONSTRAINT "AcuerdoConformidad_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -134,10 +163,8 @@ CREATE TABLE "Usuario" (
     "usuario" VARCHAR(20) NOT NULL,
     "email" VARCHAR(100) NOT NULL,
     "password" TEXT NOT NULL,
-    "abrir_ticket" BOOLEAN,
-    "cerrar_ticket" BOOLEAN,
     "inactivo" BOOLEAN DEFAULT false,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3),
     "rol" TEXT NOT NULL DEFAULT E'USUARIO',
 
@@ -150,12 +177,20 @@ CREATE TABLE "UsuarioFinal" (
     "nombre" VARCHAR(50) NOT NULL,
     "apellido_paterno" VARCHAR(50) NOT NULL,
     "apellido_materno" VARCHAR(50) NOT NULL,
+    "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3),
 
     CONSTRAINT "UsuarioFinal_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "_CiudadToTecnico" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "_ServicioToTicket" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL
 );
@@ -185,9 +220,6 @@ CREATE UNIQUE INDEX "Ciudad_id_key" ON "Ciudad"("id");
 CREATE UNIQUE INDEX "Imagen_id_key" ON "Imagen"("id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Imagen_ticketId_key" ON "Imagen"("ticketId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Seguimiento_id_key" ON "Seguimiento"("id");
 
 -- CreateIndex
@@ -204,6 +236,15 @@ CREATE UNIQUE INDEX "Ticket_id_key" ON "Ticket"("id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Ticket_num_expediente_key" ON "Ticket"("num_expediente");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "CotizacionTecnico_id_key" ON "CotizacionTecnico"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "CotizacionTecnico_ticketId_key" ON "CotizacionTecnico"("ticketId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "AcuerdoConformidad_id_key" ON "AcuerdoConformidad"("id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Usuario_id_key" ON "Usuario"("id");
@@ -224,6 +265,12 @@ CREATE UNIQUE INDEX "_CiudadToTecnico_AB_unique" ON "_CiudadToTecnico"("A", "B")
 CREATE INDEX "_CiudadToTecnico_B_index" ON "_CiudadToTecnico"("B");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "_ServicioToTicket_AB_unique" ON "_ServicioToTicket"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_ServicioToTicket_B_index" ON "_ServicioToTicket"("B");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "_ServicioToTecnico_AB_unique" ON "_ServicioToTecnico"("A", "B");
 
 -- CreateIndex
@@ -239,7 +286,7 @@ CREATE INDEX "_TicketToUsuario_B_index" ON "_TicketToUsuario"("B");
 ALTER TABLE "Asistencia" ADD CONSTRAINT "Asistencia_aseguradoraId_fkey" FOREIGN KEY ("aseguradoraId") REFERENCES "Aseguradora"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Imagen" ADD CONSTRAINT "Imagen_ticketId_fkey" FOREIGN KEY ("ticketId") REFERENCES "Ticket"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Imagen" ADD CONSTRAINT "Imagen_cotizacionTecnicoId_fkey" FOREIGN KEY ("cotizacionTecnicoId") REFERENCES "CotizacionTecnico"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Seguimiento" ADD CONSTRAINT "Seguimiento_ticketId_fkey" FOREIGN KEY ("ticketId") REFERENCES "Ticket"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -257,19 +304,19 @@ ALTER TABLE "Ticket" ADD CONSTRAINT "Ticket_aseguradoraId_fkey" FOREIGN KEY ("as
 ALTER TABLE "Ticket" ADD CONSTRAINT "Ticket_asistenciaId_fkey" FOREIGN KEY ("asistenciaId") REFERENCES "Asistencia"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Ticket" ADD CONSTRAINT "Ticket_servicioId_fkey" FOREIGN KEY ("servicioId") REFERENCES "Servicio"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Ticket" ADD CONSTRAINT "Ticket_tecnicoId_fkey" FOREIGN KEY ("tecnicoId") REFERENCES "Tecnico"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Ticket" ADD CONSTRAINT "Ticket_usuarioFinalId_fkey" FOREIGN KEY ("usuarioFinalId") REFERENCES "UsuarioFinal"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "CotizacionTecnico" ADD CONSTRAINT "CotizacionTecnico_ticketId_fkey" FOREIGN KEY ("ticketId") REFERENCES "Ticket"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_CiudadToTecnico" ADD FOREIGN KEY ("A") REFERENCES "Ciudad"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_CiudadToTecnico" ADD FOREIGN KEY ("B") REFERENCES "Tecnico"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_ServicioToTicket" ADD FOREIGN KEY ("A") REFERENCES "Servicio"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_ServicioToTicket" ADD FOREIGN KEY ("B") REFERENCES "Ticket"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_ServicioToTecnico" ADD FOREIGN KEY ("A") REFERENCES "Servicio"("id") ON DELETE CASCADE ON UPDATE CASCADE;

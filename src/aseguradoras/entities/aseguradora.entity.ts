@@ -1,8 +1,7 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Aseguradora } from "@prisma/client";
+import { ApiProperty } from '@nestjs/swagger';
+import { Aseguradora } from '@prisma/client';
 
 export class AseguradoraEntity implements Aseguradora {
-
   @ApiProperty()
   id: number;
 
