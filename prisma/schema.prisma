@@ -140,21 +140,19 @@ model CotizacionTecnico {
 }
 
 model AcuerdoConformidad {
-  id                         Int       @id @unique @default(autoincrement())
-  expediente                 String
+  id                         Int           @id @unique @default(autoincrement())
   fecha_acuerdo              DateTime
   problema                   String
-  asistencia                 String
-  nombre_asesor              String
   descripcion_problema       String
   direccion                  String
-  usuario_final              String
   hora_recepcion_servicio    DateTime
   hora_llegada_servicio      DateTime
   hora_finalizacion_servicio DateTime
   acuerdo_firmado            String?
-  createdAt                  DateTime? @default(now())
-  updatedAt                  DateTime? @updatedAt
+  usuarioFinalId             Int?
+  createdAt                  DateTime?     @default(now())
+  updatedAt                  DateTime?     @updatedAt
+  UsuarioFinal               UsuarioFinal? @relation(fields: [usuarioFinalId], references: [id])
 }
 
 model Usuario {
@@ -172,10 +170,13 @@ model Usuario {
 }
 
 model UsuarioFinal {
-  id               Int       @id @unique @default(autoincrement())
-  nombre           String    @db.VarChar(50)
-  apellido_paterno String    @db.VarChar(50)
-  apellido_materno String    @db.VarChar(50)
-  createdAt        DateTime? @default(now())
-  updatedAt        DateTime? @updatedAt
+  id                 Int                  @id @unique @default(autoincrement())
+  nombre             String               @db.VarChar(50)
+  apellido_paterno   String               @db.VarChar(50)
+  apellido_materno   String               @db.VarChar(50)
+  correo             String?              @db.VarChar(100)
+  telefono           String               @db.VarChar(10)
+  AcuerdoConformidad AcuerdoConformidad[]
+  createdAt          DateTime?            @default(now())
+  updatedAt          DateTime?            @updatedAt
 }

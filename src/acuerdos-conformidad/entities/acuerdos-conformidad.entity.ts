@@ -15,19 +15,10 @@ export class AcuerdoConformidadEntity implements AcuerdoConformidad {
   problema: string;
 
   @ApiProperty()
-  asistencia: string;
-
-  @ApiProperty()
-  nombre_asesor: string;
-
-  @ApiProperty()
   descripcion_problema: string;
 
   @ApiProperty()
   direccion: string;
-
-  @ApiProperty()
-  usuario_final: string;
 
   @ApiProperty()
   hora_recepcion_servicio: Date;
@@ -40,6 +31,9 @@ export class AcuerdoConformidadEntity implements AcuerdoConformidad {
 
   @ApiProperty({ required: false })
   acuerdo_firmado: string;
+
+  @ApiProperty({ required: false })
+  usuarioFinalId: number;
 
   @ApiProperty()
   createdAt: Date;

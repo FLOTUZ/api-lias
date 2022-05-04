@@ -16,23 +16,11 @@ export class CreateAcuerdosConformidadDto {
 
   @IsNotEmpty()
   @ApiProperty()
-  asistencia: string;
-
-  @IsNotEmpty()
-  @ApiProperty()
-  nombre_asesor: string;
-
-  @IsNotEmpty()
-  @ApiProperty()
   descripcion_problema: string;
 
   @ApiProperty()
   @IsNotEmpty()
   direccion: string;
-
-  @IsNotEmpty()
-  @ApiProperty()
-  usuario_final: string;
 
   @IsNotEmpty()
   @ApiProperty()
@@ -49,4 +37,8 @@ export class CreateAcuerdosConformidadDto {
   @IsOptional()
   @ApiProperty({ required: false })
   acuerdo_firmado: string;
+
+  @IsOptional()
+  @ApiProperty({ required: false })
+  usuarioFinalId: number;
 }

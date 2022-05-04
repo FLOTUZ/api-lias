@@ -18,5 +18,11 @@ export class UsuarioFinalEntity implements UsuarioFinal {
   createdAt: Date;
 
   @ApiProperty({ required: false })
+  correo: string;
+
+  @ApiProperty({ required: false })
+  telefono: string;
+
+  @ApiProperty({ required: false })
   updatedAt: Date;
 }
