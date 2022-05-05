@@ -12,10 +12,6 @@ export class CreateAcuerdosConformidadDto {
 
   @IsNotEmpty()
   @ApiProperty()
-  problema: string;
-
-  @IsNotEmpty()
-  @ApiProperty()
   descripcion_problema: string;
 
   @ApiProperty()
