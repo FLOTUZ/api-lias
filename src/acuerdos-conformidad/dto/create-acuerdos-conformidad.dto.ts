@@ -22,6 +22,14 @@ export class CreateAcuerdosConformidadDto {
   @IsNotEmpty()
   direccion: string;
 
+  @ApiProperty()
+  @IsOptional()
+  observaciones: string;
+
+  @IsNotEmpty()
+  @ApiProperty()
+  actividades_realizadas: string;
+
   @IsNotEmpty()
   @ApiProperty()
   hora_recepcion_servicio: Date;

@@ -105,6 +105,37 @@ async function main() {
       longitud: -101.1895,
     },
   });
+
+  //-----------------------TICKETS-------------------------------
+  await prisma.ticket.create({
+    data: {
+      num_expediente: '270986/303527',
+      asistencia_vial: false,
+      fecha_llamada: '2020-04-30T14:41:00.000Z',
+      nombre_asesor_aseguradora: 'Maria Lopez',
+      nombre_asesor_gpo_lias: 'Juan Vazquez',
+      nombre_usuario_final: 'Michelle Patiño',
+      titulo_ticket: 'HandyMan para montar una pantalla',
+      aseguradoraId: 1,
+      asistenciaId: 1,
+      problematica: 'HandyMan para montar una pantalla de 72"',
+      ciudad: 'Morelia',
+      colonia: 'Vista Hermosa',
+      calle: 'Miradores de la Sierra',
+      numero_domicilio: '130',
+      banderazo: 0,
+      total_salida: 200,
+      costo_gpo_lias: 130,
+      cobertura: 1000,
+      cotizacion_gpo_lias: 'Se requiere tambien de un soporte para pantalla',
+      deducible: 0,
+      kilometraje: 5,
+      casetas: 0,
+      total: 300,
+      anticipo: 150,
+      estado: 'NUEVO',
+    },
+  });
 }
 
 main()

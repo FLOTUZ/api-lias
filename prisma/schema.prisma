@@ -142,9 +142,10 @@ model CotizacionTecnico {
 model AcuerdoConformidad {
   id                         Int           @id @unique @default(autoincrement())
   fecha_acuerdo              DateTime
-  problema                   String
   descripcion_problema       String
   direccion                  String
+  observaciones              String?
+  actividades_realizadas     String
   hora_recepcion_servicio    DateTime
   hora_llegada_servicio      DateTime
   hora_finalizacion_servicio DateTime
