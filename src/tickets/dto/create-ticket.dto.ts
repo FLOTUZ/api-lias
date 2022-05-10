@@ -13,9 +13,11 @@ import {
 
 export enum EstadoTicket {
   'NUEVO' = 'NUEVO',
-  'PENDIENTE' = 'PENDIENTE',
+  'TOMADO' = 'TOMADO',
+  'COTIZADO' = 'COTIZADO',
   'EN PROCESO' = 'EN PROCESO',
-  'CERRADO' = 'CERRADO',
+  'A CERRAR' = 'A CERRAR',
+  'FINALIZADO' = 'FINALIZADO',
 }
 
 export class CreateTicketDto {
@@ -124,7 +126,14 @@ export class CreateTicketDto {
   @IsNotEmpty()
   @IsEnum(EstadoTicket)
   @ApiProperty({
-    enum: ['NUEVO', 'PENDIENTE', 'EN PROCESO', 'CERRADO'],
+    enum: [
+      'NUEVO',
+      'TOMADO',
+      'COTIZADO',
+      'EN PROCESO',
+      'A CERRAR',
+      'FINALIZADO',
+    ],
     default: 'NUEVO',
   })
   estado: string;
