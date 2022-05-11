@@ -67,6 +67,12 @@ export class TicketEntity implements Ticket {
   kilometraje: number;
 
   @ApiProperty({ type: 'number' })
+  costo_de_kilometraje: Decimal;
+
+  @ApiProperty({ type: 'number' })
+  costo_por_caseta: Decimal;
+
+  @ApiProperty({ type: 'number' })
   total: Decimal;
 
   @ApiProperty({ type: 'number' })

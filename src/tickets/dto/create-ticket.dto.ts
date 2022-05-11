@@ -9,6 +9,7 @@ import {
   IsNotEmpty,
   IsNumber,
   IsOptional,
+  IsPositive,
 } from 'class-validator';
 
 export enum EstadoTicket {
@@ -105,6 +106,14 @@ export class CreateTicketDto {
   @IsNumber()
   @ApiProperty()
   kilometraje: number;
+
+  @IsPositive()
+  @ApiProperty({ type: 'number' })
+  costo_de_kilometraje: Decimal;
+
+  @IsPositive()
+  @ApiProperty({ type: 'number' })
+  costo_por_caseta: Decimal;
 
   @IsNotEmpty()
   @ApiProperty({ type: 'number' })

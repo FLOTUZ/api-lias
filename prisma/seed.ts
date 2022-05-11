@@ -130,6 +130,8 @@ async function main() {
       cotizacion_gpo_lias: 'Se requiere tambien de un soporte para pantalla',
       deducible: 0,
       kilometraje: 5,
+      costo_de_kilometraje: 13,
+      costo_por_caseta: 200,
       casetas: 0,
       total: 300,
       anticipo: 150,

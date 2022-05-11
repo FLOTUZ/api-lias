@@ -109,6 +109,8 @@ model Ticket {
   cotizacion_gpo_lias       String?
   deducible                 Decimal            @db.Money
   kilometraje               Int
+  costo_de_kilometraje      Decimal            @db.Money
+  costo_por_caseta          Decimal            @db.Money
   total                     Decimal            @db.Money
   anticipo                  Decimal            @db.Money
   hora_cierre               DateTime?
