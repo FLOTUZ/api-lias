@@ -13,13 +13,13 @@ export class AseguradoraEntity implements Aseguradora {
   telefono: string;
 
   @ApiProperty()
-  telefono_domestico: number;
+  telefono_domestico: string;
 
   @ApiProperty()
-  telefono_vial: number;
+  telefono_vial: string;
 
   @ApiProperty()
-  telefono_whats: number;
+  telefono_whats: string;
 
   @ApiProperty()
   kilometraje_permitido: number;

@@ -12,6 +12,7 @@ import { AsistenciasModule } from './asistencias/asistencias.module';
 import { AseguradorasModule } from './aseguradoras/aseguradoras.module';
 import { CotizacionesTecnicoModule } from './cotizaciones-tecnico/cotizaciones-tecnico.module';
 import { AcuerdosConformidadModule } from './acuerdos-conformidad/acuerdos-conformidad.module';
+import { EstadosModule } from './estados/estados.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { AcuerdosConformidadModule } from './acuerdos-conformidad/acuerdos-confo
     AseguradorasModule,
     CotizacionesTecnicoModule,
     AcuerdosConformidadModule,
+    EstadosModule,
   ],
 })
 export class AppModule {}

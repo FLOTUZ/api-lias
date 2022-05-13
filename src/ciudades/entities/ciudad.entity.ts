@@ -15,6 +15,9 @@ export class CiudadEntity implements Ciudad {
   longitud: number;
 
   @ApiProperty()
+  estadoId: number;
+
+  @ApiProperty()
   createdAt: Date;
 
   @ApiProperty()

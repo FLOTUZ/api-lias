@@ -20,4 +20,8 @@ export class CreateCiudadDto {
   @IsLongitude()
   @ApiProperty({ required: false })
   longitud: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  estadoId: number;
 }

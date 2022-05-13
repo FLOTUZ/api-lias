@@ -10,10 +10,10 @@ datasource db {
 model Aseguradora {
   id                    Int          @id @unique @default(autoincrement())
   nombre                String       @unique
-  telefono              String
-  telefono_domestico    Int?
-  telefono_vial         Int?
-  telefono_whats        Int?
+  telefono              String       @db.VarChar(15)
+  telefono_domestico    String?      @db.VarChar(15)
+  telefono_vial         String?      @db.VarChar(15)
+  telefono_whats        String?      @db.VarChar(15)
   kilometraje_permitido Int?
   costo_por_kilometro   Int?
   Asistencia            Asistencia[]
@@ -37,9 +37,11 @@ model Ciudad {
   nombre    String    @db.VarChar(100)
   latitud   Float?
   longitud  Float?
+  estadoId  Int?
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
   Tecnico   Tecnico[]
+  Estado    Estado?   @relation(fields: [estadoId], references: [id])
 }
 
 model Imagen {
@@ -203,4 +205,12 @@ model UsuarioFinal {
   AcuerdoConformidad AcuerdoConformidad[]
   createdAt          DateTime?            @default(now())
   updatedAt          DateTime?            @updatedAt
+}
+
+model Estado {
+  id     Int    @id @unique @default(autoincrement())
+  nombre String @unique @db.VarChar(25)
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+  Ciudad    Ciudad[]
 }

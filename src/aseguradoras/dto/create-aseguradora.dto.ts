@@ -12,15 +12,15 @@ export class CreateAseguradoraDto {
 
   @ApiProperty()
   @IsOptional()
-  telefono_domestico: number;
+  telefono_domestico: string;
 
   @ApiProperty()
   @IsOptional()
-  telefono_vial: number;
+  telefono_vial: string;
 
   @ApiProperty()
   @IsOptional()
-  telefono_whats: number;
+  telefono_whats: string;
 
   @ApiProperty()
   @IsOptional()
