@@ -8,14 +8,18 @@ datasource db {
 }
 
 model Aseguradora {
-  id         Int          @id @unique @default(autoincrement())
-  nombre     String       @unique
-  telefono   String
-  expediente String       @db.VarChar(20)
-  Asistencia Asistencia[]
-  Ticket     Ticket[]
-  createdAt  DateTime?    @default(now())
-  updatedAt  DateTime?
+  id                    Int          @id @unique @default(autoincrement())
+  nombre                String       @unique
+  telefono              String
+  telefono_domestico    Int?
+  telefono_vial         Int?
+  telefono_whats        Int?
+  kilometraje_permitido Int?
+  costo_por_kilometro   Int?
+  Asistencia            Asistencia[]
+  Ticket                Ticket[]
+  createdAt             DateTime?    @default(now())
+  updatedAt             DateTime?
 }
 
 model Asistencia {
