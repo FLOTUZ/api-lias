@@ -38,4 +38,10 @@ export class CreateCotizacionTecnicoDto {
   @ApiProperty()
   @IsNotEmpty()
   tecnicoId: number;
+
+  @ApiProperty()
+  checkInId: number;
+
+  @ApiProperty()
+  preSolucionId: number;
 }

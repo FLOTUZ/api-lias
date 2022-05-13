@@ -25,7 +25,7 @@ export class TicketsController {
   }
 
   @Get()
-  @ApiOkResponse({ status: 200, type: TicketEntity })
+  @ApiOkResponse({ status: 200, type: [TicketEntity] })
   findAll() {
     return this.ticketsService.findAll();
   }

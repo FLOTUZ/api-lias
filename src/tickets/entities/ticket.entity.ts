@@ -3,6 +3,7 @@ import { Ticket } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime';
 
 export class TicketEntity implements Ticket {
+
   @ApiProperty()
   id: number;
 
@@ -89,6 +90,27 @@ export class TicketEntity implements Ticket {
 
   @ApiProperty()
   estado: string;
+
+  @ApiProperty({required: false})
+  num_interior: string;
+
+  @ApiProperty({required: false})
+  modelo_carro: string;
+
+  @ApiProperty({required: false})
+  placas_carro: string;
+
+  @ApiProperty({required: false})
+  color_carro: string;
+
+  @ApiProperty({required: false})
+  marca_carro: string;
+
+  @ApiProperty({required: false})
+  is_servicio_domestico: boolean;
+
+  @ApiProperty({required: false})
+  is_servicio_foraneo: boolean;
 
   @ApiProperty()
   createdAt: Date;

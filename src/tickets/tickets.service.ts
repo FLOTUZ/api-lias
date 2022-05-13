@@ -12,7 +12,7 @@ export class TicketsService {
   }
 
   findAll() {
-    return this.prisma.ticket.findMany({});
+    return this.prisma.ticket.findMany();
   }
 
   async findOne(id: string) {

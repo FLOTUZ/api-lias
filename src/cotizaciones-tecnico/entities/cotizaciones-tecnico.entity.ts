@@ -31,6 +31,12 @@ export class CotizacionesTecnicoEntity implements CotizacionTecnico {
   tecnicoId: number;
 
   @ApiProperty()
+  checkInId: number;
+
+  @ApiProperty()
+  preSolucionId: number;
+
+  @ApiProperty()
   createdAt: Date;
 
   @ApiProperty()

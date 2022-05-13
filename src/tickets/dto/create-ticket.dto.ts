@@ -10,6 +10,7 @@ import {
   IsNumber,
   IsOptional,
   IsPositive,
+  MaxLength,
 } from 'class-validator';
 
 export enum EstadoTicket {
@@ -150,4 +151,37 @@ export class CreateTicketDto {
   @IsOptional()
   @ApiProperty()
   hora_cierre: Date;
+
+  @IsOptional()
+  @MaxLength(5)
+  @ApiProperty({ required: false })
+  num_interior: string;
+
+  @IsOptional()
+  @MaxLength(50)
+  @ApiProperty({ required: false })
+  modelo_carro: string;
+
+  @IsOptional()
+  @MaxLength(10)
+  @ApiProperty({ required: false })
+  placas_carro: string;
+
+  @IsOptional()
+  @MaxLength(50)
+  @ApiProperty({ required: false })
+  color_carro: string;
+
+  @IsOptional()
+  @MaxLength(50)
+  @ApiProperty({ required: false })
+  marca_carro: string;
+
+  @IsOptional()
+  @ApiProperty({ required: false, default: false })
+  is_servicio_domestico: boolean;
+
+  @IsOptional()
+  @ApiProperty({ required: false, default: false })
+  is_servicio_foraneo: boolean;
 }
