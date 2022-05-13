@@ -39,13 +39,13 @@ model Ciudad {
 }
 
 model Imagen {
-  id                  Int                @id @unique @default(autoincrement())
-  url                 String
-  descripcion         String
-  cotizacionTecnicoId Int?
-  createdAt           DateTime?          @default(now())
-  updatedAt           DateTime?          @updatedAt
-  CotizacionTecnico   CotizacionTecnico? @relation(fields: [cotizacionTecnicoId], references: [id])
+  id          Int                 @id @unique @default(autoincrement())
+  url         String
+  descripcion String
+  createdAt   DateTime?           @default(now())
+  updatedAt   DateTime?           @updatedAt
+  CheckIn     CotizacionTecnico[] @relation("Checkin")
+  PreSolucion CotizacionTecnico[] @relation("PreSolucion")
 }
 
 model Seguimiento {
@@ -72,19 +72,20 @@ model Servicio {
 }
 
 model Tecnico {
-  id               Int        @id @unique @default(autoincrement())
-  nombre           String     @db.VarChar(50)
-  apellido_paterno String     @db.VarChar(50)
-  apellido_materno String     @db.VarChar(50)
-  calificacion     Decimal    @default(0.0) @db.Decimal(2, 1)
-  telefono         String     @db.VarChar(10)
-  usuarioId        Int        @unique
+  id               Int                 @id @unique @default(autoincrement())
+  nombre           String              @db.VarChar(50)
+  apellido_paterno String              @db.VarChar(50)
+  apellido_materno String              @db.VarChar(50)
+  calificacion     Decimal             @default(0.0) @db.Decimal(2, 1)
+  telefono         String              @db.VarChar(10)
+  usuarioId        Int                 @unique
   ciudadId         Int
-  createdAt        DateTime?  @default(now())
-  updatedAt        DateTime?  @updatedAt
-  Usuario          Usuario    @relation(fields: [usuarioId], references: [id])
+  createdAt        DateTime?           @default(now())
+  updatedAt        DateTime?           @updatedAt
+  Usuario          Usuario             @relation(fields: [usuarioId], references: [id])
   Ciudad           Ciudad[]
   Servicio         Servicio[]
+  Cotizaciones     CotizacionTecnico[]
 }
 
 model Ticket {
@@ -128,17 +129,26 @@ model Ticket {
 }
 
 model CotizacionTecnico {
-  id                  Int       @id @unique @default(autoincrement())
-  solucion_tecnico    String
-  fecha_contacto      DateTime
-  costo_mano_obra     Decimal   @db.Money
-  costo_materiales    Decimal   @db.Money
-  total_cotizacion    Decimal   @db.Money
-  ticketId            Int       @unique
-  createdAt           DateTime? @default(now())
-  updatedAt           DateTime? @updatedAt
-  Ticket              Ticket    @relation(fields: [ticketId], references: [id])
-  ImagenJustificacion Imagen[]
+  id                   Int       @id @unique @default(autoincrement())
+  checkInId            Int
+  diagnostico_problema String
+  solucion_tecnico     String
+  fecha_contacto       DateTime
+  costo_mano_obra      Decimal   @db.Money
+  costo_materiales     Decimal   @db.Money
+  total_cotizacion     Decimal   @db.Money
+  ticketId             Int       @unique
+  tecnicoId            Int
+  preSolucionId        Int
+  createdAt            DateTime? @default(now())
+  updatedAt            DateTime? @updatedAt
+  Ticket               Ticket    @relation(fields: [ticketId], references: [id])
+  Tecnico              Tecnico   @relation(fields: [tecnicoId], references: [id])
+  //Imagen del CheckIn
+  Checkin              Imagen?   @relation("Checkin", fields: [checkInId], references: [id])
+  //Imagen de antes de solucionar el problema
+  PreSolucion          Imagen?   @relation("PreSolucion", fields: [preSolucionId], references: [id])
+
 }
 
 model AcuerdoConformidad {

@@ -7,6 +7,9 @@ export class CotizacionesTecnicoEntity implements CotizacionTecnico {
   id: number;
 
   @ApiProperty()
+  diagnostico_problema: string;
+
+  @ApiProperty()
   solucion_tecnico: string;
 
   @ApiProperty({ type: 'number' })
@@ -23,6 +26,9 @@ export class CotizacionesTecnicoEntity implements CotizacionTecnico {
 
   @ApiProperty()
   ticketId: number;
+
+  @ApiProperty()
+  tecnicoId: number;
 
   @ApiProperty()
   createdAt: Date;

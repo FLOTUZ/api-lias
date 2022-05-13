@@ -5,6 +5,10 @@ import { IsDate, IsDecimal, IsNotEmpty } from 'class-validator';
 export class CreateCotizacionTecnicoDto {
   @IsNotEmpty()
   @ApiProperty()
+  diagnostico_problema: string;
+
+  @IsNotEmpty()
+  @ApiProperty()
   solucion_tecnico: string;
 
   @IsNotEmpty()
@@ -30,4 +34,8 @@ export class CreateCotizacionTecnicoDto {
   @ApiProperty()
   @IsNotEmpty()
   ticketId: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  tecnicoId: number;
 }
