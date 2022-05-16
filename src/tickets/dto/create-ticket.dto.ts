@@ -8,7 +8,6 @@ import {
   IsNotEmpty,
   IsNumber,
   IsOptional,
-  IsPositive,
   MaxLength,
 } from 'class-validator';
 
@@ -102,16 +101,16 @@ export class CreateTicketDto {
   @ApiProperty({ type: 'number' })
   deducible: Decimal;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   @ApiProperty()
   kilometraje: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty({ type: 'number' })
   costo_de_kilometraje: Decimal;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty({ type: 'number' })
   costo_por_caseta: Decimal;
 
@@ -123,7 +122,7 @@ export class CreateTicketDto {
   @ApiProperty({ type: 'number' })
   anticipo: Decimal;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   casetas: number;
 
