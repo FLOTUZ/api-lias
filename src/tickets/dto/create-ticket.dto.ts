@@ -112,7 +112,7 @@ export class CreateTicketDto {
   @ApiProperty({ type: 'number' })
   costo_de_kilometraje: Decimal;
 
-  @IsPositive()
+  @IsNotEmpty()
   @ApiProperty({ type: 'number' })
   costo_por_caseta: Decimal;
 
