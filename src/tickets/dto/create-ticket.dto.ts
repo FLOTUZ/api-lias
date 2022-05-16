@@ -5,7 +5,6 @@ import {
   IsBoolean,
   IsDateString,
   IsEnum,
-  IsInt,
   IsNotEmpty,
   IsNumber,
   IsOptional,
@@ -108,7 +107,7 @@ export class CreateTicketDto {
   @ApiProperty()
   kilometraje: number;
 
-  @IsPositive()
+  @IsNotEmpty()
   @ApiProperty({ type: 'number' })
   costo_de_kilometraje: Decimal;
 
