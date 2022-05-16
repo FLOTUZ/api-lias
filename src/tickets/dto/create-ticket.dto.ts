@@ -125,7 +125,6 @@ export class CreateTicketDto {
   anticipo: Decimal;
 
   @IsNotEmpty()
-  @IsInt()
   @ApiProperty()
   casetas: number;
 
