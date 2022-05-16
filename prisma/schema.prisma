@@ -109,7 +109,7 @@ model Ticket {
   ciudad                    String
   colonia                   String
   calle                     String
-  numero_domicilio          String
+  numero_domicilio          String?
   banderazo                 Decimal?           @db.Money
   total_salida              Decimal            @db.Money
   cobertura                 Decimal            @db.Money

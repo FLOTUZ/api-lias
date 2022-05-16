@@ -77,7 +77,7 @@ export class CreateTicketDto {
   @ApiProperty()
   calle: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   numero_domicilio: string;
 
