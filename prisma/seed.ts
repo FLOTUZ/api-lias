@@ -21,6 +21,8 @@ async function main() {
       telefono_domestico: '4510101012',
       telefono_vial: '4510101012',
       telefono_whats: '4510101012',
+      kilometraje_permitido: 16,
+      costo_por_kilometro: 13,
     },
   });
 
@@ -28,6 +30,12 @@ async function main() {
     data: {
       nombre: 'AXA',
       telefono: '918070055',
+      telefono_domestico: '4510101012',
+      telefono_vial: '4510101012',
+      telefono_whats: '4510101012',
+      kilometraje_permitido: 18,
+      costo_por_kilometro: 16,
+      
     },
   });
 
