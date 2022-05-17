@@ -62,4 +62,9 @@ export class AsesoresController {
   remove(@Param('id') id: string) {
     return this.asesoresService.remove(id);
   }
+
+  @Get('/aseguradoras/:id')
+  asesoresByAseguradora(@Param('id') id: string) {
+    return this.asesoresService.asesoresByAseguradora(id);
+  }
 }

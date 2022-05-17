@@ -37,4 +37,12 @@ export class AsesoresService {
   remove(id: string) {
     return this.prisma.asesor.delete({ where: { id: Number(id) } });
   }
+
+  asesoresByAseguradora(id: string) {
+    return this.prisma.asesor.findMany({
+      where: {
+        aseguradoraId: Number(id),
+      },
+    });
+  }
 }
