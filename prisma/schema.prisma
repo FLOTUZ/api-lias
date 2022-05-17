@@ -18,6 +18,7 @@ model Aseguradora {
   costo_por_kilometro   Int?
   Asistencia            Asistencia[]
   Ticket                Ticket[]
+  Asesor                Asesor[]
   createdAt             DateTime?    @default(now())
   updatedAt             DateTime?
 }
@@ -117,7 +118,7 @@ model Ticket {
   deducible                 Decimal            @db.Money
   kilometraje               Int
   costo_de_kilometraje      Decimal            @db.Money
-  costo_por_caseta          Decimal?            @db.Money
+  costo_por_caseta          Decimal?           @db.Money
   total                     Decimal            @db.Money
   anticipo                  Decimal            @db.Money
   hora_cierre               DateTime?
@@ -208,12 +209,18 @@ model UsuarioFinal {
 }
 
 model Estado {
-  id     Int    @id @unique @default(autoincrement())
-  nombre String @unique @db.VarChar(25)
+  id        Int       @id @unique @default(autoincrement())
+  nombre    String    @unique @db.VarChar(25)
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
   Ciudad    Ciudad[]
 }
 
-
-
+model Asesor {
+  id            Int         @id @unique @default(autoincrement())
+  nombre        String      @unique @db.VarChar(45)
+  aseguradoraId Int
+  createdAt     DateTime?   @default(now())
+  updatedAt     DateTime?   @updatedAt
+  Aseguradora   Aseguradora @relation(fields: [aseguradoraId], references: [id])
+}
