@@ -5,11 +5,9 @@ import {
   IsBoolean,
   IsDateString,
   IsEnum,
-  IsInt,
   IsNotEmpty,
   IsNumber,
   IsOptional,
-  IsPositive,
   MaxLength,
 } from 'class-validator';
 
@@ -79,7 +77,7 @@ export class CreateTicketDto {
   @ApiProperty()
   calle: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   numero_domicilio: string;
 
@@ -103,16 +101,16 @@ export class CreateTicketDto {
   @ApiProperty({ type: 'number' })
   deducible: Decimal;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   @ApiProperty()
   kilometraje: number;
 
-  @IsPositive()
+  @IsOptional()
   @ApiProperty({ type: 'number' })
   costo_de_kilometraje: Decimal;
 
-  @IsPositive()
+  @IsOptional()
   @ApiProperty({ type: 'number' })
   costo_por_caseta: Decimal;
 
@@ -124,8 +122,7 @@ export class CreateTicketDto {
   @ApiProperty({ type: 'number' })
   anticipo: Decimal;
 
-  @IsNotEmpty()
-  @IsInt()
+  @IsOptional()
   @ApiProperty()
   casetas: number;
 

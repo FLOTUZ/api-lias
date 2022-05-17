@@ -109,7 +109,7 @@ model Ticket {
   ciudad                    String
   colonia                   String
   calle                     String
-  numero_domicilio          String
+  numero_domicilio          String?
   banderazo                 Decimal?           @db.Money
   total_salida              Decimal            @db.Money
   cobertura                 Decimal            @db.Money
@@ -117,11 +117,11 @@ model Ticket {
   deducible                 Decimal            @db.Money
   kilometraje               Int
   costo_de_kilometraje      Decimal            @db.Money
-  costo_por_caseta          Decimal            @db.Money
+  costo_por_caseta          Decimal?            @db.Money
   total                     Decimal            @db.Money
   anticipo                  Decimal            @db.Money
   hora_cierre               DateTime?
-  casetas                   Int
+  casetas                   Int?
   costo_gpo_lias            Decimal            @db.Money
   estado                    String             @default("NUEVO")
   num_interior              String?            @db.VarChar(5)
