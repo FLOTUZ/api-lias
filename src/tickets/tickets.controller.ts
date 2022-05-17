@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { TicketsService } from './tickets.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
@@ -15,37 +17,44 @@ import { TicketEntity } from './entities/ticket.entity';
 
 @Controller('tickets')
 @ApiTags('tickets')
+@UseInterceptors(ClassSerializerInterceptor)
 export class TicketsController {
   constructor(private readonly ticketsService: TicketsService) {}
 
   @Post()
   @ApiOkResponse({ status: 200, type: TicketEntity })
-  create(@Body() createDTO: CreateTicketDto) {
-    return this.ticketsService.create(createDTO);
+  async create(@Body() createDTO: CreateTicketDto) {
+    return new TicketEntity(await this.ticketsService.create(createDTO));
   }
 
   @Get()
   @ApiOkResponse({ status: 200, type: [TicketEntity] })
-  findAll() {
-    return this.ticketsService.findAll();
+  async findAll() {
+    const list = await this.ticketsService.findAll();
+    return list.map((item) => new TicketEntity(item));
   }
 
   @Get(':id')
   @ApiOkResponse({ status: 200, type: TicketEntity })
-  findOne(@Param('id') id: string) {
-    return this.ticketsService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    return new TicketEntity(await this.ticketsService.findOne(id));
   }
 
   @Patch(':id')
   @ApiOkResponse({ status: 200, type: TicketEntity })
-  update(@Param('id') id: string, @Body() updateTicketDto: UpdateTicketDto) {
-    return this.ticketsService.update(id, updateTicketDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateTicketDto: UpdateTicketDto,
+  ) {
+    return new TicketEntity(
+      await this.ticketsService.update(id, updateTicketDto),
+    );
   }
 
   @Delete(':id')
   @ApiOkResponse({ status: 200, type: TicketEntity })
-  remove(@Param('id') id: string) {
-    return this.ticketsService.remove(id);
+  async remove(@Param('id') id: string) {
+    return new TicketEntity(await this.ticketsService.remove(id));
   }
 
   @Post(':id/servicios')
