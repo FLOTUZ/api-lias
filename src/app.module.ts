@@ -13,6 +13,7 @@ import { AseguradorasModule } from './aseguradoras/aseguradoras.module';
 import { CotizacionesTecnicoModule } from './cotizaciones-tecnico/cotizaciones-tecnico.module';
 import { AcuerdosConformidadModule } from './acuerdos-conformidad/acuerdos-conformidad.module';
 import { EstadosModule } from './estados/estados.module';
+import { AsesoresModule } from './asesores/asesores.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { EstadosModule } from './estados/estados.module';
     CotizacionesTecnicoModule,
     AcuerdosConformidadModule,
     EstadosModule,
+    AsesoresModule,
   ],
 })
 export class AppModule {}

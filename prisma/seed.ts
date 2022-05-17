@@ -35,7 +35,7 @@ async function main() {
       telefono_whats: '4510101012',
       kilometraje_permitido: 18,
       costo_por_kilometro: 16,
-      
+
     },
   });
 
@@ -98,12 +98,36 @@ async function main() {
     },
   });
 
+  //--------------ESTADOS------------------
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'Michoacan',
+    }
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'Jalisco',
+    }
+  });
+
   //--------------CIUDADES------------------
   await prisma.ciudad.create({
     data: {
       nombre: 'Morelia',
       latitud: 19.7008,
       longitud: -101.1895,
+      estadoId: 1,
+    },
+  });
+
+  await prisma.ciudad.create({
+    data: {
+      nombre: 'Uruapan',
+      latitud: 19.7008,
+      longitud: -101.1895,
+      estadoId: 1,
     },
   });
 
@@ -112,6 +136,7 @@ async function main() {
       nombre: 'Guadalajara',
       latitud: 19.7008,
       longitud: -101.1895,
+      estadoId: 2,
     },
   });
 
