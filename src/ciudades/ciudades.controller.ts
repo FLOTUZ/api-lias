@@ -62,4 +62,9 @@ export class CiudadesController {
   remove(@Param('id') id: string) {
     return this.ciudadesService.remove(id);
   }
+
+  @Get('/estado/:id')
+  getCiudadesByEstado(@Param('id') id: string) {
+    return this.ciudadesService.getCiudadesByEstado(id);
+  }
 }

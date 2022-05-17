@@ -37,4 +37,12 @@ export class CiudadesService {
   remove(id: string) {
     return this.prisma.ciudad.delete({ where: { id: Number(id) } });
   }
+
+  getCiudadesByEstado(id: string) {
+    return this.prisma.ciudad.findMany({
+      where: {
+        estadoId: Number(id),
+      },
+    });
+  }
 }
