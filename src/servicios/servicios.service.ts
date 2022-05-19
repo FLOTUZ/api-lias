@@ -37,4 +37,15 @@ export class ServiciosService {
   remove(id: string) {
     return this.prisma.servicio.delete({ where: { id: Number(id) } });
   }
+
+  getTecnicosByServicio(id: string) {
+    return this.prisma.servicio.findMany({
+      where: {
+        id: Number(id),
+      },
+      include: {
+        Tecnico: true,
+      },
+    });
+  }
 }

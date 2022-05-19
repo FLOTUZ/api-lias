@@ -7,6 +7,7 @@ import {
   IsOptional,
   IsPhoneNumber,
 } from 'class-validator';
+import { TecnicoEntity } from '../entities/tecnico.entity';
 
 export class CreateTecnicoDto {
   @ApiProperty()
@@ -39,4 +40,8 @@ export class CreateTecnicoDto {
   @IsNotEmpty()
   @ApiProperty({ required: true })
   ciudadId: number;
+
+  constructor(partial: Partial<TecnicoEntity>) {
+    Object.assign(this, partial);
+  }
 }
