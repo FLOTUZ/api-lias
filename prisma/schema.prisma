@@ -41,7 +41,8 @@ model Ciudad {
   estadoId  Int?
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
-  Tecnico   Tecnico[]
+  Tecnico   Tecnico[] //Tecnicos que dan servicio en esta ciudad
+  ViveEn    Tecnico[] @relation("ResideEn") //Tecnicos que viven en esta ciudad
   Estado    Estado?   @relation(fields: [estadoId], references: [id])
 }
 
@@ -90,9 +91,10 @@ model Tecnico {
   createdAt        DateTime?           @default(now())
   updatedAt        DateTime?           @updatedAt
   Usuario          Usuario             @relation(fields: [usuarioId], references: [id])
-  Ciudad           Ciudad[]
+  Ciudad           Ciudad[] //Ciudades que atiende
   Servicio         Servicio[]
   Cotizaciones     CotizacionTecnico[]
+  ViveEn           Ciudad?             @relation("ResideEn", fields: [ciudadId], references: [id])
 }
 
 model Ticket {

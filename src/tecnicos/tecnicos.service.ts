@@ -15,12 +15,25 @@ export class TecnicosService {
   }
 
   findAll() {
-    return this.prisma.tecnico.findMany({ include: { Servicio: true } });
+    return this.prisma.tecnico.findMany({
+      include: {
+        ViveEn: true,
+        Servicio: true,
+        Ciudad: true,
+        Cotizaciones: true,
+      },
+    });
   }
 
   async findOne(id: string) {
     const response = await this.prisma.tecnico.findUnique({
       where: { id: Number(id) },
+      include: {
+        ViveEn: true,
+        Servicio: true,
+        Ciudad: true,
+        Cotizaciones: true,
+      },
     });
 
     if (response == null) {

@@ -1,6 +1,8 @@
+import { NotFoundException } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Tecnico } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime';
+import { Type } from 'class-transformer';
 
 export class TecnicoEntity implements Tecnico {
   @ApiProperty()
@@ -16,6 +18,7 @@ export class TecnicoEntity implements Tecnico {
   apellido_materno: string;
 
   @ApiProperty({ type: 'number' })
+  @Type(() => Number)
   calificacion: Decimal;
 
   @ApiProperty()
@@ -32,4 +35,8 @@ export class TecnicoEntity implements Tecnico {
 
   @ApiProperty()
   updatedAt: Date;
+
+  constructor(partial: Partial<TecnicoEntity | NotFoundException>) {
+    Object.assign(this, partial);
+  }
 }

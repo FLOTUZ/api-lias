@@ -6,14 +6,18 @@ import {
   Patch,
   Param,
   Delete,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { TecnicosService } from './tecnicos.service';
 import { CreateTecnicoDto } from './dto/create-tecnico.dto';
 import { UpdateTecnicoDto } from './dto/update-tecnico.dto';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { TecnicoEntity } from './entities/tecnico.entity';
+import { TecnicoRelatedEntity } from './entities/tecnicoRelated.entity';
 
 @Controller('tecnicos')
+@UseInterceptors(ClassSerializerInterceptor)
 @ApiTags('tecnicos')
 export class TecnicosController {
   constructor(private readonly tecnicosService: TecnicosService) {}
@@ -23,26 +27,29 @@ export class TecnicosController {
     status: 200,
     type: TecnicoEntity,
   })
-  create(@Body() createTecnicoDto: CreateTecnicoDto) {
-    return this.tecnicosService.create(createTecnicoDto);
+  async create(@Body() createTecnicoDto: CreateTecnicoDto) {
+    return new TecnicoEntity(
+      await this.tecnicosService.create(createTecnicoDto),
+    );
   }
 
   @Get()
   @ApiOkResponse({
     status: 200,
-    type: [TecnicoEntity],
+    type: TecnicoRelatedEntity,
   })
-  findAll() {
-    return this.tecnicosService.findAll();
+  async findAll() {
+    const list = await this.tecnicosService.findAll();
+    return list.map((item) => new TecnicoRelatedEntity(item));
   }
 
   @Get(':id')
   @ApiOkResponse({
     status: 200,
-    type: TecnicoEntity,
+    type: TecnicoRelatedEntity,
   })
-  findOne(@Param('id') id: string) {
-    return this.tecnicosService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    return new TecnicoRelatedEntity(await this.tecnicosService.findOne(id));
   }
 
   @Patch(':id')
@@ -50,8 +57,13 @@ export class TecnicosController {
     status: 200,
     type: TecnicoEntity,
   })
-  update(@Param('id') id: string, @Body() updateTecnicoDto: UpdateTecnicoDto) {
-    return this.tecnicosService.update(id, updateTecnicoDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateTecnicoDto: UpdateTecnicoDto,
+  ) {
+    return new TecnicoEntity(
+      await this.tecnicosService.update(id, updateTecnicoDto),
+    );
   }
 
   @Delete(':id')
