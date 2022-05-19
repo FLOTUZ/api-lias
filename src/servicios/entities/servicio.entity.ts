@@ -1,5 +1,6 @@
+import { NotFoundException } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { Servicio } from '@prisma/client';
+import { Servicio, Tecnico } from '@prisma/client';
 
 export class ServicioEntity implements Servicio {
   @ApiProperty()
@@ -16,4 +17,12 @@ export class ServicioEntity implements Servicio {
 
   @ApiProperty()
   tipo: string;
+
+  constructor(
+    partial: Partial<
+      ServicioEntity | NotFoundException | (Servicio & { Tecnico: Tecnico[] })[]
+    >,
+  ) {
+    Object.assign(this, partial);
+  }
 }

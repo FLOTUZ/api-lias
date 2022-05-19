@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  ClassSerializerInterceptor,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ServiciosService } from './servicios.service';
 import { CreateServicioDto } from './dto/create-servicio.dto';
@@ -16,6 +18,7 @@ import { ServicioRelatedEntity } from './entities/servicioRealated.entity';
 
 @Controller('servicios')
 @ApiTags('servicios')
+@UseInterceptors(ClassSerializerInterceptor)
 export class ServiciosController {
   constructor(private readonly serviciosService: ServiciosService) {}
 
@@ -69,10 +72,9 @@ export class ServiciosController {
 
   @Get(':id/tecnicos')
   @ApiOkResponse({
-    status: 200,
-    type: ServicioRelatedEntity,
+    description: 'Tecnicos que proveen un servicio',
   })
-  getTecnicosByServicio(@Param('id') id: string) {
-    return this.serviciosService.getTecnicosByServicio(id);
+  async getTecnicosByServicio(@Param('id') id: string) {
+    return await this.serviciosService.getTecnicosByServicio(id);
   }
 }

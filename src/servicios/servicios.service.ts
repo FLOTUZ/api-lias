@@ -44,7 +44,13 @@ export class ServiciosService {
         id: Number(id),
       },
       include: {
-        Tecnico: true,
+        Tecnico: {
+          select: {
+            id: true,
+            nombre: true,
+            telefono: true,
+          },
+        },
       },
     });
   }
