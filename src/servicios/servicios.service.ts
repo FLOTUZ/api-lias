@@ -39,7 +39,7 @@ export class ServiciosService {
   }
 
   getTecnicosByServicio(id: string) {
-    return this.prisma.servicio.findMany({
+    return this.prisma.servicio.findUnique({
       where: {
         id: Number(id),
       },
