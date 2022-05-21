@@ -72,7 +72,7 @@ export class ServiciosController {
 
   @Get(':id/tecnicos')
   @ApiOkResponse({
-    description: 'Tecnicos que proveen un servicio',
+    description: 'Tecnicos que proveen un servicio  ',
   })
   async getTecnicosByServicio(@Param('id') id: string) {
     return await this.serviciosService.getTecnicosByServicio(id);
