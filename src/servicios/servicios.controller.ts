@@ -14,7 +14,6 @@ import { CreateServicioDto } from './dto/create-servicio.dto';
 import { UpdateServicioDto } from './dto/update-servicio.dto';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { ServicioEntity } from './entities/servicio.entity';
-import { ServicioRelatedEntity } from './entities/servicioRealated.entity';
 
 @Controller('servicios')
 @ApiTags('servicios')
