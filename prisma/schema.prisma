@@ -104,6 +104,7 @@ model Ticket {
   fecha_llamada             DateTime
   nombre_asesor_aseguradora String
   nombre_asesor_gpo_lias    String
+  asesorId                  Int?
   nombre_usuario_final      String
   titulo_ticket             String
   asistenciaId              Int
@@ -142,11 +143,12 @@ model Ticket {
   Seguimiento               Seguimiento[]
   Usuario                   Usuario[]
   CotizacionTecnico         CotizacionTecnico?
+  Asesor                    Asesor?            @relation(fields: [asesorId], references: [id])
 }
 
 model CotizacionTecnico {
   id                   Int       @id @unique @default(autoincrement())
-  checkInId            Int
+  checkInId            Int?
   diagnostico_problema String
   solucion_tecnico     String
   fecha_contacto       DateTime
@@ -155,7 +157,7 @@ model CotizacionTecnico {
   total_cotizacion     Decimal   @db.Money
   ticketId             Int       @unique
   tecnicoId            Int
-  preSolucionId        Int
+  preSolucionId        Int?
   createdAt            DateTime? @default(now())
   updatedAt            DateTime? @updatedAt
   Ticket               Ticket    @relation(fields: [ticketId], references: [id])
@@ -225,4 +227,5 @@ model Asesor {
   createdAt     DateTime?   @default(now())
   updatedAt     DateTime?   @updatedAt
   Aseguradora   Aseguradora @relation(fields: [aseguradoraId], references: [id])
+  Ticket        Ticket[]
 }
