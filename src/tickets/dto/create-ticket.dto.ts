@@ -44,6 +44,10 @@ export class CreateTicketDto {
   nombre_asesor_gpo_lias: string;
 
   @IsNotEmpty()
+  @ApiProperty({ type: 'number' })
+  asesorId: number;
+
+  @IsNotEmpty()
   @ApiProperty()
   nombre_usuario_final: string;
 

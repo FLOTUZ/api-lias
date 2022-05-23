@@ -20,6 +20,9 @@ export class TicketEntity implements Ticket {
   @ApiProperty()
   nombre_asesor_aseguradora: string;
 
+  @ApiProperty({ type: 'number' })
+  asesorId: number;
+
   @ApiProperty()
   nombre_asesor_gpo_lias: string;
 
