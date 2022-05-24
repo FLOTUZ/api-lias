@@ -8,16 +8,31 @@ import {
   Delete,
   UseInterceptors,
   UploadedFile,
+  StreamableFile,
+  Res,
+  ClassSerializerInterceptor,
+  HttpException,
+  BadRequestException,
 } from '@nestjs/common';
 import { ImagenesService } from './imagenes.service';
 import { CreateImagenDto } from './dto/create-imagen.dto';
 import { UpdateImagenDto } from './dto/update-imagen.dto';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiConsumes,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiParam,
+  ApiTags,
+} from '@nestjs/swagger';
 import { ImagenEntity } from './entities/imagen.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { join } from 'path';
+import { createReadStream } from 'fs';
 
 @Controller('imagenes')
+@UseInterceptors(ClassSerializerInterceptor)
 @ApiTags('imagenes')
 export class ImagenesController {
   constructor(private readonly imagenesService: ImagenesService) {}
@@ -68,6 +83,19 @@ export class ImagenesController {
   }
 
   @Post('upload')
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'Subir una imagen',
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
   @ApiCreatedResponse()
   @UseInterceptors(
     FileInterceptor('file', {
@@ -76,7 +104,7 @@ export class ImagenesController {
         filename: function (req, file, cb) {
           const extArray = file.mimetype.split('/');
           const extension = extArray[extArray.length - 1];
-          cb(null, file.originalname + '_' + Date.now() + '.' + extension);
+          cb(null, Date.now() + '.' + extension);
         },
       }),
       fileFilter: function (req, file, cb) {
@@ -93,6 +121,27 @@ export class ImagenesController {
     }),
   )
   async uploadedFile(@UploadedFile() imagen: Express.Multer.File) {
-    return imagen;
+    try {
+      const imagenDTO = new CreateImagenDto();
+      imagenDTO.url = `${join(process.cwd(), 'uploads\\')}${imagen.filename}`;
+      imagenDTO.descripcion = imagen.originalname;
+      return await this.create(imagenDTO);
+    } catch (error) {
+      throw new BadRequestException();
+    }
+  }
+
+  //Get File from server
+  @Get('uploads/:id')
+  async getFile(@Res({ passthrough: true }) res, @Param('id') id: string) {
+    const imagen = new ImagenEntity(await this.imagenesService.findOne(id));
+    const binario = createReadStream(join(imagen.url));
+    const arrName = imagen.url.split('\\');
+    const filename = arrName[arrName.length - 2] + arrName[arrName.length - 1];
+    res.set({
+      'Content-Type': 'image/generic',
+      'Content-Disposition': `attachment; filename=${filename}`,
+    });
+    return new StreamableFile(binario);
   }
 }

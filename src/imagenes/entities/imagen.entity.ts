@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Imagen } from '@prisma/client';
 
@@ -11,12 +12,13 @@ export class ImagenEntity implements Imagen {
   @ApiProperty()
   descripcion: string;
 
-  @ApiProperty({ required: false })
-  cotizacionTecnicoId: number;
-
   @ApiProperty()
   createdAt: Date;
 
   @ApiProperty()
   updatedAt: Date;
+
+  constructor(partial: Partial<ImagenEntity | NotFoundException>) {
+    Object.assign(this, partial);
+  }
 }

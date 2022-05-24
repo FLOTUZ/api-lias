@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CotizacionesTecnicoService } from './cotizaciones-tecnico.service';
@@ -13,48 +15,51 @@ import { CreateCotizacionTecnicoDto } from './dto/create-cotizaciones-tecnico.dt
 import { UpdateCotizacionTecnicoDto } from './dto/update-cotizaciones-tecnico.dto';
 import { CotizacionesTecnicoEntity } from './entities/cotizaciones-tecnico.entity';
 
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller('cotizaciones-tecnico')
 @ApiTags('cotizaciones-tecnico')
 export class CotizacionesTecnicoController {
-  constructor(
-    private readonly cotizacionesTecnicoService: CotizacionesTecnicoService,
-  ) {}
+  constructor(private readonly service: CotizacionesTecnicoService) {}
 
   @Post()
   @ApiCreatedResponse({
     type: CotizacionesTecnicoEntity,
   })
-  create(@Body() createCotizacionesTecnicoDto: CreateCotizacionTecnicoDto) {
-    return this.cotizacionesTecnicoService.create(createCotizacionesTecnicoDto);
+  async create(
+    @Body() createCotizacionesTecnicoDto: CreateCotizacionTecnicoDto,
+  ) {
+    return new CotizacionesTecnicoEntity(
+      await this.service.create(createCotizacionesTecnicoDto),
+    );
   }
 
   @Get()
   @ApiOkResponse({
     type: [CotizacionesTecnicoEntity],
   })
-  findAll() {
-    return this.cotizacionesTecnicoService.findAll();
+  async findAll() {
+    const list = await this.service.findAll();
+    return list.map((item) => new CotizacionesTecnicoEntity(item));
   }
 
   @Get(':id')
   @ApiOkResponse({
     type: CotizacionesTecnicoEntity,
   })
-  findOne(@Param('id') id: string) {
-    return this.cotizacionesTecnicoService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    return new CotizacionesTecnicoEntity(await this.service.findOne(id));
   }
 
   @Patch(':id')
   @ApiOkResponse({
     type: CotizacionesTecnicoEntity,
   })
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateCotizacionesTecnicoDto: UpdateCotizacionTecnicoDto,
   ) {
-    return this.cotizacionesTecnicoService.update(
-      id,
-      updateCotizacionesTecnicoDto,
+    return new CotizacionesTecnicoEntity(
+      await this.service.update(id, updateCotizacionesTecnicoDto),
     );
   }
 
@@ -62,7 +67,7 @@ export class CotizacionesTecnicoController {
   @ApiOkResponse({
     type: CotizacionesTecnicoEntity,
   })
-  remove(@Param('id') id: string) {
-    return this.cotizacionesTecnicoService.remove(id);
+  async remove(@Param('id') id: string) {
+    return new CotizacionesTecnicoEntity(await this.service.remove(id));
   }
 }

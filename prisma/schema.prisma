@@ -47,12 +47,11 @@ model Ciudad {
 }
 
 model Imagen {
-  id          Int                 @id @unique @default(autoincrement())
+  id          Int       @id @unique @default(autoincrement())
   url         String
   descripcion String
-  createdAt   DateTime?           @default(now())
-  updatedAt   DateTime?           @updatedAt
-  CheckIn     CotizacionTecnico[] @relation("Checkin")
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
   PreSolucion CotizacionTecnico[] @relation("PreSolucion")
 }
 
@@ -148,7 +147,6 @@ model Ticket {
 
 model CotizacionTecnico {
   id                   Int       @id @unique @default(autoincrement())
-  checkInId            Int?
   diagnostico_problema String
   solucion_tecnico     String
   fecha_contacto       DateTime
@@ -162,10 +160,9 @@ model CotizacionTecnico {
   updatedAt            DateTime? @updatedAt
   Ticket               Ticket    @relation(fields: [ticketId], references: [id])
   Tecnico              Tecnico   @relation(fields: [tecnicoId], references: [id])
-  //Imagen del CheckIn
-  Checkin              Imagen?   @relation("Checkin", fields: [checkInId], references: [id])
+
   //Imagen de antes de solucionar el problema
-  PreSolucion          Imagen?   @relation("PreSolucion", fields: [preSolucionId], references: [id])
+  PreSolucion Imagen? @relation("PreSolucion", fields: [preSolucionId], references: [id])
 
 }
 

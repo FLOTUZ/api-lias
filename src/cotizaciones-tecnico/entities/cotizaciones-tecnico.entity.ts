@@ -1,6 +1,8 @@
+import { NotFoundException } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { CotizacionTecnico } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime';
+import { Type } from 'class-transformer';
 
 export class CotizacionesTecnicoEntity implements CotizacionTecnico {
   @ApiProperty()
@@ -16,12 +18,15 @@ export class CotizacionesTecnicoEntity implements CotizacionTecnico {
   fecha_contacto: Date;
 
   @ApiProperty({ type: 'number' })
+  @Type(() => Number)
   costo_mano_obra: Decimal;
 
   @ApiProperty({ type: 'number' })
+  @Type(() => Number)
   costo_materiales: Decimal;
 
   @ApiProperty({ type: 'number' })
+  @Type(() => Number)
   total_cotizacion: Decimal;
 
   @ApiProperty()
@@ -31,9 +36,6 @@ export class CotizacionesTecnicoEntity implements CotizacionTecnico {
   tecnicoId: number;
 
   @ApiProperty()
-  checkInId: number;
-
-  @ApiProperty()
   preSolucionId: number;
 
   @ApiProperty()
@@ -41,4 +43,8 @@ export class CotizacionesTecnicoEntity implements CotizacionTecnico {
 
   @ApiProperty()
   updatedAt: Date;
+
+  constructor(partial: Partial<CotizacionesTecnicoEntity | NotFoundException>) {
+    Object.assign(this, partial);
+  }
 }
