@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Ciudad } from '@prisma/client';
+import { Exclude } from 'class-transformer';
+import { EstadoEntity } from 'src/estados/entities/estado.entity';
 
 export class CiudadEntity implements Ciudad {
   @ApiProperty()
@@ -16,6 +18,9 @@ export class CiudadEntity implements Ciudad {
 
   @ApiProperty()
   estadoId: number;
+
+  @ApiProperty({ type: EstadoEntity })
+  Edtado: EstadoEntity;
 
   @ApiProperty()
   createdAt: Date;

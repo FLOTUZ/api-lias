@@ -12,7 +12,11 @@ export class CiudadesService {
   }
 
   findAll() {
-    return this.prisma.ciudad.findMany({});
+    return this.prisma.ciudad.findMany({
+      include: {
+        Estado: true,
+      },
+    });
   }
 
   async findOne(id: string) {
