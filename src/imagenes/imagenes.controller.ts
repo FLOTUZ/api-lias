@@ -11,7 +11,6 @@ import {
   StreamableFile,
   Res,
   ClassSerializerInterceptor,
-  HttpException,
   BadRequestException,
 } from '@nestjs/common';
 import { ImagenesService } from './imagenes.service';
@@ -22,7 +21,6 @@ import {
   ApiConsumes,
   ApiCreatedResponse,
   ApiOkResponse,
-  ApiParam,
   ApiTags,
 } from '@nestjs/swagger';
 import { ImagenEntity } from './entities/imagen.entity';
