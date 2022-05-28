@@ -3,6 +3,7 @@ import { HttpAdapterHost, NestFactory, Reflector } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as bodyParser from 'body-parser';
 import { PrismaClientExceptionFilter } from 'nestjs-prisma';
+import passport from 'passport';
 
 import { AppModule } from './app.module';
 
@@ -22,6 +23,17 @@ async function bootstrap() {
     .setTitle('API NestJS + Prisma = API GPO LIAS')
     .setDescription('Este es el API de la aplicación GPO LIAS')
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT',
+        description: 'Añade el token JWT en la cabecera de la petición',
+        in: 'header',
+      },
+      'jwt',
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

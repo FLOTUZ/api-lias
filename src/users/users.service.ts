@@ -38,4 +38,12 @@ export class UsersService {
   remove(id: string) {
     return this.prisma.usuario.delete({ where: { id: Number(id) } });
   }
+
+  getUserByUser(usuario: string) {
+    return this.prisma.usuario.findUnique({
+      where: {
+        usuario: usuario,
+      },
+    });
+  }
 }
