@@ -44,6 +44,7 @@ model Ciudad {
   Tecnico   Tecnico[] //Tecnicos que dan servicio en esta ciudad
   ViveEn    Tecnico[] @relation("ResideEn") //Tecnicos que viven en esta ciudad
   Estado    Estado?   @relation(fields: [estadoId], references: [id])
+  Ticket    Ticket[]
 }
 
 model Imagen {
@@ -108,7 +109,7 @@ model Ticket {
   asistenciaId           Int
   aseguradoraId          Int
   problematica           String
-  ciudad                 String
+  ciudadId               Int
   colonia                String
   calle                  String
   numero_domicilio       String?
@@ -142,6 +143,8 @@ model Ticket {
   Usuario                Usuario[]
   CotizacionTecnico      CotizacionTecnico?
   Asesor                 Asesor?            @relation(fields: [asesorId], references: [id])
+  Ciudad                 Ciudad             @relation(fields: [ciudadId], references: [id])
+  
 }
 
 model CotizacionTecnico {

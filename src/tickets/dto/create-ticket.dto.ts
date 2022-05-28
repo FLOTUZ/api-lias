@@ -67,7 +67,7 @@ export class CreateTicketDto {
 
   @IsNotEmpty()
   @ApiProperty()
-  ciudad: string;
+  ciudadId: number;
 
   @IsNotEmpty()
   @ApiProperty()

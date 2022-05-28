@@ -1,4 +1,4 @@
-import { Aseguradora, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -35,7 +35,6 @@ async function main() {
       telefono_whats: '4510101012',
       kilometraje_permitido: 18,
       costo_por_kilometro: 16,
-
     },
   });
 
@@ -103,13 +102,13 @@ async function main() {
   await prisma.estado.create({
     data: {
       nombre: 'Michoacan',
-    }
+    },
   });
 
   await prisma.estado.create({
     data: {
       nombre: 'Jalisco',
-    }
+    },
   });
 
   //--------------CIUDADES------------------
@@ -143,33 +142,40 @@ async function main() {
   //-----------------------TICKETS-------------------------------
   await prisma.ticket.create({
     data: {
-      num_expediente: '270986/303527',
+      num_expediente: '201410241',
       asistencia_vial: false,
-      fecha_llamada: '2020-04-30T14:41:00.000Z',
-      nombre_asesor_aseguradora: 'Maria Lopez',
-      nombre_asesor_gpo_lias: 'Juan Vazquez',
-      nombre_usuario_final: 'Michelle Patiño',
-      titulo_ticket: 'HandyMan para montar una pantalla',
-      aseguradoraId: 1,
-      asistenciaId: 1,
-      problematica: 'HandyMan para montar una pantalla de 72"',
-      ciudad: 'Morelia',
-      colonia: 'Vista Hermosa',
-      calle: 'Miradores de la Sierra',
-      numero_domicilio: '130',
+      fecha_llamada: '2022-05-28T02:30:00.000Z',
+      nombre_asesor_gpo_lias: 'Aleejandro',
+      nombre_usuario_final: 'Patricio',
+      titulo_ticket: 'Auto barado en carretera',
+      aseguradoraId: 2,
+      asistenciaId: 4,
+      asesorId: 30,
+      problematica: 'auto barado en carretera por llanta pinchada',
+      ciudadId: 1,
+      colonia: 'Villas del real',
+      calle: 'Juan ibarra',
+      numero_domicilio: '13',
       banderazo: 0,
-      total_salida: 200,
-      costo_gpo_lias: 130,
+      total_salida: 0,
+      costo_gpo_lias: 300,
       cobertura: 1000,
-      cotizacion_gpo_lias: 'Se requiere tambien de un soporte para pantalla',
+      cotizacion_gpo_lias: 'Sin informacion adicional',
       deducible: 0,
-      kilometraje: 5,
+      kilometraje: 10,
       costo_de_kilometraje: 13,
-      costo_por_caseta: 200,
+      costo_por_caseta: 0,
       casetas: 0,
-      total: 300,
-      anticipo: 150,
+      total: 0,
+      anticipo: 0,
       estado: 'NUEVO',
+      num_interior: '',
+      modelo_carro: '3',
+      placas_carro: 'XYZ 234',
+      color_carro: 'Rojo vino',
+      marca_carro: 'Mazda',
+      is_servicio_domestico: true,
+      is_servicio_foraneo: false,
     },
   });
 }

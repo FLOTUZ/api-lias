@@ -39,7 +39,7 @@ export class TicketEntity implements Ticket {
   problematica: string;
 
   @ApiProperty()
-  ciudad: string;
+  ciudadId: number;
 
   @ApiProperty()
   colonia: string;
