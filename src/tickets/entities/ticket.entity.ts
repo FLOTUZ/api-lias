@@ -17,9 +17,6 @@ export class TicketEntity implements Ticket {
   @ApiProperty()
   fecha_llamada: Date;
 
-  @ApiProperty()
-  nombre_asesor_aseguradora: string;
-
   @ApiProperty({ type: 'number' })
   asesorId: number;
 

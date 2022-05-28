@@ -37,10 +37,6 @@ export class CreateTicketDto {
 
   @IsNotEmpty()
   @ApiProperty()
-  nombre_asesor_aseguradora: string;
-
-  @IsNotEmpty()
-  @ApiProperty()
   nombre_asesor_gpo_lias: string;
 
   @IsNotEmpty()

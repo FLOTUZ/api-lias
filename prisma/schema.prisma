@@ -47,11 +47,11 @@ model Ciudad {
 }
 
 model Imagen {
-  id          Int       @id @unique @default(autoincrement())
+  id          Int                 @id @unique @default(autoincrement())
   url         String
   descripcion String
-  createdAt   DateTime? @default(now())
-  updatedAt   DateTime? @updatedAt
+  createdAt   DateTime?           @default(now())
+  updatedAt   DateTime?           @updatedAt
   PreSolucion CotizacionTecnico[] @relation("PreSolucion")
 }
 
@@ -97,52 +97,51 @@ model Tecnico {
 }
 
 model Ticket {
-  id                        Int                @id @unique @default(autoincrement())
-  num_expediente            String             @unique
-  asistencia_vial           Boolean
-  fecha_llamada             DateTime
-  nombre_asesor_aseguradora String
-  nombre_asesor_gpo_lias    String
-  asesorId                  Int?
-  nombre_usuario_final      String
-  titulo_ticket             String
-  asistenciaId              Int
-  aseguradoraId             Int
-  problematica              String
-  ciudad                    String
-  colonia                   String
-  calle                     String
-  numero_domicilio          String?
-  banderazo                 Decimal?           @db.Money
-  total_salida              Decimal            @db.Money
-  cobertura                 Decimal            @db.Money
-  cotizacion_gpo_lias       String?
-  deducible                 Decimal            @db.Money
-  kilometraje               Int
-  costo_de_kilometraje      Decimal            @db.Money
-  costo_por_caseta          Decimal?           @db.Money
-  total                     Decimal            @db.Money
-  anticipo                  Decimal            @db.Money
-  hora_cierre               DateTime?
-  casetas                   Int?
-  costo_gpo_lias            Decimal            @db.Money
-  estado                    String             @default("NUEVO")
-  num_interior              String?            @db.VarChar(5)
-  modelo_carro              String?            @db.VarChar(50)
-  placas_carro              String?            @db.VarChar(10)
-  color_carro               String?            @db.VarChar(50)
-  marca_carro               String?            @db.VarChar(50)
-  is_servicio_domestico     Boolean?           @default(false)
-  is_servicio_foraneo       Boolean?           @default(false)
-  createdAt                 DateTime?          @default(now())
-  updatedAt                 DateTime?          @updatedAt
-  Aseguradora               Aseguradora        @relation(fields: [aseguradoraId], references: [id])
-  Asistencia                Asistencia         @relation(fields: [asistenciaId], references: [id])
-  Servicio                  Servicio[]
-  Seguimiento               Seguimiento[]
-  Usuario                   Usuario[]
-  CotizacionTecnico         CotizacionTecnico?
-  Asesor                    Asesor?            @relation(fields: [asesorId], references: [id])
+  id                     Int                @id @unique @default(autoincrement())
+  num_expediente         String             @unique
+  asistencia_vial        Boolean
+  fecha_llamada          DateTime
+  nombre_asesor_gpo_lias String
+  asesorId               Int?
+  nombre_usuario_final   String
+  titulo_ticket          String
+  asistenciaId           Int
+  aseguradoraId          Int
+  problematica           String
+  ciudad                 String
+  colonia                String
+  calle                  String
+  numero_domicilio       String?
+  banderazo              Decimal?           @db.Money
+  total_salida           Decimal            @db.Money
+  cobertura              Decimal            @db.Money
+  cotizacion_gpo_lias    String?
+  deducible              Decimal            @db.Money
+  kilometraje            Int
+  costo_de_kilometraje   Decimal            @db.Money
+  costo_por_caseta       Decimal?           @db.Money
+  total                  Decimal            @db.Money
+  anticipo               Decimal            @db.Money
+  hora_cierre            DateTime?
+  casetas                Int?
+  costo_gpo_lias         Decimal            @db.Money
+  estado                 String             @default("NUEVO")
+  num_interior           String?            @db.VarChar(5)
+  modelo_carro           String?            @db.VarChar(50)
+  placas_carro           String?            @db.VarChar(10)
+  color_carro            String?            @db.VarChar(50)
+  marca_carro            String?            @db.VarChar(50)
+  is_servicio_domestico  Boolean?           @default(false)
+  is_servicio_foraneo    Boolean?           @default(false)
+  createdAt              DateTime?          @default(now())
+  updatedAt              DateTime?          @updatedAt
+  Aseguradora            Aseguradora        @relation(fields: [aseguradoraId], references: [id])
+  Asistencia             Asistencia         @relation(fields: [asistenciaId], references: [id])
+  Servicio               Servicio[]
+  Seguimiento            Seguimiento[]
+  Usuario                Usuario[]
+  CotizacionTecnico      CotizacionTecnico?
+  Asesor                 Asesor?            @relation(fields: [asesorId], references: [id])
 }
 
 model CotizacionTecnico {
@@ -219,7 +218,7 @@ model Estado {
 
 model Asesor {
   id            Int         @id @unique @default(autoincrement())
-  nombre        String      @unique @db.VarChar(45)
+  nombre        String      @db.VarChar(45)
   aseguradoraId Int
   createdAt     DateTime?   @default(now())
   updatedAt     DateTime?   @updatedAt
