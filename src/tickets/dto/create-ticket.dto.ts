@@ -69,11 +69,11 @@ export class CreateTicketDto {
   @ApiProperty()
   ciudadId: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   colonia: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   calle: string;
 
