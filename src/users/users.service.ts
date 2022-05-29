@@ -4,7 +4,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
-import * as bcrypt from 'bcrypt';
+import * as argon2 from 'argon2';
 
 @Injectable()
 export class UsersService {
@@ -12,7 +12,7 @@ export class UsersService {
 
   async create(createDTO: CreateUserDto) {
     //Encrypt password
-    createDTO.password = await bcrypt.hash(createDTO.password, 10);
+    createDTO.password = await argon2.hash(createDTO.password);
     return this.prisma.usuario.create({ data: createDTO });
   }
 
@@ -47,6 +47,17 @@ export class UsersService {
     return this.prisma.usuario.findUnique({
       where: {
         usuario: usuario,
+      },
+    });
+  }
+
+  updateToken(userId: string, refreshToken: string) {
+    return this.prisma.usuario.update({
+      where: {
+        id: Number(userId),
+      },
+      data: {
+        hashedRt: refreshToken,
       },
     });
   }

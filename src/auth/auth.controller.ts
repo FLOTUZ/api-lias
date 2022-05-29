@@ -1,9 +1,9 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Request } from 'express';
 import { AuthService } from './auth.service';
+import { GetCurrentUser, GetCurrentUserId } from './decorators';
 import { LoginUserDto } from './dto/login-user.dto';
-import { JwtAuthGuard } from './guards';
+import { JwtRtGuard } from './guards';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -16,15 +16,28 @@ export class AuthController {
     return await this.authService.login(loginUserDto);
   }
 
+  @UseGuards(JwtRtGuard)
+  @ApiBearerAuth()
   @Post('logout')
-  async logout(@Req() req: Request) {
-    return await this.authService.logout(req);
+  async logout(@GetCurrentUserId() userId: number) {
+    return await this.authService.logout(userId);
   }
 
-  @Get('me')
+  @Post('refresh')
+  @UseGuards(JwtRtGuard)
   @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
-  async me() {
-    return { Hola: 'mundo' };
+  async refreshToken(
+    @GetCurrentUserId() userId: number,
+    @GetCurrentUser('refreshToken') refreshToken: string,
+  ) {
+    return await this.authService.refreshToken(userId, refreshToken);
+  }
+
+  @Get('sayhi')
+  @UseGuards(JwtRtGuard)
+  @ApiBearerAuth()
+  async sayHi(@GetCurrentUser() user: number) {
+    console.log(user);
+    return 'hi';
   }
 }

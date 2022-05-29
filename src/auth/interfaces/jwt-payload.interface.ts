@@ -1,4 +1,4 @@
-export interface JWTPayload {
+export interface JwtPayload {
   sub: number;
   rol: string;
 }
