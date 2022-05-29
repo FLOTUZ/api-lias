@@ -29,7 +29,6 @@ export class UsersController {
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard)
   @ApiOkResponse({
     status: 200,
     type: [UsuarioEntity],

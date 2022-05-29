@@ -1,34 +1,24 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Request,
-  UnauthorizedException,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiTags } from '@nestjs/swagger';
-import { Request as Req } from 'express';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { LoginUserDto } from './dto/login-user.dto';
 
 @Controller('auth')
 @ApiTags('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @ApiResponse({ status: 401, description: 'Unauthorized.' })
   @Post('login')
-  async login(@Request() req: Req) {
-    const valid = await this.authService.validateUser(req.body);
-    if (!valid) {
-      throw new UnauthorizedException();
-    }
-    return await this.authService.generateAccessToken(req.body);
+  async login(@Body() loginUserDto: LoginUserDto) {
+    return await this.authService.login(loginUserDto);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req;
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @Get('profile/:id')
+  getProfile(@Param('id') id: string) {
+    return { id };
   }
 }
