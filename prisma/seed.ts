@@ -139,10 +139,36 @@ async function main() {
     },
   });
 
+  //--------------ASESOR------------------
   await prisma.asesor.create({
     data: {
       nombre: 'Juan',
       aseguradoraId: 1,
+    },
+  });
+
+  //--------------TECNICO------------------
+
+  await prisma.usuario.create({
+    data: {
+      usuario: 'santiago',
+      email: 'santiago@mail.com',
+      password: '=papaya papaya',
+      inactivo: false,
+      createdAt: '2022-05-30T05:08:29.996Z',
+      updatedAt: '2022-05-30T05:08:29.996Z',
+      rol: 'TECNICO',
+    },
+  });
+  await prisma.tecnico.create({
+    data: {
+      nombre: 'Santiago',
+      apellido_paterno: 'Solorzano',
+      apellido_materno: 'Hernandez',
+      calificacion: 0,
+      telefono: '4433110399',
+      usuarioId: 2,
+      ciudadId: 1,
     },
   });
 
