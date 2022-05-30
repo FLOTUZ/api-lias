@@ -28,6 +28,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { join } from 'path';
 import { createReadStream } from 'fs';
+import { NotFoundException } from '@nestjs/common';
 
 @Controller('imagenes')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -132,14 +133,22 @@ export class ImagenesController {
   //Get File from server
   @Get('uploads/:id')
   async getFile(@Res({ passthrough: true }) res, @Param('id') id: string) {
-    const imagen = new ImagenEntity(await this.imagenesService.findOne(id));
-    const binario = createReadStream(join(imagen.url));
-    const arrName = imagen.url.split('\\');
-    const filename = arrName[arrName.length - 2] + arrName[arrName.length - 1];
-    res.set({
-      'Content-Type': 'image/generic',
-      'Content-Disposition': `attachment; filename=${filename}`,
-    });
-    return new StreamableFile(binario);
+    try {
+      const imagen = new ImagenEntity(await this.imagenesService.findOne(id));
+      const binario = createReadStream(join(imagen.url));
+      console.log(imagen.url);
+      console.log(binario);
+      const arrName = imagen.url.split('\\');
+      const filename =
+        arrName[arrName.length - 2] + arrName[arrName.length - 1];
+      res.set({
+        'Content-Type': 'image/generic',
+        'Content-Disposition': `attachment; filename=${filename}`,
+      });
+      return new StreamableFile(binario);
+    } catch (error) {
+      console.log(error);
+      throw new NotFoundException();
+    }
   }
 }
