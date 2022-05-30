@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "prebuild": "npm prisma generate && npm run prisma:reset && rimraf dist",
+    "prebuild": "npm run prisma:generate && npm run prisma:reset && rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
