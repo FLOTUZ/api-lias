@@ -139,6 +139,13 @@ async function main() {
     },
   });
 
+  await prisma.asesor.create({
+    data: {
+      nombre: 'Juan',
+      aseguradoraId: 1,
+    },
+  });
+
   //-----------------------TICKETS-------------------------------
   await prisma.ticket.create({
     data: {
@@ -150,7 +157,7 @@ async function main() {
       titulo_ticket: 'Auto barado en carretera',
       aseguradoraId: 2,
       asistenciaId: 4,
-      asesorId: 30,
+      asesorId: 1,
       problematica: 'auto barado en carretera por llanta pinchada',
       ciudadId: 1,
       colonia: 'Villas del real',
