@@ -149,7 +149,6 @@ export class ImagenesController {
 
       if (process.platform == 'linux') {
         const arrName = imagen.url.split('/');
-        console.log('linux');
 
         const filename = join(
           __dirname,
@@ -166,7 +165,6 @@ export class ImagenesController {
       }
 
       if (process.platform == 'win32') {
-        console.log('windows');
         const filename =
           arrName[arrName.length - 2] + arrName[arrName.length - 1];
         res.set({
