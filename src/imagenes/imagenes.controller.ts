@@ -122,7 +122,16 @@ export class ImagenesController {
   async uploadedFile(@UploadedFile() imagen: Express.Multer.File) {
     try {
       const imagenDTO = new CreateImagenDto();
-      imagenDTO.url = `${join(process.cwd(), 'uploads\\')}${imagen.filename}`;
+      if (process.platform == 'win32') {
+        imagenDTO.url = `${join(__dirname, '..', '..', 'uploads\\')}${
+          imagen.filename
+        }`;
+      }
+      if (process.platform == 'linux') {
+        imagenDTO.url = `${join(__dirname, '..', '..', 'uploads/')}${
+          imagen.filename
+        }`;
+      }
       imagenDTO.descripcion = imagen.originalname;
       return await this.create(imagenDTO);
     } catch (error) {
@@ -139,6 +148,9 @@ export class ImagenesController {
       const arrName = imagen.url.split('\\');
 
       if (process.platform == 'linux') {
+        const arrName = imagen.url.split('/');
+        console.log('linux');
+
         const filename = join(
           __dirname,
           '..',
@@ -154,6 +166,7 @@ export class ImagenesController {
       }
 
       if (process.platform == 'win32') {
+        console.log('windows');
         const filename =
           arrName[arrName.length - 2] + arrName[arrName.length - 1];
         res.set({
