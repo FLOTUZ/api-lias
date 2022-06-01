@@ -9,7 +9,13 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
+import { type } from 'os';
 import { CotizacionesTecnicoService } from './cotizaciones-tecnico.service';
 import { CreateCotizacionTecnicoDto } from './dto/create-cotizaciones-tecnico.dto';
 import { UpdateCotizacionTecnicoDto } from './dto/update-cotizaciones-tecnico.dto';
@@ -74,9 +80,20 @@ export class CotizacionesTecnicoController {
   @Get('/tecnico/:id')
   @ApiOkResponse({
     type: [CotizacionesTecnicoEntity],
+    description: 'Cotizaciones de un tecnico',
   })
   async cotizacionesTecnicoByTecnico(@Param('id') id: string) {
     const list = await this.service.cotizacionesTecnicoByTecnico(id);
     return list.map((item) => new CotizacionesTecnicoEntity(item));
+  }
+
+  @Get('/ticket/:id')
+  @ApiResponse({
+    type: CotizacionesTecnicoEntity,
+  })
+  async cotizacionByTicket(@Param('id') id: string) {
+    return new CotizacionesTecnicoEntity(
+      await this.service.cotizacionByTicket(id),
+    );
   }
 }

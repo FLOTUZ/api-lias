@@ -43,4 +43,17 @@ export class CotizacionesTecnicoService {
       where: { Tecnico: { id: Number(id) } },
     });
   }
+
+  async cotizacionByTicket(idTicket: string) {
+    const cotizacion = await this.prisma.cotizacionTecnico.findUnique({
+      where: {
+        ticketId: Number(idTicket),
+      },
+      include: {
+        Tecnico: true,
+      },
+    });
+
+    return cotizacion;
+  }
 }

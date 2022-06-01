@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateEstadoDto } from './dto/create-estado.dto';
 import { UpdateEstadoDto } from './dto/update-estado.dto';
@@ -16,14 +20,17 @@ export class EstadosService {
   }
 
   async findOne(id: string) {
-    const response = await this.prisma.estado.findUnique({
-      where: { id: Number(id) },
-    });
-
-    if (response == null) {
-      return new NotFoundException(`This register did #${id} not exist`);
-    } else {
-      return response;
+    try {
+      const response = await this.prisma.estado.findUnique({
+        where: { id: Number(id) },
+      });
+      if (response == null) {
+        return new NotFoundException(`This register did #${id} not exist`);
+      } else {
+        return response;
+      }
+    } catch (error) {
+      throw new BadRequestException();
     }
   }
 
