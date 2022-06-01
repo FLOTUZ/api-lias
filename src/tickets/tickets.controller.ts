@@ -10,7 +10,7 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { TicketsService } from './tickets.service';
-import { CreateTicketDto } from './dto/create-ticket.dto';
+import { CreateTicketDto, EstadoTicket } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { TicketEntity } from './entities/ticket.entity';
@@ -60,5 +60,12 @@ export class TicketsController {
   @Post(':id/servicios')
   addServicesToTecnico(@Param('id') id: string, @Body() servicios: number[]) {
     return this.ticketsService.agregarServicioATicket(id, servicios);
+  }
+
+  @Get('estado/:estado')
+  @ApiOkResponse({ status: 200, type: [TicketEntity] })
+  async ticketsByEstatus(@Param('estado') estado: EstadoTicket) {
+    const list = await this.ticketsService.ticketsByEstatus(estado);
+    return list.map((item) => new TicketEntity(item));
   }
 }

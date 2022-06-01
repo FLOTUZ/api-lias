@@ -47,4 +47,14 @@ export class TicketsService {
       },
     });
   }
+
+  async ticketsByEstatus(estado: string) {
+    try {
+      return this.prisma.ticket.findMany({
+        where: { estado: estado },
+      });
+    } catch (error) {
+      throw new NotFoundException(`This register did #${estado} not exist`);
+    }
+  }
 }
