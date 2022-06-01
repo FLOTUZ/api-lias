@@ -17,11 +17,6 @@ export class TecnicoRelatedEntity extends TecnicoEntity {
   Ciudad: CiudadEntity[];
 
   @ApiProperty({
-    type: [CotizacionesTecnicoEntity],
-  })
-  Cotizaciones: CotizacionesTecnicoEntity[];
-
-  @ApiProperty({
     type: CiudadEntity,
   })
   ViveEn: CiudadEntity;

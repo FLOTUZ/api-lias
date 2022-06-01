@@ -20,7 +20,6 @@ export class TecnicosService {
         ViveEn: true,
         Servicio: true,
         Ciudad: true,
-        Cotizaciones: true,
       },
     });
   }
@@ -32,7 +31,6 @@ export class TecnicosService {
         ViveEn: true,
         Servicio: true,
         Ciudad: true,
-        Cotizaciones: true,
       },
     });
 

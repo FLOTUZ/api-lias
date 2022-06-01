@@ -37,4 +37,10 @@ export class CotizacionesTecnicoService {
   remove(id: string) {
     return this.prisma.cotizacionTecnico.delete({ where: { id: Number(id) } });
   }
+
+  cotizacionesTecnicoByTecnico(id: string) {
+    return this.prisma.cotizacionTecnico.findMany({
+      where: { Tecnico: { id: Number(id) } },
+    });
+  }
 }

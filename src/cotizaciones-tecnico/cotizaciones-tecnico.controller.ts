@@ -70,4 +70,13 @@ export class CotizacionesTecnicoController {
   async remove(@Param('id') id: string) {
     return new CotizacionesTecnicoEntity(await this.service.remove(id));
   }
+
+  @Get('/tecnico/:id')
+  @ApiOkResponse({
+    type: [CotizacionesTecnicoEntity],
+  })
+  async cotizacionesTecnicoByTecnico(@Param('id') id: string) {
+    const list = await this.service.cotizacionesTecnicoByTecnico(id);
+    return list.map((item) => new CotizacionesTecnicoEntity(item));
+  }
 }
