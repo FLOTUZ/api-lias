@@ -15,11 +15,12 @@ export class CotizacionesTecnicoService {
     return this.prisma.cotizacionTecnico.findMany({});
   }
 
-  findOne(id: string) {
+  async findOne(id: string) {
     try {
-      const response = this.prisma.cotizacionTecnico.findUnique({
+      const response = await this.prisma.cotizacionTecnico.findUnique({
         where: { id: Number(id) },
       });
+      console.log(response);
 
       if (response == null) {
         return new NotFoundException(`This register did #${id} not exist`);
@@ -49,15 +50,21 @@ export class CotizacionesTecnicoService {
   }
 
   async cotizacionByTicket(idTicket: string) {
-    const cotizacion = await this.prisma.cotizacionTecnico.findUnique({
-      where: {
-        ticketId: Number(idTicket),
-      },
-      include: {
-        Tecnico: true,
-      },
-    });
-
-    return cotizacion;
+    try {
+      const cotizacion = await this.prisma.cotizacionTecnico.findUnique({
+        where: {
+          ticketId: Number(idTicket),
+        },
+        include: {
+          Tecnico: true,
+        },
+      });
+      if (cotizacion == null) {
+        throw new NotFoundException();
+      }
+      return cotizacion;
+    } catch (error) {
+      throw new NotFoundException();
+    }
   }
 }
