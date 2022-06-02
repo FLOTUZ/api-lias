@@ -25,19 +25,23 @@ export class TecnicosService {
   }
 
   async findOne(id: string) {
-    const response = await this.prisma.tecnico.findUnique({
-      where: { id: Number(id) },
-      include: {
-        ViveEn: true,
-        Servicio: true,
-        Ciudad: true,
-      },
-    });
+    try {
+      const response = await this.prisma.tecnico.findUnique({
+        where: { id: Number(id) },
+        include: {
+          ViveEn: true,
+          Servicio: true,
+          Ciudad: true,
+        },
+      });
 
-    if (response == null) {
-      return new NotFoundException(`This register did #${id} not exist`);
-    } else {
-      return response;
+      if (response == null) {
+        return new NotFoundException(`This register did #${id} not exist`);
+      } else {
+        return response;
+      }
+    } catch (error) {
+      throw new NotFoundException();
     }
   }
 

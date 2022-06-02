@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateEstadoDto } from './dto/create-estado.dto';
 import { UpdateEstadoDto } from './dto/update-estado.dto';
@@ -30,7 +26,7 @@ export class EstadosService {
         return response;
       }
     } catch (error) {
-      throw new BadRequestException();
+      throw new NotFoundException();
     }
   }
 

@@ -16,14 +16,18 @@ export class UsuariosFinalesService {
   }
 
   async findOne(id: string) {
-    const response = await this.prisma.usuarioFinal.findUnique({
-      where: { id: Number(id) },
-    });
+    try {
+      const response = await this.prisma.usuarioFinal.findUnique({
+        where: { id: Number(id) },
+      });
 
-    if (response == null) {
-      return new NotFoundException(`This register did #${id} not exist`);
-    } else {
-      return response;
+      if (response == null) {
+        return new NotFoundException(`This register did #${id} not exist`);
+      } else {
+        return response;
+      }
+    } catch (error) {
+      throw new NotFoundException();
     }
   }
 

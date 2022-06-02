@@ -16,13 +16,17 @@ export class AcuerdosConformidadService {
   }
 
   async findOne(id: string) {
-    const response = await this.prisma.acuerdoConformidad.findUnique({
-      where: { id: Number(id) },
-    });
-    if (response == null) {
-      return new NotFoundException();
-    } else {
-      return response;
+    try {
+      const response = await this.prisma.acuerdoConformidad.findUnique({
+        where: { id: Number(id) },
+      });
+      if (response == null) {
+        return new NotFoundException();
+      } else {
+        return response;
+      }
+    } catch (error) {
+      throw new NotFoundException();
     }
   }
 
