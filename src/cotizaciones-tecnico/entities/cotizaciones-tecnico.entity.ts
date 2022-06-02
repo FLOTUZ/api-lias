@@ -4,7 +4,7 @@ import { CotizacionTecnico } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime';
 import { Type } from 'class-transformer';
 
-export class CotizacionesTecnicoEntity implements CotizacionTecnico {
+export class CotizacionTecnicoEntity implements CotizacionTecnico {
   @ApiProperty()
   id: number;
 
@@ -39,12 +39,18 @@ export class CotizacionesTecnicoEntity implements CotizacionTecnico {
   preSolucionId: number;
 
   @ApiProperty()
+  isAprobado: boolean;
+
+  @ApiProperty()
+  aprobado_por_usuarioId: number;
+
+  @ApiProperty()
   createdAt: Date;
 
   @ApiProperty()
   updatedAt: Date;
 
-  constructor(partial: Partial<CotizacionesTecnicoEntity | NotFoundException>) {
+  constructor(partial: Partial<CotizacionTecnicoEntity | NotFoundException>) {
     Object.assign(this, partial);
   }
 }

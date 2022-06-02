@@ -144,27 +144,29 @@ model Ticket {
   CotizacionTecnico      CotizacionTecnico?
   Asesor                 Asesor?            @relation(fields: [asesorId], references: [id])
   Ciudad                 Ciudad             @relation(fields: [ciudadId], references: [id])
-  
+
 }
 
 model CotizacionTecnico {
-  id                   Int       @id @unique @default(autoincrement())
-  diagnostico_problema String
-  solucion_tecnico     String
-  fecha_contacto       DateTime
-  costo_mano_obra      Decimal   @db.Money
-  costo_materiales     Decimal   @db.Money
-  total_cotizacion     Decimal   @db.Money
-  ticketId             Int       @unique
-  tecnicoId            Int
-  preSolucionId        Int?
-  createdAt            DateTime? @default(now())
-  updatedAt            DateTime? @updatedAt
-  Ticket               Ticket    @relation(fields: [ticketId], references: [id])
-  Tecnico              Tecnico   @relation(fields: [tecnicoId], references: [id])
-
+  id                     Int       @id @unique @default(autoincrement())
+  diagnostico_problema   String
+  solucion_tecnico       String
+  fecha_contacto         DateTime
+  costo_mano_obra        Decimal   @db.Money
+  costo_materiales       Decimal   @db.Money
+  total_cotizacion       Decimal   @db.Money
+  ticketId               Int       @unique
+  tecnicoId              Int
+  preSolucionId          Int?
+  isAprobado             Boolean?  @default(false)
+  aprobado_por_usuarioId Int?
+  createdAt              DateTime? @default(now())
+  updatedAt              DateTime? @updatedAt
+  Ticket                 Ticket    @relation(fields: [ticketId], references: [id])
+  Tecnico                Tecnico   @relation(fields: [tecnicoId], references: [id])
+  Aprobado_Por           Usuario?  @relation(fields: [aprobado_por_usuarioId], references: [id])
   //Imagen de antes de solucionar el problema
-  PreSolucion Imagen? @relation("PreSolucion", fields: [preSolucionId], references: [id])
+  PreSolucion            Imagen?   @relation("PreSolucion", fields: [preSolucionId], references: [id])
 
 }
 
@@ -186,17 +188,18 @@ model AcuerdoConformidad {
 }
 
 model Usuario {
-  id          Int           @id @unique @default(autoincrement())
-  usuario     String        @unique @db.VarChar(20)
-  email       String        @unique @db.VarChar(100)
-  password    String
-  inactivo    Boolean?      @default(false)
-  createdAt   DateTime?     @default(now())
-  updatedAt   DateTime?     @updatedAt
-  rol         String        @default("USUARIO")
-  Seguimiento Seguimiento[]
-  Tecnico     Tecnico?
-  Ticket      Ticket[]
+  id                    Int                 @id @unique @default(autoincrement())
+  usuario               String              @unique @db.VarChar(20)
+  email                 String              @unique @db.VarChar(100)
+  password              String
+  inactivo              Boolean?            @default(false)
+  createdAt             DateTime?           @default(now())
+  updatedAt             DateTime?           @updatedAt
+  rol                   String              @default("USUARIO")
+  Seguimiento           Seguimiento[]
+  Tecnico               Tecnico?
+  Ticket                Ticket[]
+  CotizacionesAprobadas CotizacionTecnico[]
 }
 
 model UsuarioFinal {

@@ -67,4 +67,19 @@ export class CotizacionesTecnicoService {
       throw new NotFoundException();
     }
   }
+
+  async statusCotizacionById(idCotizacion: string) {
+    try {
+      const cotizacion = await this.prisma.cotizacionTecnico.findUnique({
+        where: {
+          id: Number(idCotizacion),
+        },
+      });
+      return cotizacion;
+    } catch (error) {
+      console.log(error);
+
+      throw new NotFoundException();
+    }
+  }
 }

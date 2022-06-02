@@ -40,4 +40,12 @@ export class CreateCotizacionTecnicoDto {
   @ApiProperty()
   @IsOptional()
   preSolucionId: number;
+
+  @ApiProperty()
+  @IsOptional()
+  isAprobado: boolean;
+
+  @ApiProperty()
+  @IsOptional()
+  aprobado_por_usuarioId: number;
 }

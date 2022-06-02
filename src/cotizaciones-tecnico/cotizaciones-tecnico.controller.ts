@@ -19,7 +19,7 @@ import { type } from 'os';
 import { CotizacionesTecnicoService } from './cotizaciones-tecnico.service';
 import { CreateCotizacionTecnicoDto } from './dto/create-cotizaciones-tecnico.dto';
 import { UpdateCotizacionTecnicoDto } from './dto/update-cotizaciones-tecnico.dto';
-import { CotizacionesTecnicoEntity } from './entities/cotizaciones-tecnico.entity';
+import { CotizacionTecnicoEntity } from './entities/cotizaciones-tecnico.entity';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('cotizaciones-tecnico')
@@ -29,71 +29,81 @@ export class CotizacionesTecnicoController {
 
   @Post()
   @ApiCreatedResponse({
-    type: CotizacionesTecnicoEntity,
+    type: CotizacionTecnicoEntity,
   })
   async create(
     @Body() createCotizacionesTecnicoDto: CreateCotizacionTecnicoDto,
   ) {
-    return new CotizacionesTecnicoEntity(
+    return new CotizacionTecnicoEntity(
       await this.service.create(createCotizacionesTecnicoDto),
     );
   }
 
   @Get()
   @ApiOkResponse({
-    type: [CotizacionesTecnicoEntity],
+    type: [CotizacionTecnicoEntity],
   })
   async findAll() {
     const list = await this.service.findAll();
-    return list.map((item) => new CotizacionesTecnicoEntity(item));
+    return list.map((item) => new CotizacionTecnicoEntity(item));
   }
 
   @Get(':id')
   @ApiOkResponse({
-    type: CotizacionesTecnicoEntity,
+    type: CotizacionTecnicoEntity,
   })
   async findOne(@Param('id') id: string) {
-    return new CotizacionesTecnicoEntity(await this.service.findOne(id));
+    return new CotizacionTecnicoEntity(await this.service.findOne(id));
   }
 
   @Patch(':id')
   @ApiOkResponse({
-    type: CotizacionesTecnicoEntity,
+    type: CotizacionTecnicoEntity,
   })
   async update(
     @Param('id') id: string,
     @Body() updateCotizacionesTecnicoDto: UpdateCotizacionTecnicoDto,
   ) {
-    return new CotizacionesTecnicoEntity(
+    return new CotizacionTecnicoEntity(
       await this.service.update(id, updateCotizacionesTecnicoDto),
     );
   }
 
   @Delete(':id')
   @ApiOkResponse({
-    type: CotizacionesTecnicoEntity,
+    type: CotizacionTecnicoEntity,
   })
   async remove(@Param('id') id: string) {
-    return new CotizacionesTecnicoEntity(await this.service.remove(id));
+    return new CotizacionTecnicoEntity(await this.service.remove(id));
   }
 
   @Get('/tecnico/:id')
   @ApiOkResponse({
-    type: [CotizacionesTecnicoEntity],
+    type: [CotizacionTecnicoEntity],
     description: 'Cotizaciones de un tecnico',
   })
   async cotizacionesTecnicoByTecnico(@Param('id') id: string) {
     const list = await this.service.cotizacionesTecnicoByTecnico(id);
-    return list.map((item) => new CotizacionesTecnicoEntity(item));
+    return list.map((item) => new CotizacionTecnicoEntity(item));
   }
 
   @Get('/ticket/:id')
   @ApiResponse({
-    type: CotizacionesTecnicoEntity,
+    type: CotizacionTecnicoEntity,
   })
   async cotizacionByTicket(@Param('id') id: string) {
-    return new CotizacionesTecnicoEntity(
+    return new CotizacionTecnicoEntity(
       await this.service.cotizacionByTicket(id),
+    );
+  }
+
+  @Get('/:id/status')
+  @ApiResponse({
+    type: CotizacionTecnicoEntity,
+  })
+  async statusCotizacionById(@Param('id') id: string) {
+    return new CotizacionTecnicoEntity(
+      await this.service.statusCotizacionById(id),
     );
   }
 }
