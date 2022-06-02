@@ -4,6 +4,7 @@ import {
   IsDecimal,
   IsInt,
   IsNotEmpty,
+  IsNumberString,
   IsOptional,
   IsPhoneNumber,
 } from 'class-validator';
@@ -27,8 +28,8 @@ export class CreateTecnicoDto {
   @ApiProperty({ type: 'number', required: false })
   calificacion: Decimal;
 
-  @IsPhoneNumber('MX')
   @ApiProperty()
+  @IsNotEmpty()
   telefono: string;
 
   @IsInt()
