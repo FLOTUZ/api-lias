@@ -17,7 +17,11 @@ export class TecnicosService {
   findAll() {
     return this.prisma.tecnico.findMany({
       include: {
-        ViveEn: true,
+        ViveEn: {
+          include: {
+            Estado: true,
+          },
+        },
         Servicio: true,
         Ciudad: true,
       },

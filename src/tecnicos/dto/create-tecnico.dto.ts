@@ -1,13 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Decimal } from '@prisma/client/runtime';
-import {
-  IsDecimal,
-  IsInt,
-  IsNotEmpty,
-  IsNumberString,
-  IsOptional,
-  IsPhoneNumber,
-} from 'class-validator';
+import { IsDecimal, IsInt, IsNotEmpty, IsOptional } from 'class-validator';
 import { TecnicoEntity } from '../entities/tecnico.entity';
 
 export class CreateTecnicoDto {
