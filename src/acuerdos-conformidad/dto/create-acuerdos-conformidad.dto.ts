@@ -40,7 +40,7 @@ export class CreateAcuerdosConformidadDto {
 
   @IsOptional()
   @ApiProperty({ default: false, required: false })
-  status: boolean;
+  is_aprobado: boolean;
 
   @IsNotEmpty()
   @ApiProperty()

@@ -36,7 +36,7 @@ export class AcuerdoConformidadEntity implements AcuerdoConformidad {
   acuerdo_firmado: string;
 
   @ApiProperty({ default: false, required: false })
-  status: boolean;
+  is_aprobado: boolean;
 
   @ApiProperty({ required: false })
   usuarioFinalId: number;

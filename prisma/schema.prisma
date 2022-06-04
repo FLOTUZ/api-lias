@@ -182,7 +182,7 @@ model AcuerdoConformidad {
   hora_llegada_servicio      DateTime
   hora_finalizacion_servicio DateTime
   acuerdo_firmado            String?
-  status                     Boolean?      @default(false)
+  is_aprobado                Boolean?      @default(false)
   ticketId                   Int           @unique
   usuarioFinalId             Int?
   createdAt                  DateTime?     @default(now())
