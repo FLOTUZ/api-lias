@@ -60,4 +60,12 @@ export class AcuerdosConformidadController {
   remove(@Param('id') id: string) {
     return this.acuerdosConformidadService.remove(id);
   }
+
+  @Get('/ticket/:id')
+  @ApiOkResponse({
+    type: AcuerdoConformidadEntity,
+  })
+  getByIdTicket(@Param('id') id: string) {
+    return this.acuerdosConformidadService.getByIdTicket(id);
+  }
 }

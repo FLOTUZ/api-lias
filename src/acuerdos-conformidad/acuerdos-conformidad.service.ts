@@ -40,4 +40,10 @@ export class AcuerdosConformidadService {
   remove(id: string) {
     return this.prisma.acuerdoConformidad.delete({ where: { id: Number(id) } });
   }
+
+  async getByIdTicket(idTicket: string) {
+    return await this.prisma.acuerdoConformidad.findUnique({
+      where: { ticketId: Number(idTicket) },
+    });
+  }
 }
