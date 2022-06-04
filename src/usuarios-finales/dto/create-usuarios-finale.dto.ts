@@ -7,6 +7,7 @@ import {
 } from 'class-validator';
 
 export class CreateUsuariosFinaleDto {
+  @IsNotEmpty()
   @ApiProperty()
   nombre: string;
 

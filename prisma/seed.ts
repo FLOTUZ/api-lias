@@ -172,6 +172,16 @@ async function main() {
     },
   });
 
+  await prisma.usuarioFinal.create({
+    data: {
+      nombre: 'Maria',
+      apellido_paterno: 'Dolores',
+      apellido_materno: 'Morales',
+      correo: 'mam@mail.com',
+      telefono: '4433113099',
+    },
+  });
+
   //-----------------------TICKETS-------------------------------
   await prisma.ticket.create({
     data: {
@@ -189,7 +199,7 @@ async function main() {
       colonia: 'Villas del real',
       calle: 'Juan ibarra',
       numero_domicilio: '13',
-      banderazo: 100.10,
+      banderazo: 100.1,
       total_salida: 100.12,
       costo_gpo_lias: 300,
       cobertura: 1000.31,
@@ -200,7 +210,7 @@ async function main() {
       costo_por_caseta: 140.12,
       casetas: 2,
       total: 530.12,
-      anticipo: 260.10,
+      anticipo: 260.1,
       estado: 'NUEVO',
       num_interior: '',
       modelo_carro: '3',

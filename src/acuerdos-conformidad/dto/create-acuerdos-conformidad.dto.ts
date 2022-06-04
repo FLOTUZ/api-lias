@@ -4,10 +4,6 @@ import { IsNotEmpty, IsOptional } from 'class-validator';
 export class CreateAcuerdosConformidadDto {
   @IsNotEmpty()
   @ApiProperty()
-  expediente: string;
-
-  @IsNotEmpty()
-  @ApiProperty()
   fecha_acuerdo: Date;
 
   @IsNotEmpty()
@@ -41,6 +37,14 @@ export class CreateAcuerdosConformidadDto {
   @IsOptional()
   @ApiProperty({ required: false })
   acuerdo_firmado: string;
+
+  @IsOptional()
+  @ApiProperty({ default: false, required: false })
+  status: boolean;
+
+  @IsNotEmpty()
+  @ApiProperty()
+  ticketId: number;
 
   @IsOptional()
   @ApiProperty({ required: false })

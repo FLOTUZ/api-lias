@@ -2,12 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { AcuerdoConformidad } from '@prisma/client';
 
 export class AcuerdoConformidadEntity implements AcuerdoConformidad {
-
   @ApiProperty({ required: false })
   id: number;
-
-  @ApiProperty()
-  expediente: string;
 
   @ApiProperty()
   fecha_acuerdo: Date;
@@ -39,8 +35,14 @@ export class AcuerdoConformidadEntity implements AcuerdoConformidad {
   @ApiProperty({ required: false })
   acuerdo_firmado: string;
 
+  @ApiProperty({ default: false, required: false })
+  status: boolean;
+
   @ApiProperty({ required: false })
   usuarioFinalId: number;
+
+  @ApiProperty()
+  ticketId: number;
 
   @ApiProperty()
   createdAt: Date;

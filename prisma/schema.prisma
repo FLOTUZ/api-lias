@@ -145,6 +145,7 @@ model Ticket {
   Asesor                 Asesor?            @relation(fields: [asesorId], references: [id])
   Ciudad                 Ciudad             @relation(fields: [ciudadId], references: [id])
 
+  AcuerdoConformidad AcuerdoConformidad?
 }
 
 model CotizacionTecnico {
@@ -181,10 +182,13 @@ model AcuerdoConformidad {
   hora_llegada_servicio      DateTime
   hora_finalizacion_servicio DateTime
   acuerdo_firmado            String?
+  status                     Boolean?      @default(false)
+  ticketId                   Int           @unique
   usuarioFinalId             Int?
   createdAt                  DateTime?     @default(now())
   updatedAt                  DateTime?     @updatedAt
   UsuarioFinal               UsuarioFinal? @relation(fields: [usuarioFinalId], references: [id])
+  Ticket                     Ticket        @relation(fields: [ticketId], references: [id])
 }
 
 model Usuario {
