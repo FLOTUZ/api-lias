@@ -1,0 +1,106 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+/* -----------GLOBALES---------- */
+.table {
+  display: table;
+}
+
+.row {
+  display: table-row;
+}
+
+.column {
+  display: table-column;
+}
+
+.cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.label {
+  vertical-align: top;
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 5px;
+}
+.data-box {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  padding: 5px;
+  line-height: 1.5rem;
+  margin: 0;
+}
+/* -----------LOGO---------- */
+.logo {
+  height: 125px;
+}
+/* -----------EXPEDIENTE---------- */
+.expediente {
+  width: 100%;
+  text-align: -webkit-right;
+  vertical-align: top;
+}
+
+.label-exp {
+  font-weight: bold;
+  font-size: 2.5rem;
+  padding-right: 10px;
+}
+
+.data-exp {
+  font-size: 2rem;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black;
+  width: 300px;
+}
+
+/* -----------FECHA---------- */
+.fecha {
+  float: right;
+}
+.label-fecha {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.data-fecha {
+  font-size: 2rem;
+}
+
+/* -----------PRIMERA FILA---------- */
+.primera-fila {
+  width: 100%;
+}
+.primera-fila-item {
+  width: 50%;
+  vertical-align: top;
+}
+
+.hora {
+  vertical-align: middle;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+.observaciones {
+  vertical-align: top;
+}
+
+
+.conformidad {
+  text-align-last: center;
+}
+.firma {
+  margin: 5px;
+  text-align: center;
+}
+.firma-img {
+  height: 100px;
+}
+
+.whatsapp {
+  height: 60px;
+  font-weight: bold;
+}

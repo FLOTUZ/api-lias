@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Render,
-  Res,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Res } from '@nestjs/common';
 import { ImprimiblesService } from './imprimibles.service';
 import { CreateImprimibleDto } from './dto/create-imprimible.dto';
 import { Response } from 'express';
@@ -23,7 +15,7 @@ export class ImprimiblesController {
   @Get()
   root(@Res() res: Response) {
     res.header('Content-Type', 'text/html');
-    return res.render('index', {
+    return res.render('acuerdo-conformidad', {
       message: 'Hello world!',
     });
   }
