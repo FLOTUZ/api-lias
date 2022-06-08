@@ -1,0 +1,145 @@
+<html lang='en'>
+  <head>
+    <title>Acuerdo</title>
+    <link rel='stylesheet' href='{{{env}}}/acuerdo.css' />
+  </head>
+
+  <body>
+    <div class='table'>
+      <div class='row'>
+        <img src='{{{env}}}//logo.jpeg' alt='logo' class='logo cell' />
+        {{! Expediente }}
+        <div class='cell expediente'>
+          <div class='row'>
+            <p class='label-exp'>Expediente:</p>
+            <div class='cell texto-exp'>
+              <p class='data-exp'>{{{expediente}}}</p>
+            </div>
+          </div>
+          {{! Fecha }}
+          <div class='cell fecha'>
+            <div class='row'>
+              <p class='cell label-fecha'>Fecha:</p>
+              <p class='cell data-fecha'>
+                {{{fecha}}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {{! ------ PRIMERA FILA ------- }}
+    </div>
+    <div class='table primera-fila'>
+      <div class='row'>
+
+        <div class='cell primera-fila-item'>
+
+          <p class='cell label'>PROBLEMA: </p>
+          <p class='data-box problema-data'>
+            {{{problema}}}
+          </p>
+
+        </div>
+
+        <div class='cell primera-fila-item'>
+          <div class='row'>
+            <p class='cell label'>ASISTENCIA: </p>
+            <p class='cell data-box'>
+              {{{asistencia}}}
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      {{! ------ SEGUNDA FILA ------- }}
+      <div class='row'>
+        <div class='cell primera-fila-item'>
+          <div class='row'>
+            <p class='cell label'>DIRECCION: </p>
+            <p class='cell data-box'>
+              {{{direccion}}}
+            </p>
+          </div>
+        </div>
+
+        <div class='cell primera-fila-item'>
+          <div class='row'>
+            <p class='cell label'>ASESOR: </p>
+            <p class='cell data-box'>
+              {{{asesor}}}
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      {{! ------ SEGUNDA FILA ------- }}
+      <div class='row'>
+        <div class='cell primera-fila-item'>
+          <p class='cell label'>USUARIO: </p>
+          <p class='cell data-box'>{{{usuario}}}
+          </p>
+        </div>
+
+        <div class='cell primera-fila-item'>
+
+          <p class='cell label'>SE REALIZO: </p>
+          <p class='data-box data-realizo'>
+            {{{actividades}}}
+          </p>
+
+        </div>
+      </div>
+      {{! ------ TERCERA FILA ------- }}
+      <div class='row primera-fila-item'>
+        <div class='cell'>
+          <div class='row'>
+            <div class='cell label'>HORAS: </div>
+            <p class='cell data-box hora'>
+              {{{hora_recepcion}}}
+            </p>
+            <p class='cell data-box hora'>
+              {{{hora_llegada}}}
+            </p>
+            <p class='cell data-box hora'>
+              {{{hora_finalizacion}}}
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class='row primera-fila-item'>
+        <div class='cell observaciones'>
+          <div class='cell label'>OBSERVACIONES: </div>
+          <p class='data-box data-observaciones'>
+            {{{observaciones}}}
+          </p>
+
+          <div class='row'>
+            <img
+              src='{{{env}}}//whatsapp.svg'
+              alt='logo'
+              class='cell whatsapp'
+            />
+            <p class='cell whatsapp'>44 34 71 43 56</p>
+          </div>
+        </div>
+        <div class='cell conformidad'>
+          <div class='cell label'>CONFORMIDAD </div>
+          <img
+            src='{{{env}}}//firmas//{{{firma}}}'
+            alt='logo'
+            class='firma firma-img'
+          />
+          <p class='data-box firma'>
+            {{{nombre_usuario}}}
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>
