@@ -28,6 +28,7 @@ import { Response } from 'express';
 
 import * as puppeteer from 'puppeteer';
 import * as fs from 'fs';
+import * as moment from 'moment';
 
 @Controller('acuerdos-conformidad')
 @ApiTags('acuerdos-conformidad')
@@ -85,8 +86,6 @@ export class AcuerdosConformidadController {
     return this.acuerdosConformidadService.getByIdTicket(id);
   }
 
-  @Post('acuerdo-firmado')
-  @ApiCreatedResponse()
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     description: 'Subir una imagen',
@@ -123,12 +122,16 @@ export class AcuerdosConformidadController {
       },
     }),
   )
+  @ApiCreatedResponse({ type: AcuerdoConformidadEntity })
+  @Post(':id/acuerdo-firmado')
   async generateAcuerdoPDF(
-    @Res() res: Response,
+    @Param('id') id: string,
     @UploadedFile() firma: Express.Multer.File,
-    @Body() createDto: CreateAcuerdosConformidadDto,
+    @Res() res: Response,
   ) {
-    const acuerdo = await this.acuerdosConformidadService.create(createDto);
+    const acuerdo = (await this.acuerdosConformidadService.findOne(
+      id,
+    )) as AcuerdoConformidadEntity;
 
     const getHtml = async (err, html) => {
       const browser = await puppeteer.launch();
@@ -155,16 +158,18 @@ export class AcuerdosConformidadController {
       {
         env,
         expediente: 'hardcode',
-        fecha: acuerdo.fecha_acuerdo,
+        fecha: moment(acuerdo.fecha_acuerdo).format('L'),
         problema: acuerdo.descripcion_problema,
         asistencia: 'hardcode',
         direccion: acuerdo.direccion,
         asesor: 'hardcode',
         usuario: acuerdo.usuarioFinalId,
         actividades: acuerdo.actividades_realizadas,
-        hora_recepcion: acuerdo.hora_recepcion_servicio,
-        hora_llegada: acuerdo.hora_llegada_servicio,
-        hora_finalizacion: acuerdo.hora_finalizacion_servicio,
+        hora_recepcion: moment(acuerdo.hora_recepcion_servicio).format('LT'),
+        hora_llegada: moment(acuerdo.hora_llegada_servicio).format('LT'),
+        hora_finalizacion: moment(acuerdo.hora_finalizacion_servicio).format(
+          'LT',
+        ),
         observaciones: acuerdo.observaciones,
         nombre_usuario: acuerdo.usuarioFinalId,
         firma: firma.filename,
