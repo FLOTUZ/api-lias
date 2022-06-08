@@ -69,4 +69,11 @@ export class TecnicosService {
       },
     });
   }
+
+  async getServicesOfTecnico(idTecnico: string) {
+    return await this.prisma.tecnico.findUnique({
+      where: { id: Number(idTecnico) },
+      include: { Servicio: true },
+    });
+  }
 }

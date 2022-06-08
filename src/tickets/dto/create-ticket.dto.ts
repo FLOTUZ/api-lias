@@ -181,4 +181,8 @@ export class CreateTicketDto {
   @IsOptional()
   @ApiProperty({ required: false, default: false })
   is_servicio_foraneo: boolean;
+
+  @IsOptional()
+  @ApiProperty({ required: false })
+  tecnicoId: number;
 }

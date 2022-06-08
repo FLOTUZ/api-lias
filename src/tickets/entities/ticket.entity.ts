@@ -122,6 +122,9 @@ export class TicketEntity implements Ticket {
   @ApiProperty({ required: false })
   is_servicio_foraneo: boolean;
 
+  @ApiProperty({ required: false })
+  tecnicoId: number;
+
   @ApiProperty()
   createdAt: Date;
 

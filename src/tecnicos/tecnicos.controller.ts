@@ -12,9 +12,10 @@ import {
 import { TecnicosService } from './tecnicos.service';
 import { CreateTecnicoDto } from './dto/create-tecnico.dto';
 import { UpdateTecnicoDto } from './dto/update-tecnico.dto';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags, PartialType } from '@nestjs/swagger';
 import { TecnicoEntity } from './entities/tecnico.entity';
 import { TecnicoRelatedEntity } from './entities/tecnicoRelated.entity';
+import { ServicesOfTecnicoEntity } from './entities/services-of-tecnico.entity';
 
 @Controller('tecnicos')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -78,5 +79,15 @@ export class TecnicosController {
   @Post(':id/servicios')
   addServicesToTecnico(@Param('id') id: string, @Body() servicios: number[]) {
     return this.tecnicosService.agregarServiciosATecnico(id, servicios);
+  }
+
+  @Get(':id/servicios')
+  @ApiOkResponse({
+    type: ServicesOfTecnicoEntity,
+  })
+  async getServicesOfTecnico(@Param('id') id: string) {
+    return new ServicesOfTecnicoEntity(
+      await this.tecnicosService.getServicesOfTecnico(id),
+    );
   }
 }
