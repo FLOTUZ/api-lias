@@ -13,7 +13,7 @@ async function bootstrap() {
 
   app.setViewEngine('hbs');
   app.useStaticAssets(join(__dirname, '../public'));
-  app.setBaseViewsDir(join(__dirname, '../src/imprimibles/views'));
+  app.setBaseViewsDir(join(__dirname, '../public/views'));
 
   const { httpAdapter } = app.get(HttpAdapterHost);
   app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));

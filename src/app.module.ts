@@ -14,7 +14,6 @@ import { CotizacionesTecnicoModule } from './cotizaciones-tecnico/cotizaciones-t
 import { AcuerdosConformidadModule } from './acuerdos-conformidad/acuerdos-conformidad.module';
 import { EstadosModule } from './estados/estados.module';
 import { AsesoresModule } from './asesores/asesores.module';
-import { ImprimiblesModule } from './imprimibles/imprimibles.module';
 
 @Module({
   imports: [
@@ -33,7 +32,6 @@ import { ImprimiblesModule } from './imprimibles/imprimibles.module';
     AcuerdosConformidadModule,
     EstadosModule,
     AsesoresModule,
-    ImprimiblesModule,
   ],
 })
 export class AppModule {}
