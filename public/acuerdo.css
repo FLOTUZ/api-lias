@@ -1,6 +1,10 @@
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+body{
+  margin: 2rem;
+}
 /* -----------GLOBALES---------- */
 .table {
   display: table;

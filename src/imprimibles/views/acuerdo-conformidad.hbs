@@ -1,19 +1,19 @@
 <html lang='en'>
   <head>
     <title>Acuerdo</title>
-    <link rel='stylesheet' href='acuerdo.css' />
+    <link rel='stylesheet' href='{{{env}}}/acuerdo.css' />
   </head>
 
   <body>
     <div class='table'>
       <div class='row'>
-        <img src='logo.jpeg' alt='logo' class='logo cell' />
+        <img src='{{{env}}}//logo.jpeg' alt='logo' class='logo cell' />
         {{! Expediente }}
         <div class='cell expediente'>
           <div class='row'>
             <p class='label-exp'>Expediente:</p>
             <div class='cell texto-exp'>
-              <p class='data-exp'>181202-A</p>
+              <p class='data-exp'>{{{message}}}</p>
             </div>
           </div>
           {{! Fecha }}
@@ -123,13 +123,13 @@
           </p>
 
           <div class='row'>
-            <img src='whatsapp.svg' alt='logo' class='cell whatsapp' />
+            <img src='{{{env}}}//whatsapp.svg' alt='logo' class='cell whatsapp' />
             <p class='cell whatsapp'>44 34 71 43 56</p>
           </div>
         </div>
         <div class='cell conformidad'>
           <div class='cell label'>CONFORMIDAD </div>
-          <img src='logo.jpeg' alt='logo' class='firma firma-img' />
+          <img src='{{{env}}}//firmas//{{{firma}}}' alt='logo' class='firma firma-img' />
           <p class='data-box firma'>
             Itiza la egipcia
           </p>

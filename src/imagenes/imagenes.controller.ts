@@ -145,7 +145,6 @@ export class ImagenesController {
     try {
       const imagen = new ImagenEntity(await this.imagenesService.findOne(id));
       const binario = createReadStream(join(imagen.url));
-      const arrName = imagen.url.split('\\');
 
       if (process.platform == 'linux') {
         const arrName = imagen.url.split('/');
@@ -165,6 +164,7 @@ export class ImagenesController {
       }
 
       if (process.platform == 'win32') {
+        const arrName = imagen.url.split('\\');
         const filename =
           arrName[arrName.length - 2] + arrName[arrName.length - 1];
         res.set({
