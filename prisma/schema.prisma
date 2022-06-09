@@ -15,8 +15,8 @@ model Aseguradora {
   telefono_vial               String?      @db.VarChar(15)
   telefono_whats              String?      @db.VarChar(15)
   kilometraje_permitido       Int?
-  costo_por_kilometro         Decimal?
-  costo_por_kilometro_foraneo Decimal?
+  costo_por_kilometro         Decimal?     @db.Money
+  costo_por_kilometro_foraneo Decimal?     @db.Money
   Asistencia                  Asistencia[]
   Ticket                      Ticket[]
   Asesor                      Asesor[]
