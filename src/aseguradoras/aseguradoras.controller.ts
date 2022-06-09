@@ -8,6 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { TicketEntity } from 'src/tickets/entities/ticket.entity';
 import { AseguradorasService } from './aseguradoras.service';
 import { CreateAseguradoraDto } from './dto/create-aseguradora.dto';
 import { UpdateAseguradoraDto } from './dto/update-aseguradora.dto';
@@ -32,8 +33,9 @@ export class AseguradorasController {
     status: 200,
     type: [AseguradoraEntity],
   })
-  findAll() {
-    return this.aseguradorasService.findAll();
+  async findAll() {
+    const list = await this.aseguradorasService.findAll();
+    return list.map((item) => new AseguradoraEntity(item));
   }
 
   @Get(':id')
@@ -41,8 +43,8 @@ export class AseguradorasController {
     status: 200,
     type: AseguradoraEntity,
   })
-  findOne(@Param('id') id: string) {
-    return this.aseguradorasService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    return new AseguradoraEntity(await this.aseguradorasService.findOne(id));
   }
 
   @Patch(':id')
@@ -50,11 +52,13 @@ export class AseguradorasController {
     status: 200,
     type: AseguradoraEntity,
   })
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateAseguradoraDto: UpdateAseguradoraDto,
   ) {
-    return this.aseguradorasService.update(id, updateAseguradoraDto);
+    return new AseguradoraEntity(
+      await this.aseguradorasService.update(id, updateAseguradoraDto),
+    );
   }
 
   @Delete(':id')
@@ -62,7 +66,7 @@ export class AseguradorasController {
     status: 200,
     type: AseguradoraEntity,
   })
-  remove(@Param('id') id: string) {
-    return this.aseguradorasService.remove(id);
+  async remove(@Param('id') id: string) {
+    return new AseguradoraEntity(await this.aseguradorasService.remove(id));
   }
 }

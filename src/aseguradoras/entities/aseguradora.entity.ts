@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Aseguradora } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime';
@@ -38,4 +39,8 @@ export class AseguradoraEntity implements Aseguradora {
 
   @ApiProperty()
   updatedAt: Date;
+
+  constructor(partial: Partial<AseguradoraEntity | NotFoundException>) {
+    Object.assign(this, partial);
+  }
 }
