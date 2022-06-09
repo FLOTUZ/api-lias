@@ -44,7 +44,7 @@ export class AseguradorasController {
     type: AseguradoraEntity,
   })
   async findOne(@Param('id') id: string) {
-    return new TicketEntity(await this.aseguradorasService.findOne(id));
+    return new AseguradoraEntity(await this.aseguradorasService.findOne(id));
   }
 
   @Patch(':id')
@@ -56,7 +56,7 @@ export class AseguradorasController {
     @Param('id') id: string,
     @Body() updateAseguradoraDto: UpdateAseguradoraDto,
   ) {
-    return new TicketEntity(
+    return new AseguradoraEntity(
       await this.aseguradorasService.update(id, updateAseguradoraDto),
     );
   }
@@ -67,6 +67,6 @@ export class AseguradorasController {
     type: AseguradoraEntity,
   })
   async remove(@Param('id') id: string) {
-    return new TicketEntity(await this.aseguradorasService.remove(id));
+    return new AseguradoraEntity(await this.aseguradorasService.remove(id));
   }
 }
