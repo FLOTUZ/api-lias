@@ -8,7 +8,6 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { TicketEntity } from 'src/tickets/entities/ticket.entity';
 import { AseguradorasService } from './aseguradoras.service';
 import { CreateAseguradoraDto } from './dto/create-aseguradora.dto';
 import { UpdateAseguradoraDto } from './dto/update-aseguradora.dto';
