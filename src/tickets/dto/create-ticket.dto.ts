@@ -102,7 +102,6 @@ export class CreateTicketDto {
   deducible: Decimal;
 
   @IsOptional()
-  @IsNumber()
   @ApiProperty()
   kilometraje: number;
 
