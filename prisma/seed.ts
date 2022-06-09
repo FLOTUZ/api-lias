@@ -34,37 +34,407 @@ async function main() {
       telefono_vial: '4510101012',
       telefono_whats: '4510101012',
       kilometraje_permitido: 18,
+      costo_por_kilometro: 0,
+    },
+  });
+
+  await prisma.aseguradora.create({
+    data: {
+      nombre: 'MEXICO ASISTENCIA',
+      telefono: '918070055',
+      telefono_domestico: '4510101012',
+      telefono_vial: '4510101012',
+      telefono_whats: '4510101012',
+      kilometraje_permitido: 18,
+      costo_por_kilometro: 7,
+    },
+  });
+
+  await prisma.aseguradora.create({
+    data: {
+      nombre: 'TELEMEDIC',
+      telefono: '918070055',
+      telefono_domestico: '4510101012',
+      telefono_vial: '4510101012',
+      telefono_whats: '4510101012',
+      kilometraje_permitido: 18,
+      costo_por_kilometro: 8,
+    },
+  });
+
+  await prisma.aseguradora.create({
+    data: {
+      nombre: 'ADDIUVA',
+      telefono: '918070055',
+      telefono_domestico: '4510101012',
+      telefono_vial: '4510101012',
+      telefono_whats: '4510101012',
+      kilometraje_permitido: 18,
       costo_por_kilometro: 16,
     },
   });
+
+  await prisma.aseguradora.create({
+    data: {
+      nombre: 'CLUB DE ASISTENCIA',
+      telefono: '918070055',
+      telefono_domestico: '4510101012',
+      telefono_vial: '4510101012',
+      telefono_whats: '4510101012',
+      kilometraje_permitido: 18,
+      costo_por_kilometro: 16,
+    },
+  });
+
+  await prisma.aseguradora.create({
+    data: {
+      nombre: 'IGS',
+      telefono: '918070055',
+      telefono_domestico: '4510101012',
+      telefono_vial: '4510101012',
+      telefono_whats: '4510101012',
+      kilometraje_permitido: 18,
+      costo_por_kilometro: 0,
+    },
+  });
+
+  await prisma.aseguradora.create({
+    data: {
+      nombre: 'MAS SERVICIOS',
+      telefono: '918070055',
+      telefono_domestico: '4510101012',
+      telefono_vial: '4510101012',
+      telefono_whats: '4510101012',
+      kilometraje_permitido: 18,
+      costo_por_kilometro: 7.50,
+    },
+  });
+
+  await prisma.aseguradora.create({
+    data: {
+      nombre: 'SPV',
+      telefono: '918070055',
+      telefono_domestico: '4510101012',
+      telefono_vial: '4510101012',
+      telefono_whats: '4510101012',
+      kilometraje_permitido: 18,
+      costo_por_kilometro: 12.75,
+    },  });
 
   //--------------ASISTENCIAS------------------
 
   await prisma.asistencia.create({
     data: {
-      nombre: 'Libra plus',
+      nombre: 'LIBRA PLUS',
       aseguradoraId: 1,
     },
   });
 
   await prisma.asistencia.create({
     data: {
-      nombre: 'Banamex',
+      nombre: 'BANAMEX',
       aseguradoraId: 1,
     },
   });
 
   await prisma.asistencia.create({
     data: {
-      nombre: 'Engie Seguros',
+      nombre: 'BANORTE',
+      aseguradoraId: 1,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'ABBA',
+      aseguradoraId: 1,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'NIETO',
+      aseguradoraId: 1,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'GNP VERSATIL',
+      aseguradoraId: 1,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'HSBC',
+      aseguradoraId: 1,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'HDI',
+      aseguradoraId: 1,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'NISSAN',
+      aseguradoraId: 1,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'ZURICH',
+      aseguradoraId: 1,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'MERCEDES BENZ',
+      aseguradoraId: 1,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'AFIRME',
+      aseguradoraId: 1,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'RENAULT',
+      aseguradoraId: 1,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'PEUGEOT',
+      aseguradoraId: 1,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'GM',
+      aseguradoraId: 1,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'ADP RESIDENCIAL',
+      aseguradoraId: 1,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'ENGIE SEGUROS',
       aseguradoraId: 2,
     },
   });
 
   await prisma.asistencia.create({
     data: {
-      nombre: 'Hogar Integral',
+      nombre: 'HOGAR INTEGRAL',
       aseguradoraId: 2,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'FORD',
+      aseguradoraId: 2,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'VW',
+      aseguradoraId: 2,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'NATURGY',
+      aseguradoraId: 3,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'CHUBB SEGUROS',
+      aseguradoraId: 3,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'MAPFRE SEGUROS',
+      aseguradoraId: 3,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'SCOTIABANK',
+      aseguradoraId: 3,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'HSBC',
+      aseguradoraId: 3,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'BANORTE HOGAR',
+      aseguradoraId: 3,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'KIA VW',
+      aseguradoraId: 3,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'MERCEDES BENZ',
+      aseguradoraId: 3,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'GNP',
+      aseguradoraId: 3,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'BBVA',
+      aseguradoraId: 4,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'SANTANDER',
+      aseguradoraId: 4,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'CARE VOLARIS',
+      aseguradoraId: 4,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'COPPEL',
+      aseguradoraId: 4,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'ZURICH',
+      aseguradoraId: 4,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'SUBURBIA',
+      aseguradoraId: 6,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'LIVERPOOL',
+      aseguradoraId: 6,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'WOW',
+      aseguradoraId: 6,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'HDI',
+      aseguradoraId: 6,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'COPPEL',
+      aseguradoraId: 6,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'PALACIO',
+      aseguradoraId: 7,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'BANORTE',
+      aseguradoraId: 7,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'EL POTOSI',
+      aseguradoraId: 8,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'AL AGUILA',
+      aseguradoraId: 8,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'ANA SEGUROS',
+      aseguradoraId: 8,
+    },
+  });
+
+  await prisma.asistencia.create({
+    data: {
+      nombre: 'GNP',
+      aseguradoraId: 9,
     },
   });
 
@@ -90,6 +460,7 @@ async function main() {
       tipo: 'VIAL',
     },
   });
+
   await prisma.servicio.create({
     data: {
       nombre: 'Mecanico',
@@ -97,21 +468,222 @@ async function main() {
     },
   });
 
+  await prisma.servicio.create({
+    data: {
+      nombre: 'Vidrio',
+      tipo: 'DOMESTICO',
+    },
+  });
+
+  await prisma.servicio.create({
+    data: {
+      nombre: 'Aluminio',
+      tipo: 'DOMESTICO',
+    },
+  });
+
+  await prisma.servicio.create({
+    data: {
+      nombre: 'Cerrajería',
+      tipo: 'DOMESTICO',
+    },
+  });
+
+  await prisma.servicio.create({
+    data: {
+      nombre: 'Pintura',
+      tipo: 'DOMESTICO',
+    },
+  });
+
+  await prisma.servicio.create({
+    data: {
+      nombre: 'Impermeabilización',
+      tipo: 'DOMESTICO',
+    },
+  });
+
+  await prisma.servicio.create({
+    data: {
+      nombre: 'Albañilería',
+      tipo: 'DOMESTICO',
+    },
+  });
+
+  await prisma.servicio.create({
+    data: {
+      nombre: 'Carpintería',
+      tipo: 'DOMESTICO',
+    },
+  });
+
+  await prisma.servicio.create({
+    data: {
+      nombre: 'Aire Acondicionado',
+      tipo: 'DOMESTICO',
+    },
+  });
+
   //--------------ESTADOS------------------
 
   await prisma.estado.create({
     data: {
-      nombre: 'Michoacan',
+      nombre: 'MICHOACÁN',
     },
   });
 
   await prisma.estado.create({
     data: {
-      nombre: 'Jalisco',
+      nombre: 'JALISCO',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'AGUASCALIENTES',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'BAJA CALIFORNIA NORTE',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'BAJA CALIFORNIA SUR',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'CAMPECHE',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'CHIAPAS',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'CHIHUAHUA',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'COLIMA',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'DURANGO',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'ESTADO DE MÉXICO',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'GUANAJUATO',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'GUERRERO',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'HIDALGO',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'MORELOS',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'NUEVO LEÓN',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'PUEBLA',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'QUERÉTARO',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'QUINTANA ROO',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'SAN LUIS POTOSÍ',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'SINALOA',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'SONORA',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'TABASCO',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'TAMAULIPAS',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'VERACRUZ',
+    },
+  });
+
+  await prisma.estado.create({
+    data: {
+      nombre: 'ZACATECAS',
     },
   });
 
   //--------------CIUDADES------------------
+  
   await prisma.ciudad.create({
     data: {
       nombre: 'Morelia',
