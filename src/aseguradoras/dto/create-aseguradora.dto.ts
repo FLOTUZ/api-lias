@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Decimal } from '@prisma/client/runtime';
 import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateAseguradoraDto {
@@ -26,7 +27,11 @@ export class CreateAseguradoraDto {
   @IsOptional()
   kilometraje_permitido: number;
 
-  @ApiProperty()
+  @ApiProperty({ type: 'number' })
   @IsOptional()
-  costo_por_kilometro: number;
+  costo_por_kilometro: Decimal;
+
+  @ApiProperty({ type: 'number' })
+  @IsOptional()
+  costo_por_kilometro_foraneo: Decimal;
 }
