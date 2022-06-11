@@ -13,6 +13,7 @@ async function bootstrap() {
 
   app.setViewEngine('hbs');
   app.useStaticAssets(join(__dirname, '../public'));
+  app.useStaticAssets(join(__dirname, '../uploads'));
   app.setBaseViewsDir(join(__dirname, '../public/views'));
 
   const { httpAdapter } = app.get(HttpAdapterHost);
