@@ -203,6 +203,7 @@ model Usuario {
   createdAt             DateTime?           @default(now())
   updatedAt             DateTime?           @updatedAt
   rol                   String              @default("USUARIO")
+  hashedRt              String?
   Seguimiento           Seguimiento[]
   Tecnico               Tecnico?
   Ticket                Ticket[]

@@ -25,4 +25,7 @@ export class UsuarioEntity implements Usuario {
 
   @ApiProperty()
   rol: string;
+
+  @ApiProperty()
+  hashedRt: string;
 }
