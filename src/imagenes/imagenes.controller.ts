@@ -8,8 +8,6 @@ import {
   Delete,
   UseInterceptors,
   UploadedFile,
-  StreamableFile,
-  Res,
   ClassSerializerInterceptor,
   BadRequestException,
 } from '@nestjs/common';
@@ -26,9 +24,6 @@ import {
 import { ImagenEntity } from './entities/imagen.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { join } from 'path';
-import { createReadStream } from 'fs';
-import { NotFoundException } from '@nestjs/common';
 
 @Controller('imagenes')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -123,59 +118,15 @@ export class ImagenesController {
     try {
       const imagenDTO = new CreateImagenDto();
       if (process.platform == 'win32') {
-        imagenDTO.url = `${join(__dirname, '..', '..', 'uploads\\')}${
-          imagen.filename
-        }`;
+        imagenDTO.url = `${process.env.HOSTNAME}/${imagen.filename}`;
       }
       if (process.platform == 'linux') {
-        imagenDTO.url = `${join(__dirname, '..', '..', 'uploads/')}${
-          imagen.filename
-        }`;
+        imagenDTO.url = `${process.env.HOSTNAME}/${imagen.filename}`;
       }
       imagenDTO.descripcion = imagen.originalname;
       return await this.create(imagenDTO);
     } catch (error) {
       throw new BadRequestException();
-    }
-  }
-
-  //Get File from server
-  @Get('uploads/:id')
-  async getFile(@Res({ passthrough: true }) res, @Param('id') id: string) {
-    try {
-      const imagen = new ImagenEntity(await this.imagenesService.findOne(id));
-      const binario = createReadStream(join(imagen.url));
-
-      if (process.platform == 'linux') {
-        const arrName = imagen.url.split('/');
-
-        const filename = join(
-          __dirname,
-          '..',
-          '..',
-          'uploads',
-          arrName[arrName.length - 1],
-        );
-        res.set({
-          'Content-Type': 'image/generic',
-          'Content-Disposition': `attachment; filename=${filename}`,
-        });
-        return new StreamableFile(binario);
-      }
-
-      if (process.platform == 'win32') {
-        const arrName = imagen.url.split('\\');
-        const filename =
-          arrName[arrName.length - 2] + arrName[arrName.length - 1];
-        res.set({
-          'Content-Type': 'image/generic',
-          'Content-Disposition': `attachment; filename=${filename}`,
-        });
-        return new StreamableFile(binario);
-      }
-    } catch (error) {
-      console.log(error);
-      throw new NotFoundException();
     }
   }
 }

@@ -15,7 +15,6 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { type } from 'os';
 import { CotizacionesTecnicoService } from './cotizaciones-tecnico.service';
 import { CreateCotizacionTecnicoDto } from './dto/create-cotizaciones-tecnico.dto';
 import { UpdateCotizacionTecnicoDto } from './dto/update-cotizaciones-tecnico.dto';

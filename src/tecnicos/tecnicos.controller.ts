@@ -12,7 +12,7 @@ import {
 import { TecnicosService } from './tecnicos.service';
 import { CreateTecnicoDto } from './dto/create-tecnico.dto';
 import { UpdateTecnicoDto } from './dto/update-tecnico.dto';
-import { ApiOkResponse, ApiTags, PartialType } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { TecnicoEntity } from './entities/tecnico.entity';
 import { TecnicoRelatedEntity } from './entities/tecnicoRelated.entity';
 import { ServicesOfTecnicoEntity } from './entities/services-of-tecnico.entity';
