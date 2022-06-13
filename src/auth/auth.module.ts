@@ -15,11 +15,11 @@ import { RtStrategy } from './strategy';
     UsersModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '6m' },
+      signOptions: { expiresIn: '2h' },
     }),
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, RtStrategy],
-  exports: [AuthService],
+  exports: [AuthService, JwtModule],
 })
 export class AuthModule {}

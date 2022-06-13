@@ -5,6 +5,7 @@ import { UsersService } from 'src/users/users.service';
 import { LoginUserDto } from './dto/login-user.dto';
 
 import * as argon2 from 'argon2';
+import { UsuarioEntity } from 'src/users/entities/usuario.entity';
 
 @Injectable()
 export class AuthService {
@@ -19,15 +20,17 @@ export class AuthService {
 
     if (user && (await argon2.verify(user.password, loginUser.password))) {
       //Generate a new token
-      return await this.generateAccessToken(user.id, user.rol);
+      return await this.generateAccessToken(user.id);
     }
     throw new UnauthorizedException();
   }
 
-  async generateAccessToken(idUser: number, rolUser: string) {
+  async generateAccessToken(idUser: number) {
+    const { id, rol }: any = await this.userService.findOne(String(idUser));
+
     const payload = {
-      sub: idUser,
-      rol: rolUser,
+      sub: id,
+      rol: rol,
     };
 
     return {
@@ -41,15 +44,11 @@ export class AuthService {
   }
 
   async refreshToken(userId: number, refreshToken: string) {
-    const { sub, rol, exp }: any = this.jwtService.decode(refreshToken);
+    const { sub }: any = this.jwtService.decode(refreshToken);
 
-    //If exp date expire in less than 5 minutes, we generate a new token
-    if (exp - Math.floor(Date.now() / 1000) < 300) {
-      const newToken = await this.generateAccessToken(sub, rol);
-      //Refresh token in user table
-      await this.userService.updateToken(String(userId), newToken.access_token);
-      return newToken;
-    }
-    return { access_token: refreshToken };
+    const newToken = await this.generateAccessToken(sub);
+    //Refresh token in user table
+    await this.userService.updateToken(String(userId), newToken.access_token);
+    return newToken;
   }
 }

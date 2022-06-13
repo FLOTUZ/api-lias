@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UsuarioEntity } from 'src/users/entities/usuario.entity';
+import { AutorizedRol, Rol } from 'src/autorization/decorators/roles.decorator';
 import { AuthService } from './auth.service';
 import { GetCurrentUser, GetCurrentUserId } from './decorators';
 import { LoginUserDto } from './dto/login-user.dto';
@@ -36,10 +36,9 @@ export class AuthController {
 
   @Get('sayhi')
   @UseGuards(JwtRtGuard)
+  @AutorizedRol(Rol.ADMIN)
   @ApiBearerAuth()
-  async sayHi(@GetCurrentUser() user: UsuarioEntity) {
-    console.log(user);
-
+  async sayHi() {
     return 'hi';
   }
 }

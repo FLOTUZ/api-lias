@@ -8,11 +8,11 @@ import {
   Length,
 } from 'class-validator';
 
-export enum TipoUsuario {
-  'ADMIN' = 'ADMIN',
-  'USUARIO' = 'USUARIO',
-  'TECNICO' = 'TECNICO',
-  'CAPTURISTA' = 'CAPTURISTA',
+export enum Roles {
+  ADMIN = 'ADMIN',
+  USUARIO = 'USUARIO',
+  TECNICO = 'TECNICO',
+  CAPTURISTA = 'CAPTURISTA',
 }
 
 export class CreateUserDto {
@@ -38,11 +38,11 @@ export class CreateUserDto {
   })
   inactivo: boolean | null;
 
-  @IsEnum(TipoUsuario)
+  @IsEnum(Roles)
   @IsNotEmpty()
   @ApiProperty({
     enum: ['ADMIN', 'USUARIO', 'TECNICO', 'CAPTURISTA'],
-    example: 'USUARIO',
+    example: 'CAPTURISTA',
   })
   rol: string;
 }

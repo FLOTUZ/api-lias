@@ -15,6 +15,11 @@ import { AcuerdosConformidadModule } from './acuerdos-conformidad/acuerdos-confo
 import { EstadosModule } from './estados/estados.module';
 import { AsesoresModule } from './asesores/asesores.module';
 import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './autorization/guards/permissions.guard';
+import { AutorizationModule } from './autorization/autorization.module';
+import { AuthService } from './auth/auth.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -34,6 +39,18 @@ import { AuthModule } from './auth/auth.module';
     EstadosModule,
     AsesoresModule,
     AuthModule,
+    AutorizationModule,
+  ],
+  providers: [
+    AuthService,
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: JwtService,
+    },
   ],
 })
 export class AppModule {}
