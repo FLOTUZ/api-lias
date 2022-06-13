@@ -36,7 +36,7 @@ export class AuthController {
 
   @Get('sayhi')
   @UseGuards(JwtRtGuard)
-  @AutorizedRol(Rol.ADMIN)
+  //@AutorizedRol(Rol.ADMIN)
   @ApiBearerAuth()
   async sayHi() {
     return 'hi';
