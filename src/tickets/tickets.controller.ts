@@ -8,19 +8,15 @@ import {
   Delete,
   UseInterceptors,
   ClassSerializerInterceptor,
-  UseGuards,
 } from '@nestjs/common';
 import { TicketsService } from './tickets.service';
 import { CreateTicketDto, EstadoTicket } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
-import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { TicketEntity } from './entities/ticket.entity';
-import { JwtRtGuard } from 'src/auth/guards';
 
 @Controller('tickets')
 @ApiTags('tickets')
-@UseGuards(JwtRtGuard)
-@ApiBearerAuth()
 @UseInterceptors(ClassSerializerInterceptor)
 export class TicketsController {
   constructor(private readonly ticketsService: TicketsService) {}
