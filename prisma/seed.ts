@@ -11,6 +11,31 @@ async function main() {
       rol: 'ADMIN',
     },
   });
+  await prisma.usuario.create({
+    data: {
+      usuario: 'emmanuel',
+      email: 'emmanuel@mail.com',
+      password:
+        '$argon2i$v=19$m=4096,t=3,p=1$oEeQ0Y4CA5tpQAJoRUzM+g$s68618qhpkV76r/18xwlu1ji9iu5aHpnoPSjjDfKpKo',
+      inactivo: true,
+      rol: 'ADMIN',
+      hashedRt: null,
+    },
+  });
+  await prisma.usuario.create({
+    data: {
+      id: 4,
+      usuario: 'Jaquelyne',
+      email: 'jaquelyne@gmail.com',
+      password:
+        '$argon2i$v=19$m=4096,t=3,p=1$kps94dQ7dtJXgGTYVEwo2A$ISamlPr+q8Jkyw0UXWFy1ISQkA5F8Ae7d9D9zbtXmQI',
+      inactivo: true,
+      createdAt: '2022-06-13T19:02:58.205Z',
+      updatedAt: '2022-06-13T19:02:58.206Z',
+      rol: 'ADMIN',
+      hashedRt: null,
+    },
+  });
 
   //--------------ASEGURADORAS------------------
 
