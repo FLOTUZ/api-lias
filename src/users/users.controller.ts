@@ -13,7 +13,6 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { UsuarioEntity } from './entities/usuario.entity';
-import { JwtRtGuard } from 'src/auth/guards';
 
 @ApiTags('users')
 @Controller('users')
@@ -33,7 +32,6 @@ export class UsersController {
     status: 200,
     type: [UsuarioEntity],
   })
-  @UseGuards(JwtRtGuard)
   findAll() {
     return this.repository.findAll();
   }
