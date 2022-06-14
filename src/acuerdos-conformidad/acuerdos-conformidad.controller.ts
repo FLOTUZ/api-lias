@@ -135,6 +135,9 @@ export class AcuerdosConformidadController {
     )) as AcuerdoConformidadEntity;
 
     let pathDocumento = '';
+    try {
+      fs.mkdirSync('./downloads');
+    } catch (error) {}
     if (process.platform === 'win32') {
       pathDocumento = `downloads\\${Date.now()}.pdf`;
     }
