@@ -29,6 +29,7 @@ import { Response } from 'express';
 import * as puppeteer from 'puppeteer';
 import * as fs from 'fs';
 import * as moment from 'moment';
+import { platform } from 'os';
 
 @Controller('acuerdos-conformidad')
 @ApiTags('acuerdos-conformidad')
@@ -133,6 +134,14 @@ export class AcuerdosConformidadController {
       id,
     )) as AcuerdoConformidadEntity;
 
+    let pathDocumento = '';
+    if (process.platform === 'win32') {
+      pathDocumento = `downloads\\${Date.now()}.pdf`;
+    }
+    if (process.platform === 'linux') {
+      pathDocumento = `downloads/${Date.now()}.pdf`;
+    }
+
     const getHtml = async (err, html) => {
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
@@ -140,7 +149,7 @@ export class AcuerdosConformidadController {
       await page.setContent(html);
       await page.emulateMediaType('screen');
       await page.pdf({
-        path: `downloads\\${Date.now()}.pdf`,
+        path: pathDocumento,
         format: 'LETTER',
         printBackground: true,
       });
