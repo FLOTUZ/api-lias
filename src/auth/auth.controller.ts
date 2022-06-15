@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AutorizedRol, Rol } from 'src/autorization/decorators/roles.decorator';
 import { AuthService } from './auth.service';
 import { GetCurrentUser, GetCurrentUserId } from './decorators';
 import { LoginUserDto } from './dto/login-user.dto';
