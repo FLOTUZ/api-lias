@@ -39,7 +39,7 @@ export class CotizacionTecnicoEntity implements CotizacionTecnico {
   preSolucionId: number;
 
   @ApiProperty()
-  isAprobado: boolean;
+  is_aprobado: boolean;
 
   @ApiProperty()
   aprobado_por_usuarioId: number;

@@ -43,7 +43,7 @@ export class CreateCotizacionTecnicoDto {
 
   @ApiProperty()
   @IsOptional()
-  isAprobado: boolean;
+  is_aprobado: boolean;
 
   @ApiProperty()
   @IsOptional()

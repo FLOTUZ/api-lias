@@ -162,7 +162,7 @@ model CotizacionTecnico {
   ticketId               Int       @unique
   tecnicoId              Int
   preSolucionId          Int?
-  isAprobado             Boolean?  @default(false)
+  is_aprobado            Boolean?  @default(false)
   aprobado_por_usuarioId Int?
   createdAt              DateTime? @default(now())
   updatedAt              DateTime? @updatedAt
