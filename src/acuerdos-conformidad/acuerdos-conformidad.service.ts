@@ -46,4 +46,19 @@ export class AcuerdosConformidadService {
       where: { ticketId: Number(idTicket) },
     });
   }
+
+  async getAcuerdoWithNodes(idAcuerdo: string) {
+    return await this.prisma.acuerdoConformidad.findUnique({
+      where: { id: Number(idAcuerdo) },
+      include: {
+        UsuarioFinal: true,
+        Ticket: {
+          include: {
+            Asesor: true,
+            Asistencia: true,
+          },
+        },
+      },
+    });
+  }
 }

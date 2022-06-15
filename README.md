@@ -75,3 +75,18 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## RUN on server with pm2
+```bash
+# INSTALL PM2
+npm install -g pm2
+#Register the lia-panel in pm2
+pm2 start npm --name "api-lias" -- run "start"
+# Save the as a startup script
+pm2 startup
+# Save the as a startup script
+pm2 save
+
+# If not when restart the server
+pm2 resurrect
+```

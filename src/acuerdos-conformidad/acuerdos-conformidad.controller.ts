@@ -16,6 +16,7 @@ import {
   ApiTags,
   ApiBody,
   ApiConsumes,
+  ApiOperation,
 } from '@nestjs/swagger';
 import { AcuerdosConformidadService } from './acuerdos-conformidad.service';
 import { CreateAcuerdosConformidadDto } from './dto/create-acuerdos-conformidad.dto';
@@ -29,7 +30,7 @@ import { Response } from 'express';
 import * as puppeteer from 'puppeteer';
 import * as fs from 'fs';
 import * as moment from 'moment';
-import { platform } from 'os';
+import { AcuerdoConformidadAllEntity } from './entities/acuerdos-conformidad.all.entity';
 
 @Controller('acuerdos-conformidad')
 @ApiTags('acuerdos-conformidad')
@@ -80,6 +81,9 @@ export class AcuerdosConformidadController {
   }
 
   @Get('/ticket/:id')
+  @ApiOperation({
+    summary: 'Obtener un acuerdo por el Id del ticket al que pertenece',
+  })
   @ApiOkResponse({
     type: AcuerdoConformidadEntity,
   })
@@ -87,7 +91,21 @@ export class AcuerdosConformidadController {
     return this.acuerdosConformidadService.getByIdTicket(id);
   }
 
+  @ApiOkResponse({ type: AcuerdoConformidadAllEntity })
+  @ApiOperation({
+    summary: 'Obtener datos de un acuerdo, además de sus nodos',
+  })
+  @Get('/acuerdo-conformidad/:id/all')
+  getAcuerdoWithNodes(@Param('id') id: string) {
+    return this.acuerdosConformidadService.getAcuerdoWithNodes(id);
+  }
+
   @ApiConsumes('multipart/form-data')
+  @ApiCreatedResponse({ type: AcuerdoConformidadEntity })
+  @ApiOperation({
+    summary:
+      'Generar un pdf firmado (este endpoint retorna el HTML del PDF generado)',
+  })
   @ApiBody({
     description: 'Subir una imagen',
     schema: {
@@ -123,28 +141,37 @@ export class AcuerdosConformidadController {
       },
     }),
   )
-  @ApiCreatedResponse({ type: AcuerdoConformidadEntity })
   @Post(':id/acuerdo-firmado')
   async generateAcuerdoPDF(
     @Param('id') id: string,
     @UploadedFile() firma: Express.Multer.File,
     @Res() res: Response,
   ) {
-    const acuerdo = (await this.acuerdosConformidadService.findOne(
+    //Se consultan los datos del acuerdo
+    const acuerdo = await this.acuerdosConformidadService.getAcuerdoWithNodes(
       id,
-    )) as AcuerdoConformidadEntity;
+    );
 
+    //Se crea el path del documento
     let pathDocumento = '';
     try {
+      //Si el directorio downloads no existe, se crea 📂
       fs.mkdirSync('./downloads');
     } catch (error) {}
+    //Si el sistema operativo es windows, cambian las diagonales 😪
     if (process.platform === 'win32') {
-      pathDocumento = `downloads\\${Date.now()}.pdf`;
+      pathDocumento = `downloads\\AC_${
+        acuerdo.Ticket.num_expediente
+      }_${Date.now()}.pdf`;
     }
+    //Si el sistema operativo es linux, no cambian las diagonales 😉
     if (process.platform === 'linux') {
-      pathDocumento = `downloads/${Date.now()}.pdf`;
+      pathDocumento = `downloads/AC_${
+        acuerdo.Ticket.num_expediente
+      }_${Date.now()}.pdf`;
     }
 
+    //Se crea el PDF y se guarda con puppeteer
     const getHtml = async (err, html) => {
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
@@ -159,22 +186,34 @@ export class AcuerdosConformidadController {
       await browser.close();
 
       fs.unlinkSync(`./public/firmas/${firma.filename}`);
+
+      //Se retorna el HTML del PDF
       res.send(html);
     };
 
-    //Get utl environment
+    //Get hostname environment
     const env = process.env.HOSTNAME;
+    //Se divide el path del documento en un array
+    const arr = pathDocumento.split('\\');
+    //Se obtiene el nombre del documento
+    const path = arr[arr.length - 1];
 
+    //Se gauarda la ruta del documento
+    await this.acuerdosConformidadService.update(id, {
+      acuerdo_firmado: `${env}/${path}`,
+    });
+
+    //Se renderea el HTML del PDF con datos del acuerdo
     res.render(
       'acuerdo-conformidad',
       {
         env,
-        expediente: 'hardcode',
+        expediente: acuerdo.Ticket.num_expediente,
         fecha: moment(acuerdo.fecha_acuerdo).format('L'),
         problema: acuerdo.descripcion_problema,
-        asistencia: 'hardcode',
+        asistencia: acuerdo.Ticket.Asistencia.nombre,
         direccion: acuerdo.direccion,
-        asesor: 'hardcode',
+        asesor: acuerdo.Ticket.Asesor.nombre,
         usuario: acuerdo.usuarioFinalId,
         actividades: acuerdo.actividades_realizadas,
         hora_recepcion: moment(acuerdo.hora_recepcion_servicio).format('LT'),
