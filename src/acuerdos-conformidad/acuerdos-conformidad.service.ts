@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateAcuerdosConformidadDto } from './dto/create-acuerdos-conformidad.dto';
 import { UpdateAcuerdosConformidadDto } from './dto/update-acuerdos-conformidad.dto';
@@ -7,8 +11,24 @@ import { UpdateAcuerdosConformidadDto } from './dto/update-acuerdos-conformidad.
 export class AcuerdosConformidadService {
   constructor(private prisma: PrismaService) {}
 
-  create(createDTO: CreateAcuerdosConformidadDto) {
-    return this.prisma.acuerdoConformidad.create({ data: createDTO });
+  async create(createDTO: CreateAcuerdosConformidadDto) {
+    const acuerdo = await this.prisma.acuerdoConformidad.create({
+      data: createDTO,
+    });
+    //Se genera la direccion completa del acuerdo
+    if (acuerdo.ticketId) {
+      const ticket = (await this.getAcuerdoWithNodes(String(acuerdo.id)))
+        .Ticket;
+      acuerdo.direccion = `${ticket.calle}, ${ticket.numero_domicilio},
+     ${ticket.num_interior}, ${ticket.colonia},
+     ${ticket.Ciudad.nombre}, ${ticket.Ciudad.Estado.nombre}`;
+
+      return await this.update(String(acuerdo.id), acuerdo);
+    } else {
+      throw new InternalServerErrorException(
+        'Error al generar la direccion del acuerdo',
+      );
+    }
   }
 
   findAll() {
@@ -56,6 +76,11 @@ export class AcuerdosConformidadService {
           include: {
             Asesor: true,
             Asistencia: true,
+            Ciudad: {
+              include: {
+                Estado: true,
+              },
+            },
           },
         },
       },
