@@ -48,6 +48,7 @@ async function main() {
       telefono_whats: '4510101012',
       kilometraje_permitido: 16,
       costo_por_kilometro: 13,
+      costo_por_kilometro_foraneo: 13,
     },
   });
 
@@ -60,6 +61,7 @@ async function main() {
       telefono_whats: '4510101012',
       kilometraje_permitido: 18,
       costo_por_kilometro: 0,
+      costo_por_kilometro_foraneo: 13,
     },
   });
 
@@ -72,6 +74,7 @@ async function main() {
       telefono_whats: '4510101012',
       kilometraje_permitido: 18,
       costo_por_kilometro: 7,
+      costo_por_kilometro_foraneo: 13.17,
     },
   });
 
@@ -84,6 +87,7 @@ async function main() {
       telefono_whats: '4510101012',
       kilometraje_permitido: 18,
       costo_por_kilometro: 8,
+      costo_por_kilometro_foraneo: 13,
     },
   });
 
@@ -96,6 +100,7 @@ async function main() {
       telefono_whats: '4510101012',
       kilometraje_permitido: 18,
       costo_por_kilometro: 16,
+      costo_por_kilometro_foraneo: 0,
     },
   });
 
@@ -107,7 +112,8 @@ async function main() {
       telefono_vial: '4510101012',
       telefono_whats: '4510101012',
       kilometraje_permitido: 18,
-      costo_por_kilometro: 16,
+      costo_por_kilometro: 0,
+      costo_por_kilometro_foraneo: 10,
     },
   });
 
@@ -120,6 +126,7 @@ async function main() {
       telefono_whats: '4510101012',
       kilometraje_permitido: 18,
       costo_por_kilometro: 0,
+      costo_por_kilometro_foraneo: 0,
     },
   });
 
@@ -131,7 +138,8 @@ async function main() {
       telefono_vial: '4510101012',
       telefono_whats: '4510101012',
       kilometraje_permitido: 18,
-      costo_por_kilometro: 7.50,
+      costo_por_kilometro: 0,
+      costo_por_kilometro_foraneo: 7.50,
     },
   });
 
@@ -143,7 +151,8 @@ async function main() {
       telefono_vial: '4510101012',
       telefono_whats: '4510101012',
       kilometraje_permitido: 18,
-      costo_por_kilometro: 12.75,
+      costo_por_kilometro: 0,
+      costo_por_kilometro_foraneo: 12.75,
     },  });
 
   //--------------ASISTENCIAS------------------
@@ -545,6 +554,13 @@ async function main() {
   await prisma.servicio.create({
     data: {
       nombre: 'Aire Acondicionado',
+      tipo: 'DOMESTICO',
+    },
+  });
+
+  await prisma.servicio.create({
+    data: {
+      nombre: 'HANDY-MAN',
       tipo: 'DOMESTICO',
     },
   });
