@@ -7,7 +7,9 @@ async function main() {
     data: {
       usuario: 'admin',
       email: 'admin@mail.com',
-      password: 'adminsupersecret',
+      inactivo: false,
+      password:
+        '$argon2i$v=19$m=4096,t=3,p=1$rTFe/GwrT+IkSGHGBDUHkA$Fabf40xbHmdnmk8VI2G7cjuKmKtiRlKKDYQu9q2Uc0U',
       rol: 'ADMIN',
     },
   });
@@ -17,21 +19,40 @@ async function main() {
       email: 'emmanuel@mail.com',
       password:
         '$argon2i$v=19$m=4096,t=3,p=1$oEeQ0Y4CA5tpQAJoRUzM+g$s68618qhpkV76r/18xwlu1ji9iu5aHpnoPSjjDfKpKo',
-      inactivo: true,
+      inactivo: false,
       rol: 'ADMIN',
       hashedRt: null,
     },
   });
   await prisma.usuario.create({
     data: {
-      id: 4,
+      usuario: 'licluis',
+      email: 'luis_avila@gmail.com',
+      password:
+        '$argon2i$v=19$m=4096,t=3,p=1$eB29CBcoKOVEJvp17CzxWA$g3asQ4U0zxJT8qGGkAVLHiw5qf2E2c8i2fBm3AF1Zso',
+      inactivo: false,
+      rol: 'ADMIN',
+    },
+  });
+  await prisma.usuario.create({
+    data: {
+      usuario: 'jose',
+      email: 'jose@mail.com',
+      password:
+        '$argon2i$v=19$m=4096,t=3,p=1$qouxPiS06Hb4T6BXyEdOqA$ckCISFqrmaKhhAaKf5takyIwSsIeIE4o0iIJUpvQLh0',
+      inactivo: false,
+      createdAt: '2022-06-15T16:42:42.415Z',
+      updatedAt: '2022-06-15T16:50:09.517Z',
+      rol: 'TECNICO',
+    },
+  });
+  await prisma.usuario.create({
+    data: {
       usuario: 'Jaquelyne',
       email: 'jaquelyne@gmail.com',
       password:
         '$argon2i$v=19$m=4096,t=3,p=1$kps94dQ7dtJXgGTYVEwo2A$ISamlPr+q8Jkyw0UXWFy1ISQkA5F8Ae7d9D9zbtXmQI',
-      inactivo: true,
-      createdAt: '2022-06-13T19:02:58.205Z',
-      updatedAt: '2022-06-13T19:02:58.206Z',
+      inactivo: false,
       rol: 'ADMIN',
       hashedRt: null,
     },
@@ -139,7 +160,7 @@ async function main() {
       telefono_whats: '4510101012',
       kilometraje_permitido: 18,
       costo_por_kilometro: 0,
-      costo_por_kilometro_foraneo: 7.50,
+      costo_por_kilometro_foraneo: 7.5,
     },
   });
 
@@ -153,7 +174,8 @@ async function main() {
       kilometraje_permitido: 18,
       costo_por_kilometro: 0,
       costo_por_kilometro_foraneo: 12.75,
-    },  });
+    },
+  });
 
   //--------------ASISTENCIAS------------------
 
@@ -724,7 +746,7 @@ async function main() {
   });
 
   //--------------CIUDADES------------------
-  
+
   await prisma.ciudad.create({
     data: {
       nombre: 'Morelia',
@@ -759,6 +781,24 @@ async function main() {
       aseguradoraId: 1,
     },
   });
+  await prisma.asesor.create({
+    data: {
+      nombre: 'Maria',
+      aseguradoraId: 4,
+    },
+  });
+  await prisma.asesor.create({
+    data: {
+      nombre: 'Ana Juarez',
+      aseguradoraId: 2,
+    },
+  });
+  await prisma.asesor.create({
+    data: {
+      nombre: 'Eloisa',
+      aseguradoraId: 1,
+    },
+  });
 
   //--------------TECNICO------------------
 
@@ -766,7 +806,8 @@ async function main() {
     data: {
       usuario: 'santiago',
       email: 'santiago@mail.com',
-      password: '=papaya papaya',
+      password:
+        '$argon2i$v=19$m=4096,t=3,p=1$4TI1Dy6RB0t3PTV578s2mQ$QjVfG0zgpJUcikfkKvH/pmJmitpm7wbcnyF+8QnJ+pQ',
       inactivo: false,
       createdAt: '2022-05-30T05:08:29.996Z',
       updatedAt: '2022-05-30T05:08:29.996Z',
@@ -832,6 +873,125 @@ async function main() {
       marca_carro: 'Mazda',
       is_servicio_domestico: false,
       is_servicio_foraneo: false,
+    },
+  });
+  await prisma.ticket.create({
+    data: {
+      num_expediente: 'p1200301',
+      asistencia_vial: false,
+      fecha_llamada: '2022-06-16T04:59:00.000Z',
+      nombre_asesor_gpo_lias: 'Emmanuel',
+      asesorId: 1,
+      nombre_usuario_final: 'Abril Jasive Zamora Estrada',
+      titulo_ticket: 'Llave de puerta principal quebrada',
+      asistenciaId: 2,
+      aseguradoraId: 1,
+      problematica: 'La usuaria Abril se quedo afuera de su casa',
+      ciudadId: 1,
+      colonia: 'Vasco de Quiroga',
+      calle: 'Carpinteros de Paracho LB',
+      numero_domicilio: '157',
+      banderazo: 0,
+      total_salida: 100,
+      cobertura: 1000,
+      cotizacion_gpo_lias: 'La casa está al lado del auto lavado',
+      deducible: 0,
+      kilometraje: 10,
+      costo_de_kilometraje: 10,
+      costo_por_caseta: 0,
+      total: 300,
+      anticipo: 180,
+      hora_cierre: null,
+      casetas: 0,
+      costo_gpo_lias: 200,
+      estado: 'NUEVO',
+      num_interior: '',
+      modelo_carro: '',
+      placas_carro: '',
+      color_carro: '',
+      marca_carro: '',
+      is_servicio_domestico: true,
+      is_servicio_foraneo: false,
+    },
+  });
+  await prisma.ticket.create({
+    data: {
+      num_expediente: 'A1245321',
+      asistencia_vial: false,
+      fecha_llamada: '2022-06-16T05:10:00.000Z',
+      nombre_asesor_gpo_lias: 'Miguel Angel Solorzano',
+      asesorId: 1,
+      nombre_usuario_final: 'Regina Lomelí',
+      titulo_ticket: 'Ventana rota Regina',
+      asistenciaId: 1,
+      aseguradoraId: 1,
+      problematica: 'reemplazo de ventana rota',
+      ciudadId: 1,
+      colonia: 'Sin Nombre',
+      calle: 'Cam. de La Arboleda',
+      numero_domicilio: '8',
+      banderazo: 0,
+      total_salida: 356,
+      cobertura: 1000,
+      cotizacion_gpo_lias: 'Tecnologico de morelia campus 2',
+      deducible: 0,
+      kilometraje: 12,
+      costo_de_kilometraje: 13,
+      costo_por_caseta: 200,
+      total: 556,
+      anticipo: 213.6,
+      hora_cierre: null,
+      casetas: 1,
+      costo_gpo_lias: 200,
+      estado: 'NUEVO',
+      num_interior: '',
+      modelo_carro: '',
+      placas_carro: '',
+      color_carro: '',
+      marca_carro: '',
+      is_servicio_domestico: true,
+      is_servicio_foraneo: true,
+      tecnicoId: null,
+    },
+  });
+  await prisma.ticket.create({
+    data: {
+      num_expediente: '11141241a-211',
+      asistencia_vial: true,
+      fecha_llamada: '2022-06-16T05:48:00.000Z',
+      nombre_asesor_gpo_lias: 'Emmanuel',
+      asesorId: 4,
+      nombre_usuario_final: 'Isla Solorzano',
+      titulo_ticket: '20lts de gasolina para Isla',
+      asistenciaId: 2,
+      aseguradoraId: 1,
+      problematica: 'Llevar 20 lts de gasolina a usuaria',
+      ciudadId: 1,
+      colonia: '',
+      calle: '19.7033025,-101.1916141,13z',
+      numero_domicilio: '',
+      banderazo: 100,
+      total_salida: 510,
+      cobertura: 1000,
+      cotizacion_gpo_lias: 'El cliente necesita el servicio urgentemente',
+      deducible: 400,
+      kilometraje: 20,
+      costo_de_kilometraje: 20,
+      costo_por_caseta: 10,
+      total: 2010,
+      anticipo: 900,
+      hora_cierre: null,
+      casetas: 1,
+      costo_gpo_lias: 1000,
+      estado: 'NUEVO',
+      num_interior: '',
+      modelo_carro: ' BMW M340i xDrive Sedán 2023',
+      placas_carro: 'WLU 94 69',
+      color_carro: 'Negro',
+      marca_carro: 'Mazda',
+      is_servicio_domestico: false,
+      is_servicio_foraneo: true,
+      tecnicoId: null,
     },
   });
 }
