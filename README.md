@@ -81,7 +81,7 @@ Nest is [MIT licensed](LICENSE).
 # INSTALL PM2
 npm install -g pm2
 #Register the lia-panel in pm2
-pm2 start npm --name "api-lias" -- run "start"
+pm2 start npm --name "api-lias" -- run "start:prod"
 # Save the as a startup script
 pm2 startup
 # Save the as a startup script
