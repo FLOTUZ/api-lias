@@ -194,9 +194,11 @@ export class AcuerdosConformidadController {
     //Get hostname environment
     const env = process.env.HOSTNAME;
     //Se divide el path del documento en un array
-    const arr = pathDocumento.split('\\');
+    let pathArray = [];
+    if (process.platform === 'win32') pathArray = pathDocumento.split('\\');
+    if (process.platform === 'linux') pathArray = pathDocumento.split('/');
     //Se obtiene el nombre del documento
-    const path = arr[arr.length - 1];
+    const path = pathArray[pathArray.length - 1];
 
     //Se gauarda la ruta del documento
     await this.acuerdosConformidadService.update(id, {
