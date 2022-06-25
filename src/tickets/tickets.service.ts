@@ -1,7 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
+import { TicketEntity } from './entities/ticket.entity';
 
 @Injectable()
 export class TicketsService {
@@ -59,6 +64,20 @@ export class TicketsService {
       });
     } catch (error) {
       throw new NotFoundException(`This register did #${estado} not exist`);
+    }
+  }
+
+  async tomarTicket(idTicket: string, updateDto: UpdateTicketDto) {
+    //Se obtiene la propiedad tecnicoId mediante destrucuracion
+    //Si el ticket no existe, el mismo enpoint de findOne retornara un 404
+    const { tecnicoId } = (await this.findOne(idTicket)) as TicketEntity;
+
+    //Si el id del tecnico del ticket no ha sido asignado
+    if (tecnicoId === null && tecnicoId !== 0) {
+      //Se actualiza el ticket con el tecnico asignado
+      return this.update(idTicket, updateDto);
+    } else {
+      throw new ConflictException('El ticket ya fue tomado');
     }
   }
 }

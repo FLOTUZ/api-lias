@@ -12,7 +12,7 @@ import {
 import { TicketsService } from './tickets.service';
 import { CreateTicketDto, EstadoTicket } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { TicketEntity } from './entities/ticket.entity';
 
 @Controller('tickets')
@@ -67,5 +67,19 @@ export class TicketsController {
   async ticketsByEstatus(@Param('estado') estado: EstadoTicket) {
     const list = await this.ticketsService.ticketsByEstatus(estado);
     return list.map((item) => new TicketEntity(item));
+  }
+
+  @Patch('tomar/:id')
+  @ApiOkResponse({ status: 200, type: [TicketEntity] })
+  @ApiOperation({
+    summary: 'Se toma el ticket si el ticket no tiene tecnico ya asignado',
+  })
+  async tomarTicket(
+    @Param('id') id: string,
+    @Body() updateDto: UpdateTicketDto,
+  ) {
+    return new TicketEntity(
+      await this.ticketsService.tomarTicket(id, updateDto),
+    );
   }
 }

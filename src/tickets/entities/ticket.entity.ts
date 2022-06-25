@@ -1,4 +1,4 @@
-import { NotFoundException } from '@nestjs/common';
+import { ConflictException, NotFoundException } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Ticket } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime';
@@ -131,7 +131,7 @@ export class TicketEntity implements Ticket {
   @ApiProperty()
   updatedAt: Date;
 
-  constructor(partial: Partial<TicketEntity | NotFoundException>) {
+  constructor(partial: Partial<TicketEntity | NotFoundException | ConflictException>) {
     Object.assign(this, partial);
   }
 }
