@@ -968,7 +968,7 @@ async function main() {
       problematica: 'Llevar 20 lts de gasolina a usuaria',
       ciudadId: 1,
       colonia: '',
-      calle: '19.7033025,-101.1916141,13z',
+      calle: '19.7033025,-101.1916141',
       numero_domicilio: '',
       banderazo: 100,
       total_salida: 510,

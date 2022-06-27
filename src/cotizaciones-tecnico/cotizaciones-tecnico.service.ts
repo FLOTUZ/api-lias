@@ -55,9 +55,6 @@ export class CotizacionesTecnicoService {
         where: {
           ticketId: Number(idTicket),
         },
-        include: {
-          Tecnico: true,
-        },
       });
       if (cotizacion == null) {
         throw new NotFoundException();
