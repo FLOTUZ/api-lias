@@ -218,7 +218,7 @@ export class AcuerdosConformidadController {
         asesor: acuerdo.Ticket.Asesor.nombre,
         usuario: `${acuerdo.UsuarioFinal.nombre} ${acuerdo.UsuarioFinal.apellido_paterno} ${acuerdo.UsuarioFinal.apellido_materno}`,
         actividades: acuerdo.actividades_realizadas,
-        hora_recepcion: moment(acuerdo.hora_recepcion_servicio).format('LT'),
+        hora_recepcion: moment(acuerdo.Ticket.fecha_llamada).format('LT'),
         hora_llegada: moment(acuerdo.hora_llegada_servicio).format('LT'),
         hora_finalizacion: moment(acuerdo.hora_finalizacion_servicio).format(
           'LT',
