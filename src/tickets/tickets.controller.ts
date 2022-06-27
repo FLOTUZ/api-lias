@@ -82,4 +82,12 @@ export class TicketsController {
       await this.ticketsService.tomarTicket(id, updateDto),
     );
   }
+
+  @Get('tecnico/:id')
+  @ApiOperation({ summary: 'Consultar tickets por el id del tecnico' })
+  @ApiOkResponse({ status: 200, type: [TicketEntity] })
+  async ticketsOfTecnico(@Param('id') id: string) {
+    const list = await this.ticketsService.ticketsOfTecnico(id);
+    return list.map((item) => new TicketEntity(item));
+  }
 }

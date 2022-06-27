@@ -80,4 +80,10 @@ export class TicketsService {
       throw new ConflictException('El ticket ya fue tomado');
     }
   }
+
+  async ticketsOfTecnico(idTecnico: string) {
+    return await this.prisma.ticket.findMany({
+      where: { tecnicoId: Number(idTecnico) },
+    });
+  }
 }
