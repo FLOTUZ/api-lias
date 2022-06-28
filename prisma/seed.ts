@@ -13,17 +13,7 @@ async function main() {
       rol: 'ADMIN',
     },
   });
-  await prisma.usuario.create({
-    data: {
-      usuario: 'emmanuel',
-      email: 'emmanuel@mail.com',
-      password:
-        '$argon2i$v=19$m=4096,t=3,p=1$oEeQ0Y4CA5tpQAJoRUzM+g$s68618qhpkV76r/18xwlu1ji9iu5aHpnoPSjjDfKpKo',
-      inactivo: false,
-      rol: 'ADMIN',
-      hashedRt: null,
-    },
-  });
+
   await prisma.usuario.create({
     data: {
       usuario: 'licluis',
@@ -34,26 +24,15 @@ async function main() {
       rol: 'ADMIN',
     },
   });
+
   await prisma.usuario.create({
     data: {
-      usuario: 'jose',
-      email: 'jose@mail.com',
-      password:
-        '$argon2i$v=19$m=4096,t=3,p=1$qouxPiS06Hb4T6BXyEdOqA$ckCISFqrmaKhhAaKf5takyIwSsIeIE4o0iIJUpvQLh0',
-      inactivo: false,
-      createdAt: '2022-06-15T16:42:42.415Z',
-      updatedAt: '2022-06-15T16:50:09.517Z',
-      rol: 'TECNICO',
-    },
-  });
-  await prisma.usuario.create({
-    data: {
-      usuario: 'Jaquelyne',
+      usuario: 'jaquelyne',
       email: 'jaquelyne@gmail.com',
       password:
         '$argon2i$v=19$m=4096,t=3,p=1$kps94dQ7dtJXgGTYVEwo2A$ISamlPr+q8Jkyw0UXWFy1ISQkA5F8Ae7d9D9zbtXmQI',
       inactivo: false,
-      rol: 'ADMIN',
+      rol: 'CAPTURISTA',
       hashedRt: null,
     },
   });
@@ -804,27 +783,54 @@ async function main() {
 
   await prisma.usuario.create({
     data: {
-      usuario: 'santiago',
-      email: 'santiago@mail.com',
+      usuario: 'emmanuel',
+      email: 'emmanuel@mail.com',
       password:
-        '$argon2i$v=19$m=4096,t=3,p=1$4TI1Dy6RB0t3PTV578s2mQ$QjVfG0zgpJUcikfkKvH/pmJmitpm7wbcnyF+8QnJ+pQ',
+        '$argon2i$v=19$m=4096,t=3,p=1$oEeQ0Y4CA5tpQAJoRUzM+g$s68618qhpkV76r/18xwlu1ji9iu5aHpnoPSjjDfKpKo',
       inactivo: false,
-      createdAt: '2022-05-30T05:08:29.996Z',
-      updatedAt: '2022-05-30T05:08:29.996Z',
       rol: 'TECNICO',
+      hashedRt: null,
     },
   });
+
   await prisma.tecnico.create({
     data: {
-      nombre: 'Santiago',
-      apellido_paterno: 'Solorzano',
-      apellido_materno: 'Hernandez',
+      nombre: 'Emmanuel',
+      apellido_paterno: 'Esquivel',
+      apellido_materno: 'Pardo',
       calificacion: 0,
       telefono: '4433110399',
-      usuarioId: 2,
+      usuarioId: 4,
       ciudadId: 1,
     },
   });
+
+  await prisma.usuario.create({
+    data: {
+      usuario: 'jose',
+      email: 'jose@mail.com',
+      password:
+        '$argon2i$v=19$m=4096,t=3,p=1$qouxPiS06Hb4T6BXyEdOqA$ckCISFqrmaKhhAaKf5takyIwSsIeIE4o0iIJUpvQLh0',
+      inactivo: false,
+      createdAt: '2022-06-15T16:42:42.415Z',
+      updatedAt: '2022-06-15T16:50:09.517Z',
+      rol: 'TECNICO',
+    },
+  });
+
+  await prisma.tecnico.create({
+    data: {
+      nombre: 'Jose',
+      apellido_paterno: 'Lopez',
+      apellido_materno: 'Mancilla',
+      calificacion: 0,
+      telefono: '4433110399',
+      usuarioId: 5,
+      ciudadId: 1,
+    },
+  });
+
+  //-----------------------TICKETS-------------------------------
 
   await prisma.usuarioFinal.create({
     data: {

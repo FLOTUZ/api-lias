@@ -12,7 +12,7 @@ import {
 import { TecnicosService } from './tecnicos.service';
 import { CreateTecnicoDto } from './dto/create-tecnico.dto';
 import { UpdateTecnicoDto } from './dto/update-tecnico.dto';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { TecnicoEntity } from './entities/tecnico.entity';
 import { TecnicoRelatedEntity } from './entities/tecnicoRelated.entity';
 import { ServicesOfTecnicoEntity } from './entities/services-of-tecnico.entity';
@@ -88,6 +88,18 @@ export class TecnicosController {
   async getServicesOfTecnico(@Param('id') id: string) {
     return new ServicesOfTecnicoEntity(
       await this.tecnicosService.getServicesOfTecnico(id),
+    );
+  }
+
+  @Get('user/:id')
+  @ApiOkResponse({
+    status: 200,
+    type: TecnicoRelatedEntity,
+  })
+  @ApiOperation({ summary: 'Consultar tecnico por su id de usuario' })
+  async getTecnicoByUserId(@Param('id') id: string) {
+    return new TecnicoRelatedEntity(
+      await this.tecnicosService.getTecnicoByUserId(id),
     );
   }
 }

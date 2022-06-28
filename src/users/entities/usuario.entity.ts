@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Usuario } from '@prisma/client';
 
@@ -28,4 +29,8 @@ export class UsuarioEntity implements Usuario {
 
   @ApiProperty()
   hashedRt: string;
+
+  constructor(partial: Partial<UsuarioEntity | NotFoundException>) {
+    Object.assign(this, partial);
+  }
 }

@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTecnicoDto } from './dto/create-tecnico.dto';
 import { UpdateTecnicoDto } from './dto/update-tecnico.dto';
@@ -50,10 +54,14 @@ export class TecnicosService {
   }
 
   update(id: string, updateDTO: UpdateTecnicoDto) {
-    return this.prisma.tecnico.update({
-      where: { id: Number(id) },
-      data: updateDTO,
-    });
+    try {
+      return this.prisma.tecnico.update({
+        where: { id: Number(id) },
+        data: updateDTO,
+      });
+    } catch (error) {
+      throw new UnprocessableEntityException();
+    }
   }
 
   remove(id: string) {
@@ -75,5 +83,26 @@ export class TecnicosService {
       where: { id: Number(idTecnico) },
       include: { Servicio: true },
     });
+  }
+
+  async getTecnicoByUserId(id: string) {
+    try {
+      const response = await this.prisma.tecnico.findUnique({
+        where: { usuarioId: Number(id) },
+        include: {
+          ViveEn: true,
+          Servicio: true,
+          Ciudad: true,
+        },
+      });
+
+      if (response == null) {
+        return new NotFoundException(`This register did #${id} not exist`);
+      } else {
+        return response;
+      }
+    } catch (error) {
+      throw new NotFoundException();
+    }
   }
 }

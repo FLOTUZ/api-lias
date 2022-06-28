@@ -1,4 +1,4 @@
-import { NotFoundException } from '@nestjs/common';
+import { NotFoundException, UnprocessableEntityException } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Tecnico } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime';
@@ -36,7 +36,7 @@ export class TecnicoEntity implements Tecnico {
   @ApiProperty()
   updatedAt: Date;
 
-  constructor(partial: Partial<TecnicoEntity | NotFoundException>) {
+  constructor(partial: Partial<TecnicoEntity | NotFoundException | UnprocessableEntityException>) {
     Object.assign(this, partial);
   }
 }

@@ -11,8 +11,15 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { UsuarioEntity } from './entities/usuario.entity';
+import { JwtRtGuard } from 'src/auth/guards';
+import { GetCurrentUserId } from 'src/auth/decorators';
 
 @ApiTags('users')
 @Controller('users')
@@ -34,6 +41,17 @@ export class UsersController {
   })
   findAll() {
     return this.repository.findAll();
+  }
+
+  @ApiOkResponse({
+    status: 200,
+    type: UsuarioEntity,
+  })
+  @Get('usuario-logueado')
+  @ApiBearerAuth()
+  @UseGuards(JwtRtGuard)
+  async whoami(@GetCurrentUserId() userId: number) {
+    return new UsuarioEntity(await this.findOne(String(userId)));
   }
 
   @Get(':id')
