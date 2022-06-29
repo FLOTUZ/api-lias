@@ -7,7 +7,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CiudadesService } from './ciudades.service';
 import { CreateCiudadDto } from './dto/create-ciudad.dto';
 import { UpdateCiudadDto } from './dto/update-ciudad.dto';
@@ -64,6 +64,13 @@ export class CiudadesController {
   }
 
   @Get('/estado/:id')
+  @ApiOkResponse({
+    type: [CiudadEntity],
+    status: 200,
+  })
+  @ApiOperation({
+    summary: 'Consultar ciudades por el id del estado al que pertenecen ',
+  })
   getCiudadesByEstado(@Param('id') id: string) {
     return this.ciudadesService.getCiudadesByEstado(id);
   }

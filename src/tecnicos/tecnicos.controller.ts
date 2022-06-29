@@ -85,6 +85,7 @@ export class TecnicosController {
   @ApiOkResponse({
     type: ServicesOfTecnicoEntity,
   })
+  @ApiOperation({ summary: 'Consultar tecnico con sus servicios' })
   async getServicesOfTecnico(@Param('id') id: string) {
     return new ServicesOfTecnicoEntity(
       await this.tecnicosService.getServicesOfTecnico(id),
