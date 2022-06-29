@@ -139,6 +139,7 @@ model Ticket {
   is_servicio_foraneo    Boolean?            @default(false)
   tecnicoId              Int?
   is_archivado           Boolean?            @default(false)
+  is_facturado           Boolean?            @default(false)
   createdAt              DateTime?           @default(now())
   updatedAt              DateTime?           @updatedAt
   Aseguradora            Aseguradora         @relation(fields: [aseguradoraId], references: [id])

@@ -188,4 +188,8 @@ export class CreateTicketDto {
   @IsOptional()
   @ApiProperty()
   is_archivado: boolean;
+
+  @ApiProperty()
+  @IsOptional()
+  is_facturado: boolean;
 }
