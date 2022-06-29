@@ -131,6 +131,9 @@ export class TicketEntity implements Ticket {
   @ApiProperty()
   updatedAt: Date;
 
+  @ApiProperty()
+  is_archivado: boolean;
+
   constructor(partial: Partial<TicketEntity | NotFoundException | ConflictException>) {
     Object.assign(this, partial);
   }

@@ -55,6 +55,7 @@ model Imagen {
   createdAt   DateTime?           @default(now())
   updatedAt   DateTime?           @updatedAt
   PreSolucion CotizacionTecnico[] @relation("PreSolucion")
+  Usuario     Usuario[]
 }
 
 model Seguimiento {
@@ -137,6 +138,7 @@ model Ticket {
   is_servicio_domestico  Boolean?            @default(false)
   is_servicio_foraneo    Boolean?            @default(false)
   tecnicoId              Int?
+  is_archivado           Boolean?            @default(false)
   createdAt              DateTime?           @default(now())
   updatedAt              DateTime?           @updatedAt
   Aseguradora            Aseguradora         @relation(fields: [aseguradoraId], references: [id])
@@ -204,10 +206,12 @@ model Usuario {
   updatedAt             DateTime?           @updatedAt
   rol                   String              @default("USUARIO")
   hashedRt              String?
+  img_perfilId          Int?
   Seguimiento           Seguimiento[]
   Tecnico               Tecnico?
   Ticket                Ticket[]
   CotizacionesAprobadas CotizacionTecnico[]
+  Imagen                Imagen?             @relation(fields: [img_perfilId], references: [id])
 }
 
 model UsuarioFinal {

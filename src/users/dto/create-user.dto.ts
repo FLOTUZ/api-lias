@@ -45,4 +45,10 @@ export class CreateUserDto {
     example: 'CAPTURISTA',
   })
   rol: string;
+
+  @IsOptional()
+  @ApiProperty({
+    description: 'Foto de perfil',
+  })
+  img_perfilId: number;
 }

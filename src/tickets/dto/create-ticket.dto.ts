@@ -184,4 +184,8 @@ export class CreateTicketDto {
   @IsOptional()
   @ApiProperty({ required: false })
   tecnicoId: number;
+
+  @IsOptional()
+  @ApiProperty()
+  is_archivado: boolean;
 }

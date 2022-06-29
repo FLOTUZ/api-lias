@@ -28,6 +28,9 @@ export class UsuarioEntity implements Usuario {
   rol: string;
 
   @ApiProperty()
+  img_perfilId: number;
+
+  @ApiProperty()
   hashedRt: string;
 
   constructor(partial: Partial<UsuarioEntity | NotFoundException>) {
