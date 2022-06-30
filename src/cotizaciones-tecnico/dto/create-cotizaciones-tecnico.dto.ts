@@ -60,5 +60,5 @@ export class CreateCotizacionTecnicoDto {
 
   @ApiProperty()
   @IsOptional()
-  img_placas: number;
+  img_placasId: number;
 }

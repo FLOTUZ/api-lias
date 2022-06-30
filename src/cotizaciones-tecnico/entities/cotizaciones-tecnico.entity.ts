@@ -51,7 +51,7 @@ export class CotizacionTecnicoEntity implements CotizacionTecnico {
   img_llegadaId: number;
 
   @ApiProperty({required: false})
-  img_placas: number;
+  img_placasId: number;
 
   @ApiProperty()
   createdAt: Date;

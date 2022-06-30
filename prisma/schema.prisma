@@ -161,7 +161,7 @@ model CotizacionTecnico {
   id                     Int       @id @unique @default(autoincrement())
   hora_llegada           DateTime
   img_llegadaId          Int
-  img_placas             Int?
+  img_placasId             Int?
   diagnostico_problema   String
   solucion_tecnico       String
   fecha_contacto         DateTime
@@ -183,7 +183,7 @@ model CotizacionTecnico {
   //Imagen de antes de solucionar el problema
   PreSolucion            Imagen?   @relation("PreSolucion", fields: [preSolucionId], references: [id])
   //Imagen de las placas del carro
-  Img_placas             Imagen?   @relation("imgPlacas", fields: [img_placas], references: [id])
+  Img_placas             Imagen?   @relation("imgPlacas", fields: [img_placasId], references: [id])
 }
 
 model AcuerdoConformidad {
