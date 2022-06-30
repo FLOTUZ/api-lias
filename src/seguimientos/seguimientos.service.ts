@@ -41,4 +41,12 @@ export class SeguimientosService {
   remove(id: string) {
     return this.prisma.seguimiento.delete({ where: { id: Number(id) } });
   }
+
+  getSeguiminetosByTicket(idTicketId: string) {
+    return this.prisma.seguimiento.findMany({
+      where: {
+        ticketId: Number(idTicketId),
+      },
+    });
+  }
 }

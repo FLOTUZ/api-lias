@@ -10,7 +10,7 @@ import {
 import { SeguimientosService } from './seguimientos.service';
 import { CreateSeguimientoDto } from './dto/create-seguimiento.dto';
 import { UpdateSeguimientoDto } from './dto/update-seguimiento.dto';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { SeguimientoEntity } from './entities/seguimiento.entity';
 
 @ApiTags('seguimientos')
@@ -64,5 +64,17 @@ export class SeguimientosController {
   })
   remove(@Param('id') id: string) {
     return this.seguimientosService.remove(id);
+  }
+
+  @Get('ticket/:id')
+  @ApiOkResponse({
+    status: 200,
+    type: [SeguimientoEntity],
+  })
+  @ApiOperation({
+    summary: 'Consultar seguimientos by ticket',
+  })
+  getSeguiminetosByTicket(@Param('id') id: string) {
+    return this.seguimientosService.getSeguiminetosByTicket(id);
   }
 }
