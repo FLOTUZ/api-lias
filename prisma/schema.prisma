@@ -54,8 +54,11 @@ model Imagen {
   descripcion String
   createdAt   DateTime?           @default(now())
   updatedAt   DateTime?           @updatedAt
-  PreSolucion CotizacionTecnico[] @relation("PreSolucion")
   Usuario     Usuario[]
+  PreSolucion CotizacionTecnico[] @relation("PreSolucion")
+  ImgLlegada  CotizacionTecnico[] @relation("ImgLlegada")
+  ImgPlacas   CotizacionTecnico[] @relation("imgPlacas")
+  ImgSolucion AcuerdoConformidad[]
 }
 
 model Seguimiento {
@@ -156,6 +159,9 @@ model Ticket {
 
 model CotizacionTecnico {
   id                     Int       @id @unique @default(autoincrement())
+  hora_llegada           DateTime
+  img_llegadaId          Int
+  img_placas             Int?
   diagnostico_problema   String
   solucion_tecnico       String
   fecha_contacto         DateTime
@@ -172,9 +178,12 @@ model CotizacionTecnico {
   Ticket                 Ticket    @relation(fields: [ticketId], references: [id])
   Tecnico                Tecnico   @relation(fields: [tecnicoId], references: [id])
   Aprobado_Por           Usuario?  @relation(fields: [aprobado_por_usuarioId], references: [id])
+  //Imagen de llegada
+  Img_Llegada            Imagen    @relation("ImgLlegada", fields: [img_llegadaId], references: [id])
   //Imagen de antes de solucionar el problema
   PreSolucion            Imagen?   @relation("PreSolucion", fields: [preSolucionId], references: [id])
-
+  //Imagen de las placas del carro
+  Img_placas             Imagen?   @relation("imgPlacas", fields: [img_placas], references: [id])
 }
 
 model AcuerdoConformidad {
@@ -191,10 +200,12 @@ model AcuerdoConformidad {
   is_aprobado                Boolean?      @default(false)
   ticketId                   Int           @unique
   usuarioFinalId             Int?
+  img_solucionId             Int?
   createdAt                  DateTime?     @default(now())
   updatedAt                  DateTime?     @updatedAt
   UsuarioFinal               UsuarioFinal? @relation(fields: [usuarioFinalId], references: [id])
   Ticket                     Ticket        @relation(fields: [ticketId], references: [id])
+  Img_solucion               Imagen?       @relation(fields: [img_solucionId], references: [id])
 }
 
 model Usuario {

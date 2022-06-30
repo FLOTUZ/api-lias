@@ -41,6 +41,9 @@ export class AcuerdoConformidadEntity implements AcuerdoConformidad {
   @ApiProperty({ required: false })
   usuarioFinalId: number;
 
+  @ApiProperty({ required: false })
+  img_solucionId: number;
+
   @ApiProperty()
   ticketId: number;
 
