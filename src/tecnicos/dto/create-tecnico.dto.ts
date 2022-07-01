@@ -16,7 +16,6 @@ export class CreateTecnicoDto {
   @ApiProperty()
   apellido_materno: string;
 
-  @IsDecimal()
   @IsOptional()
   @ApiProperty({ type: 'number', required: false })
   calificacion: Decimal;
