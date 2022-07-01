@@ -35,7 +35,7 @@ export class CotizacionTecnicoEntity implements CotizacionTecnico {
   @ApiProperty()
   tecnicoId: number;
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   preSolucionId: number;
 
   @ApiProperty()
@@ -44,10 +44,10 @@ export class CotizacionTecnicoEntity implements CotizacionTecnico {
   @ApiProperty()
   aprobado_por_usuarioId: number;
 
-  @ApiProperty({required: false})
+  @ApiProperty({ required: false })
   img_llegadaId: number;
 
-  @ApiProperty({required: false})
+  @ApiProperty({ required: false })
   img_placasId: number;
 
   @ApiProperty()

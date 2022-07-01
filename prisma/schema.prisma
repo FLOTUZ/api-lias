@@ -55,10 +55,10 @@ model Imagen {
   createdAt   DateTime?           @default(now())
   updatedAt   DateTime?           @updatedAt
   Usuario     Usuario[]
-  PreSolucion CotizacionTecnico[] @relation("PreSolucion")
-  ImgLlegada  CotizacionTecnico[] @relation("ImgLlegada")
-  ImgPlacas   CotizacionTecnico[] @relation("imgPlacas")
-  ImgSolucion AcuerdoConformidad[]
+  PreSolucion CotizacionTecnico?  @relation("PreSolucion")
+  ImgLlegada  CotizacionTecnico?  @relation("ImgLlegada")
+  ImgPlacas   CotizacionTecnico?  @relation("imgPlacas")
+  ImgSolucion AcuerdoConformidad? @relation("ImgSolucion")
 }
 
 model Seguimiento {
@@ -159,8 +159,8 @@ model Ticket {
 
 model CotizacionTecnico {
   id                     Int       @id @unique @default(autoincrement())
-  img_llegadaId          Int
-  img_placasId             Int?
+  img_llegadaId          Int?      @unique
+  img_placasId           Int?      @unique
   diagnostico_problema   String
   solucion_tecnico       String
   fecha_contacto         DateTime
@@ -169,7 +169,7 @@ model CotizacionTecnico {
   total_cotizacion       Decimal   @db.Money
   ticketId               Int       @unique
   tecnicoId              Int
-  preSolucionId          Int?
+  preSolucionId          Int?      @unique
   is_aprobado            Boolean?  @default(false)
   aprobado_por_usuarioId Int?
   createdAt              DateTime? @default(now())
@@ -178,7 +178,7 @@ model CotizacionTecnico {
   Tecnico                Tecnico   @relation(fields: [tecnicoId], references: [id])
   Aprobado_Por           Usuario?  @relation(fields: [aprobado_por_usuarioId], references: [id])
   //Imagen de llegada
-  Img_Llegada            Imagen?    @relation("ImgLlegada", fields: [img_llegadaId], references: [id])
+  Img_Llegada            Imagen?   @relation("ImgLlegada", fields: [img_llegadaId], references: [id])
   //Imagen de antes de solucionar el problema
   PreSolucion            Imagen?   @relation("PreSolucion", fields: [preSolucionId], references: [id])
   //Imagen de las placas del carro
@@ -199,12 +199,12 @@ model AcuerdoConformidad {
   is_aprobado                Boolean?      @default(false)
   ticketId                   Int           @unique
   usuarioFinalId             Int?
-  img_solucionId             Int?
+  img_solucionId             Int?          @unique
   createdAt                  DateTime?     @default(now())
   updatedAt                  DateTime?     @updatedAt
   UsuarioFinal               UsuarioFinal? @relation(fields: [usuarioFinalId], references: [id])
   Ticket                     Ticket        @relation(fields: [ticketId], references: [id])
-  Img_solucion               Imagen?       @relation(fields: [img_solucionId], references: [id])
+  Img_solucion               Imagen?       @relation("ImgSolucion", fields: [img_solucionId], references: [id])
 }
 
 model Usuario {
