@@ -159,7 +159,6 @@ model Ticket {
 
 model CotizacionTecnico {
   id                     Int       @id @unique @default(autoincrement())
-  hora_llegada           DateTime
   img_llegadaId          Int
   img_placasId             Int?
   diagnostico_problema   String
@@ -179,7 +178,7 @@ model CotizacionTecnico {
   Tecnico                Tecnico   @relation(fields: [tecnicoId], references: [id])
   Aprobado_Por           Usuario?  @relation(fields: [aprobado_por_usuarioId], references: [id])
   //Imagen de llegada
-  Img_Llegada            Imagen    @relation("ImgLlegada", fields: [img_llegadaId], references: [id])
+  Img_Llegada            Imagen?    @relation("ImgLlegada", fields: [img_llegadaId], references: [id])
   //Imagen de antes de solucionar el problema
   PreSolucion            Imagen?   @relation("PreSolucion", fields: [preSolucionId], references: [id])
   //Imagen de las placas del carro

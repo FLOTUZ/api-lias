@@ -44,9 +44,6 @@ export class CotizacionTecnicoEntity implements CotizacionTecnico {
   @ApiProperty()
   aprobado_por_usuarioId: number;
 
-  @ApiProperty()
-  hora_llegada: Date;
-
   @ApiProperty({required: false})
   img_llegadaId: number;
 

@@ -50,12 +50,7 @@ export class CreateCotizacionTecnicoDto {
   aprobado_por_usuarioId: number;
 
   @ApiProperty()
-  @IsDateString()
   @IsOptional()
-  hora_llegada: Date;
-
-  @ApiProperty()
-  @IsNotEmpty()
   img_llegadaId: number;
 
   @ApiProperty()

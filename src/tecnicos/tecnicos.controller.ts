@@ -77,8 +77,24 @@ export class TecnicosController {
   }
 
   @Post(':id/servicios')
+  @ApiOperation({
+    summary: 'Agregar servicios a un tecnico',
+  })
   addServicesToTecnico(@Param('id') id: string, @Body() servicios: number[]) {
     return this.tecnicosService.agregarServiciosATecnico(id, servicios);
+  }
+
+  @Patch(':id/servicios')
+  @ApiOperation({
+    summary: 'Editar los servicios a un tecnico',
+  })
+  async editServicesToTecnico(
+    @Param('id') id: string,
+    @Body() servicios: number[],
+  ) {
+    return new TecnicoRelatedEntity(
+      await this.tecnicosService.editServicesToTecnico(id, servicios),
+    );
   }
 
   @Get(':id/servicios')

@@ -105,4 +105,22 @@ export class TecnicosService {
       throw new NotFoundException();
     }
   }
+
+  async editServicesToTecnico(id: string, servicios: number[]) {
+    return await this.prisma.tecnico.update({
+      where: { id: Number(id) },
+      include: {
+        ViveEn: {
+          include: {
+            Estado: true,
+          },
+        },
+        Servicio: true,
+        Ciudad: true,
+      },
+      data: {
+        Servicio: { connect: servicios.map((id) => ({ id: Number(id) })) },
+      },
+    });
+  }
 }
