@@ -36,7 +36,9 @@ export class UsersService {
     }
   }
 
-  update(id: string, updateDTO: UpdateUserDto) {
+  async update(id: string, updateDTO: UpdateUserDto) {
+    //Encrypt password
+    updateDTO.password = await argon2.hash(updateDTO.password);
     return this.prisma.usuario.update({
       where: { id: Number(id) },
       data: updateDTO,
