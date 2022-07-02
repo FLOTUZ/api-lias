@@ -12,7 +12,11 @@ export class SeguimientosService {
   }
 
   findAll() {
-    return this.prisma.seguimiento.findMany({});
+    return this.prisma.seguimiento.findMany({
+      include: {
+        Usuario: true,
+      },
+    });
   }
 
   async findOne(id: string) {
@@ -42,11 +46,16 @@ export class SeguimientosService {
     return this.prisma.seguimiento.delete({ where: { id: Number(id) } });
   }
 
-  getSeguiminetosByTicket(idTicketId: string) {
-    return this.prisma.seguimiento.findMany({
-      where: {
-        ticketId: Number(idTicketId),
-      },
-    });
+  getSeguiminetosByTicket(idTicketId: number) {
+    try {
+      const seguimientosByTicket = this.prisma.seguimiento.findMany({
+        where: {
+          ticketId: Number(idTicketId),
+        },
+      });
+      return seguimientosByTicket;
+    } catch (error) {
+      throw new NotFoundException();
+    }
   }
 }

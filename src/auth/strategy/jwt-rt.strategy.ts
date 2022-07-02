@@ -1,7 +1,7 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Request } from 'express';
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtPayload } from '../interfaces';
 import { AuthService } from '../auth.service';
@@ -23,7 +23,8 @@ export class RtStrategy extends PassportStrategy(Strategy, 'refresh-token') {
       .trim();
 
     //If refresh token is not valid, we throw an error
-    if (!refreshToken) throw new ForbiddenException('Refresh token malformed');
+    if (!refreshToken)
+      throw new HttpException('Token malformado o expirado', 498);
     //If refresh token is valid, eject refresh token from payload
     await this.authService.refreshToken(payload.sub, refreshToken);
 

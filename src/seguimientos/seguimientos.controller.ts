@@ -6,12 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { SeguimientosService } from './seguimientos.service';
 import { CreateSeguimientoDto } from './dto/create-seguimiento.dto';
 import { UpdateSeguimientoDto } from './dto/update-seguimiento.dto';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { SeguimientoEntity } from './entities/seguimiento.entity';
+import { SeguimientoRelatedEntity } from './entities/seguimiento-related.entity';
 
 @ApiTags('seguimientos')
 @Controller('seguimientos')
@@ -30,7 +32,7 @@ export class SeguimientosController {
   @Get()
   @ApiOkResponse({
     status: 200,
-    type: [SeguimientoEntity],
+    type: [SeguimientoRelatedEntity],
   })
   findAll() {
     return this.seguimientosService.findAll();
@@ -74,7 +76,7 @@ export class SeguimientosController {
   @ApiOperation({
     summary: 'Consultar seguimientos by ticket',
   })
-  getSeguiminetosByTicket(@Param('id') id: string) {
+  getSeguiminetosByTicket(@Param('id', ParseIntPipe) id: number) {
     return this.seguimientosService.getSeguiminetosByTicket(id);
   }
 }
