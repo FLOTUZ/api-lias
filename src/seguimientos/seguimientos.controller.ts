@@ -71,7 +71,7 @@ export class SeguimientosController {
   @Get('ticket/:id')
   @ApiOkResponse({
     status: 200,
-    type: [SeguimientoEntity],
+    type: [SeguimientoRelatedEntity],
   })
   @ApiOperation({
     summary: 'Consultar seguimientos by ticket',

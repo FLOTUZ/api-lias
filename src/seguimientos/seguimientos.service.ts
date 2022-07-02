@@ -52,6 +52,9 @@ export class SeguimientosService {
         where: {
           ticketId: Number(idTicketId),
         },
+        include: {
+          Usuario: true,
+        },
       });
       return seguimientosByTicket;
     } catch (error) {
