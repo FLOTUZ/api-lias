@@ -6,9 +6,6 @@ export class SeguimientoEntity implements Seguimiento {
   id: number;
 
   @ApiProperty()
-  nombre_asesor_seguro: string;
-
-  @ApiProperty()
   detalles: string;
 
   @ApiProperty()
@@ -19,6 +16,9 @@ export class SeguimientoEntity implements Seguimiento {
 
   @ApiProperty()
   usuarioId: number;
+
+  @ApiProperty()
+  asesorId : number;
 
   @ApiProperty()
   createdAt: Date;

@@ -4,10 +4,6 @@ import { IsNotEmpty } from 'class-validator';
 export class CreateSeguimientoDto {
   @IsNotEmpty()
   @ApiProperty()
-  nombre_asesor_seguro: string;
-
-  @IsNotEmpty()
-  @ApiProperty()
   detalles: string;
 
   @IsNotEmpty()
@@ -21,4 +17,8 @@ export class CreateSeguimientoDto {
   @IsNotEmpty()
   @ApiProperty()
   usuarioId: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  asesorId: number;
 }

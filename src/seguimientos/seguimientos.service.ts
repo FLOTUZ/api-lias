@@ -15,6 +15,7 @@ export class SeguimientosService {
     return this.prisma.seguimiento.findMany({
       include: {
         Usuario: true,
+        Asesor: true,
       },
     });
   }
@@ -54,6 +55,7 @@ export class SeguimientosService {
         },
         include: {
           Usuario: true,
+          Asesor: true,
         },
       });
       return seguimientosByTicket;
