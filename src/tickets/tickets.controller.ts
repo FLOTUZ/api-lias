@@ -8,12 +8,20 @@ import {
   Delete,
   UseInterceptors,
   ClassSerializerInterceptor,
+  UseGuards,
 } from '@nestjs/common';
 import { TicketsService } from './tickets.service';
 import { CreateTicketDto, EstadoTicket } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
-import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 import { TicketEntity } from './entities/ticket.entity';
+import { JwtRtGuard } from 'src/auth/guards';
+import { GetCurrentUser, GetCurrentUserId } from 'src/auth/decorators';
 
 @Controller('tickets')
 @ApiTags('tickets')
@@ -32,6 +40,19 @@ export class TicketsController {
   async findAll() {
     const list = await this.ticketsService.findAll();
     return list.map((item) => new TicketEntity(item));
+  }
+
+  @Get('ciudad')
+  @ApiBearerAuth()
+  @UseGuards(JwtRtGuard)
+  @ApiOperation({
+    summary: 'Consultar tickets por la ciudad del tecnico logueado en la app',
+  })
+  @ApiOkResponse({ status: 200, type: [TicketEntity] })
+  async ticketsByCiudadOfUser(@GetCurrentUserId() userId: number) {
+    return (await this.ticketsService.ticketsByCiudadOfUser(userId)).map(
+      (item) => new TicketEntity(item),
+    );
   }
 
   @Get(':id')

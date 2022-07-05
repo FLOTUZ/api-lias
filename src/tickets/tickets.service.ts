@@ -4,6 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { TecnicoRelatedEntity } from 'src/tecnicos/entities/tecnicoRelated.entity';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
 import { TicketEntity } from './entities/ticket.entity';
@@ -45,6 +46,23 @@ export class TicketsService {
 
   remove(id: string) {
     return this.prisma.ticket.delete({ where: { id: Number(id) } });
+  }
+
+  async ticketsByCiudadOfUser(id: number) {
+    const user = await this.prisma.usuario.findUnique({ where: { id: id } });
+    const tecnico = new TecnicoRelatedEntity(
+      await this.prisma.tecnico.findUnique({
+        where: { id: user.id },
+      }),
+    );
+
+    return await this.prisma.ticket.findMany({
+      where: {
+        ciudadId: tecnico.ciudadId,
+        estado: 'NUEVO',
+        //TODO: Agregar filtro por servicio de tecnico
+      },
+    });
   }
 
   async agregarServicioATicket(idTicket: string, servicios: number[]) {
