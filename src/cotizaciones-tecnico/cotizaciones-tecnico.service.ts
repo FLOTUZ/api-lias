@@ -2,7 +2,6 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCotizacionTecnicoDto } from './dto/create-cotizaciones-tecnico.dto';
 import { UpdateCotizacionTecnicoDto } from './dto/update-cotizaciones-tecnico.dto';
-import { CotizacionTecnicoEntity } from './entities/cotizaciones-tecnico.entity';
 
 @Injectable()
 export class CotizacionesTecnicoService {
