@@ -5,13 +5,17 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TecnicoRelatedEntity } from 'src/tecnicos/entities/tecnicoRelated.entity';
+import { TecnicosService } from 'src/tecnicos/tecnicos.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
 import { TicketEntity } from './entities/ticket.entity';
 
 @Injectable()
 export class TicketsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private tecnicoService: TecnicosService,
+  ) {}
 
   create(createDTO: CreateTicketDto) {
     return this.prisma.ticket.create({ data: createDTO });
@@ -51,18 +55,24 @@ export class TicketsService {
   async ticketsByCiudadOfUser(id: number) {
     const user = await this.prisma.usuario.findUnique({ where: { id: id } });
     const tecnico = new TecnicoRelatedEntity(
-      await this.prisma.tecnico.findUnique({
-        where: { id: user.id },
-      }),
+      await this.tecnicoService.getTecnicoByUserId(String(user.id)),
     );
 
-    return await this.prisma.ticket.findMany({
+    const tickets = await this.prisma.ticket.findMany({
       where: {
         ciudadId: tecnico.ciudadId,
         estado: 'NUEVO',
-        //TODO: Agregar filtro por servicio de tecnico
+        Servicio: {
+          some: {
+            id: {
+              in: tecnico.Servicio.map((servicio) => servicio.id),
+            },
+          },
+        },
       },
     });
+
+    return tickets;
   }
 
   async agregarServicioATicket(idTicket: string, servicios: number[]) {

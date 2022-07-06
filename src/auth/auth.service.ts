@@ -5,7 +5,6 @@ import { UsersService } from 'src/users/users.service';
 import { LoginUserDto } from './dto/login-user.dto';
 
 import * as argon2 from 'argon2';
-import { UsuarioEntity } from 'src/users/entities/usuario.entity';
 
 @Injectable()
 export class AuthService {

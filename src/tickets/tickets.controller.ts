@@ -21,7 +21,7 @@ import {
 } from '@nestjs/swagger';
 import { TicketEntity } from './entities/ticket.entity';
 import { JwtRtGuard } from 'src/auth/guards';
-import { GetCurrentUser, GetCurrentUserId } from 'src/auth/decorators';
+import { GetCurrentUserId } from 'src/auth/decorators';
 
 @Controller('tickets')
 @ApiTags('tickets')
