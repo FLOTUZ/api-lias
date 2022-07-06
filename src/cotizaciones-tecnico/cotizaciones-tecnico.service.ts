@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCotizacionTecnicoDto } from './dto/create-cotizaciones-tecnico.dto';
 import { UpdateCotizacionTecnicoDto } from './dto/update-cotizaciones-tecnico.dto';
+import { CotizacionTecnicoEntity } from './entities/cotizaciones-tecnico.entity';
 
 @Injectable()
 export class CotizacionesTecnicoService {
@@ -39,8 +40,15 @@ export class CotizacionesTecnicoService {
     });
   }
 
-  remove(id: string) {
-    return this.prisma.cotizacionTecnico.delete({ where: { id: Number(id) } });
+  async remove(id: string) {
+    try {
+      const tecnico = await this.prisma.cotizacionTecnico.delete({
+        where: { id: Number(id) },
+      });
+      return tecnico;
+    } catch (error) {
+      throw new NotFoundException(`This register did #${id} not exist`);
+    }
   }
 
   cotizacionesTecnicoByTecnico(id: string) {
