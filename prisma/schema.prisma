@@ -26,7 +26,7 @@ model Aseguradora {
 
 model Asistencia {
   id            Int          @id @unique @default(autoincrement())
-  nombre        String
+  nombre        String       @db.VarChar(50)
   aseguradoraId Int?
   Aseguradora   Aseguradora? @relation(fields: [aseguradoraId], references: [id])
   Ticket        Ticket[]
@@ -62,17 +62,17 @@ model Imagen {
 }
 
 model Seguimiento {
-  id                   Int       @id @unique @default(autoincrement())
-  detalles             String
-  fecha_seguimiento    DateTime
-  ticketId             Int
-  usuarioId            Int
-  asesorId             Int
-  createdAt            DateTime? @default(now())
-  updatedAt            DateTime? @updatedAt
-  Ticket               Ticket    @relation(fields: [ticketId], references: [id])
-  Usuario              Usuario   @relation(fields: [usuarioId], references: [id])
-  Asesor               Asesor    @relation(fields: [asesorId], references: [id])
+  id                Int       @id @unique @default(autoincrement())
+  detalles          String
+  fecha_seguimiento DateTime
+  ticketId          Int
+  usuarioId         Int
+  asesorId          Int
+  createdAt         DateTime? @default(now())
+  updatedAt         DateTime? @updatedAt
+  Ticket            Ticket    @relation(fields: [ticketId], references: [id])
+  Usuario           Usuario   @relation(fields: [usuarioId], references: [id])
+  Asesor            Asesor    @relation(fields: [asesorId], references: [id])
 }
 
 model Servicio {

@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateEstadoDto } from './dto/create-estado.dto';
 import { UpdateEstadoDto } from './dto/update-estado.dto';
@@ -7,12 +11,20 @@ import { UpdateEstadoDto } from './dto/update-estado.dto';
 export class EstadosService {
   constructor(private prisma: PrismaService) {}
 
-  create(createDTO: CreateEstadoDto) {
-    return this.prisma.estado.create({ data: createDTO });
+  async create(createDTO: CreateEstadoDto) {
+    try {
+      return await this.prisma.estado.create({ data: createDTO });
+    } catch (error) {
+      throw new ConflictException();
+    }
   }
 
   findAll() {
-    return this.prisma.estado.findMany({});
+    return this.prisma.estado.findMany({
+      orderBy: {
+        nombre: 'asc',
+      },
+    });
   }
 
   async findOne(id: string) {

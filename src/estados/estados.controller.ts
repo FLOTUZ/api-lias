@@ -23,8 +23,8 @@ export class EstadosController {
     status: 201,
     type: EstadoEntity,
   })
-  create(@Body() createEstadoDto: CreateEstadoDto) {
-    return this.estadosService.create(createEstadoDto);
+  async create(@Body() createEstadoDto: CreateEstadoDto) {
+    return new EstadoEntity(await this.estadosService.create(createEstadoDto));
   }
 
   @Get()

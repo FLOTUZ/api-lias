@@ -48,6 +48,9 @@ export class CiudadesService {
 
   getCiudadesByEstado(id: string) {
     return this.prisma.ciudad.findMany({
+      orderBy: {
+        nombre: 'asc',
+      },
       where: {
         estadoId: Number(id),
       },
