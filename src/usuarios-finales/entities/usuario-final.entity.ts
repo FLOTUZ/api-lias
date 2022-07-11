@@ -1,3 +1,4 @@
+import { ConflictException, NotFoundException } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { UsuarioFinal } from '@prisma/client';
 
@@ -25,4 +26,8 @@ export class UsuarioFinalEntity implements UsuarioFinal {
 
   @ApiProperty({ required: false })
   updatedAt: Date;
+
+  constructor(partial: Partial<UsuarioFinalEntity | NotFoundException | ConflictException>) {
+    Object.assign(this, partial);
+  }
 }

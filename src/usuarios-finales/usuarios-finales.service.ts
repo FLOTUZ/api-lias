@@ -7,8 +7,8 @@ import { UpdateUsuariosFinaleDto } from './dto/update-usuarios-finale.dto';
 export class UsuariosFinalesService {
   constructor(private prisma: PrismaService) {}
 
-  create(createDto: CreateUsuariosFinaleDto) {
-    return this.prisma.usuarioFinal.create({ data: createDto });
+  async create(createDto: CreateUsuariosFinaleDto) {
+    return await this.prisma.usuarioFinal.create({ data: createDto });
   }
 
   findAll() {
@@ -31,14 +31,24 @@ export class UsuariosFinalesService {
     }
   }
 
-  update(id: string, updateDTO: UpdateUsuariosFinaleDto) {
-    return this.prisma.usuarioFinal.update({
+  async update(id: string, updateDTO: UpdateUsuariosFinaleDto) {
+    return await this.prisma.usuarioFinal.update({
       where: { id: Number(id) },
       data: updateDTO,
     });
   }
 
-  remove(id: string) {
-    return this.prisma.usuarioFinal.delete({ where: { id: Number(id) } });
+  async remove(id: string) {
+    return await this.prisma.usuarioFinal.delete({ where: { id: Number(id) } });
+  }
+
+  async getByTelefono(telefono: string) {
+    const user = await this.prisma.usuarioFinal.findUnique({
+      where: { telefono },
+    });
+    if (user == null) {
+      throw new NotFoundException(`This register did not exist`);
+    }
+    return user;
   }
 }

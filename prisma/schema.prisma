@@ -232,7 +232,7 @@ model UsuarioFinal {
   apellido_paterno   String               @db.VarChar(50)
   apellido_materno   String               @db.VarChar(50)
   correo             String?              @db.VarChar(100)
-  telefono           String               @db.VarChar(10)
+  telefono           String               @unique @db.VarChar(10)
   AcuerdoConformidad AcuerdoConformidad[]
   createdAt          DateTime?            @default(now())
   updatedAt          DateTime?            @updatedAt
