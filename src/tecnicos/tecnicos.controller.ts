@@ -72,8 +72,8 @@ export class TecnicosController {
     status: 200,
     type: TecnicoEntity,
   })
-  remove(@Param('id') id: string) {
-    return this.tecnicosService.remove(id);
+  async remove(@Param('id') id: string) {
+    return new TecnicoEntity(await this.tecnicosService.remove(id));
   }
 
   @Post(':id/servicios')

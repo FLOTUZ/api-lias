@@ -64,8 +64,8 @@ export class TecnicosService {
     }
   }
 
-  remove(id: string) {
-    return this.prisma.tecnico.delete({ where: { id: Number(id) } });
+  async remove(id: string) {
+    return await this.prisma.tecnico.delete({ where: { id: Number(id) } });
   }
 
   agregarServiciosATecnico(idTecnico: string, servicios: number[]) {

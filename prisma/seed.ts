@@ -805,6 +805,17 @@ async function main() {
     },
   });
 
+  await prisma.tecnico.update({
+    where: {
+      id: 1,
+    },
+    data: {
+      Servicio: {
+        connect: [3, 4].map((id) => ({ id: Number(id) })),
+      },
+    },
+  });
+
   await prisma.usuario.create({
     data: {
       usuario: 'jose',
@@ -826,11 +837,22 @@ async function main() {
       calificacion: 0,
       telefono: '4433110399',
       usuarioId: 5,
-      ciudadId: 1,
+      ciudadId: 3,
     },
   });
 
-  //-----------------------TICKETS-------------------------------
+  await prisma.tecnico.update({
+    where: {
+      id: 2,
+    },
+    data: {
+      Servicio: {
+        connect: [1, 5].map((id) => ({ id: Number(id) })),
+      },
+    },
+  });
+
+  //-----------------------Usuarios Finales-------------------------------
 
   await prisma.usuarioFinal.create({
     data: {
