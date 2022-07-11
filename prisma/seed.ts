@@ -810,6 +810,7 @@ async function main() {
       id: 1,
     },
     data: {
+      ciudadId: 1,
       Servicio: {
         connect: [3, 4].map((id) => ({ id: Number(id) })),
       },
@@ -846,6 +847,7 @@ async function main() {
       id: 2,
     },
     data: {
+      ciudadId: 2,
       Servicio: {
         connect: [1, 5].map((id) => ({ id: Number(id) })),
       },
@@ -901,6 +903,9 @@ async function main() {
       marca_carro: 'Mazda',
       is_servicio_domestico: false,
       is_servicio_foraneo: false,
+      Servicio: {
+        connect: [3, 4].map((id) => ({ id: Number(id) })),
+      },
     },
   });
   await prisma.ticket.create({
@@ -940,6 +945,9 @@ async function main() {
       marca_carro: '',
       is_servicio_domestico: true,
       is_servicio_foraneo: false,
+      Servicio: {
+        connect: [7].map((id) => ({ id: Number(id) })),
+      },
     },
   });
   await prisma.ticket.create({
@@ -980,6 +988,9 @@ async function main() {
       is_servicio_domestico: true,
       is_servicio_foraneo: true,
       tecnicoId: null,
+      Servicio: {
+        connect: [5, 6].map((id) => ({ id: Number(id) })),
+      },
     },
   });
   await prisma.ticket.create({
@@ -990,7 +1001,8 @@ async function main() {
       nombre_asesor_gpo_lias: 'Emmanuel',
       asesorId: 4,
       nombre_usuario_final: 'Isla Solorzano',
-      titulo_ticket: '20lts de gasolina para Isla',
+      titulo_ticket:
+        '20lts de gasolina para Isla 20lts de gasolina para Isla20lts de gasolina para Isla20lts de gasolina para Isla',
       asistenciaId: 2,
       aseguradoraId: 1,
       problematica: 'Llevar 20 lts de gasolina a usuaria',
@@ -1020,6 +1032,9 @@ async function main() {
       is_servicio_domestico: false,
       is_servicio_foraneo: true,
       tecnicoId: null,
+      Servicio: {
+        connect: [3, 4, 13].map((id) => ({ id: Number(id) })),
+      },
     },
   });
 }

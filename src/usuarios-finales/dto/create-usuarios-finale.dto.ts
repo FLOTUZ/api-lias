@@ -8,28 +8,30 @@ import {
 } from 'class-validator';
 
 export class CreateUsuariosFinaleDto {
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'El nombre del usuario final es requerido' })
   @MaxLength(50)
   @ApiProperty()
   nombre: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'El apellido del usuario final es requerido' })
   @MaxLength(50)
   @ApiProperty()
   apellido_paterno: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'El apellido del usuario final es requerido' })
   @MaxLength(50)
   @ApiProperty()
   apellido_materno: string;
 
-  @IsEmail()
+  @IsEmail({ message: 'El email del usuario final es inválido' })
   @IsOptional()
   @MaxLength(100)
   @ApiProperty({ required: false })
   correo: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({
+    message: 'El teléfono del usuario final es requerido',
+  })
   @MaxLength(10)
   @IsPhoneNumber('MX')
   @ApiProperty({ required: false })
