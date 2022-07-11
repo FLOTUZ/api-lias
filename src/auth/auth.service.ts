@@ -20,8 +20,9 @@ export class AuthService {
     if (user && (await argon2.verify(user.password, loginUser.password))) {
       //Generate a new token
       return await this.generateAccessToken(user.id);
+    } else {
+      throw new UnauthorizedException();
     }
-    throw new UnauthorizedException();
   }
 
   async generateAccessToken(idUser: number) {
