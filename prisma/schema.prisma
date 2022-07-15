@@ -89,7 +89,7 @@ model Tecnico {
   id               Int                 @id @unique @default(autoincrement())
   nombre           String              @db.VarChar(50)
   apellido_paterno String              @db.VarChar(50)
-  apellido_materno String              @db.VarChar(50)
+  apellido_materno String?              @db.VarChar(50)
   calificacion     Decimal             @default(0.0) @db.Decimal(2, 1)
   telefono         String              @db.VarChar(10)
   usuarioId        Int                 @unique
