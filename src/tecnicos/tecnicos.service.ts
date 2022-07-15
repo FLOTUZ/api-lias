@@ -20,6 +20,9 @@ export class TecnicosService {
 
   findAll() {
     return this.prisma.tecnico.findMany({
+      orderBy: {
+        nombre: 'asc',
+      },
       include: {
         ViveEn: {
           include: {
@@ -106,21 +109,39 @@ export class TecnicosService {
     }
   }
 
-  async editServicesToTecnico(id: string, servicios: number[]) {
-    return await this.prisma.tecnico.update({
+  async editarServiciosDeTecnico(id: string, servicios: number[]) {
+    //Se consultan el tecnico incluyendo sus servicios
+    const serviciosAnteriores = await this.prisma.tecnico.findUnique({
       where: { id: Number(id) },
-      include: {
-        ViveEn: {
-          include: {
-            Estado: true,
-          },
+      include: { Servicio: true },
+    });
+
+    //Se crea un arreglo solo con los ids de los servicios que se desean eliminar
+    const servis = serviciosAnteriores.Servicio.map((servicio) => {
+      return servicio.id;
+    });
+    //=========================================================================
+    //Se eliminan los servicios actuales del tecnico
+    await this.prisma.tecnico.update({
+      where: { id: Number(id) },
+      data: {
+        Servicio: {
+          disconnect: servis.map((id) => ({
+            id: Number(id),
+          })),
         },
-        Servicio: true,
-        Ciudad: true,
       },
+    });
+
+    //Se agregan los servicios nuevos al tecnico
+    const serviciosNuevos = await this.prisma.tecnico.update({
+      where: { id: Number(id) },
+      include: { Servicio: true },
       data: {
         Servicio: { connect: servicios.map((id) => ({ id: Number(id) })) },
       },
     });
+
+    return serviciosNuevos;
   }
 }

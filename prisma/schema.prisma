@@ -112,10 +112,10 @@ model Ticket {
   nombre_asesor_gpo_lias String
   asesorId               Int?
   nombre_usuario_final   String
-  titulo_ticket          String
+  titulo_ticket          String              @db.VarChar(100)
   asistenciaId           Int
   aseguradoraId          Int
-  problematica           String
+  problematica           String              @db.VarChar(500)
   ciudadId               Int
   colonia                String
   calle                  String

@@ -88,12 +88,12 @@ export class TecnicosController {
   @ApiOperation({
     summary: 'Editar los servicios a un tecnico',
   })
-  async editServicesToTecnico(
+  async editarServiciosDeTecnico(
     @Param('id') id: string,
     @Body() servicios: number[],
   ) {
     return new TecnicoRelatedEntity(
-      await this.tecnicosService.editServicesToTecnico(id, servicios),
+      await this.tecnicosService.editarServiciosDeTecnico(id, servicios),
     );
   }
 
