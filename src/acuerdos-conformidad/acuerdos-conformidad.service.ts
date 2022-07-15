@@ -67,12 +67,17 @@ export class AcuerdosConformidadService {
   }
 
   async getByIdTicket(idTicket: string) {
-    return await this.prisma.acuerdoConformidad.findUnique({
+    const acuerdo = await this.prisma.acuerdoConformidad.findUnique({
       where: { ticketId: Number(idTicket) },
       include: {
         Usuario_Aprobador: true,
       },
     });
+    if (acuerdo) {
+      return acuerdo;
+    } else {
+      throw new NotFoundException();
+    }
   }
 
   async getAcuerdoWithNodes(idAcuerdo: string) {
