@@ -33,6 +33,9 @@ export class TicketsService {
     try {
       const response = await this.prisma.ticket.findUnique({
         where: { id: Number(id) },
+        include: {
+          Servicio: true,
+        },
       });
 
       if (response == null) {

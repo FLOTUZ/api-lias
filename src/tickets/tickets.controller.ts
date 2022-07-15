@@ -22,6 +22,7 @@ import {
 import { TicketEntity } from './entities/ticket.entity';
 import { JwtRtGuard } from 'src/auth/guards';
 import { GetCurrentUserId } from 'src/auth/decorators';
+import { TicketRelatedEntity } from './entities/ticket-related.entity';
 
 @Controller('tickets')
 @ApiTags('tickets')
@@ -56,9 +57,9 @@ export class TicketsController {
   }
 
   @Get(':id')
-  @ApiOkResponse({ status: 200, type: TicketEntity })
+  @ApiOkResponse({ status: 200, type: TicketRelatedEntity })
   async findOne(@Param('id') id: string) {
-    return new TicketEntity(await this.ticketsService.findOne(id));
+    return new TicketRelatedEntity(await this.ticketsService.findOne(id));
   }
 
   @Patch(':id')
