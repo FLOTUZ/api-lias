@@ -13,6 +13,9 @@ export class AseguradorasService {
 
   findAll() {
     return this.prisma.aseguradora.findMany({
+      orderBy: {
+        nombre: 'asc',
+      },
       include: { Asistencia: true },
     });
   }

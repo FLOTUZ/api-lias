@@ -32,7 +32,11 @@ export class AcuerdosConformidadService {
   }
 
   findAll() {
-    return this.prisma.acuerdoConformidad.findMany({});
+    return this.prisma.acuerdoConformidad.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
   }
 
   async findOne(id: string) {

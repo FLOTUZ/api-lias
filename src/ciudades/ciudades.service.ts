@@ -13,6 +13,9 @@ export class CiudadesService {
 
   findAll() {
     return this.prisma.ciudad.findMany({
+      orderBy: {
+        nombre: 'asc',
+      },
       include: {
         Estado: true,
       },

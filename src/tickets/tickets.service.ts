@@ -22,7 +22,11 @@ export class TicketsService {
   }
 
   findAll() {
-    return this.prisma.ticket.findMany();
+    return this.prisma.ticket.findMany({
+      orderBy: {
+        fecha_llamada: 'desc',
+      },
+    });
   }
 
   async findOne(id: string) {

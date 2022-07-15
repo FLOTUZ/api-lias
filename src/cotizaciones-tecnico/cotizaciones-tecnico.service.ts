@@ -12,7 +12,11 @@ export class CotizacionesTecnicoService {
   }
 
   findAll() {
-    return this.prisma.cotizacionTecnico.findMany({});
+    return this.prisma.cotizacionTecnico.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
   }
 
   async findOne(id: string) {

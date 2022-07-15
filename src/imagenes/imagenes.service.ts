@@ -12,7 +12,11 @@ export class ImagenesService {
   }
 
   findAll() {
-    return this.prisma.imagen.findMany({});
+    return this.prisma.imagen.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
   }
 
   async findOne(id: string) {

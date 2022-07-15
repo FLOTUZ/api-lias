@@ -13,6 +13,9 @@ export class SeguimientosService {
 
   findAll() {
     return this.prisma.seguimiento.findMany({
+      orderBy: {
+        fecha_seguimiento: 'desc',
+      },
       include: {
         Usuario: true,
         Asesor: true,

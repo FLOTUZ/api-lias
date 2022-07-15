@@ -12,7 +12,11 @@ export class AsesoresService {
   }
 
   findAll() {
-    return this.prisma.asesor.findMany({});
+    return this.prisma.asesor.findMany({
+      orderBy: {
+        nombre: 'asc',
+      },
+    });
   }
 
   async findOne(id: string) {
@@ -44,6 +48,9 @@ export class AsesoresService {
 
   asesoresByAseguradora(id: string) {
     return this.prisma.asesor.findMany({
+      orderBy: {
+        nombre: 'asc',
+      },
       where: {
         aseguradoraId: Number(id),
       },

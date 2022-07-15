@@ -12,7 +12,11 @@ export class ServiciosService {
   }
 
   findAll() {
-    return this.prisma.servicio.findMany({});
+    return this.prisma.servicio.findMany({
+      orderBy: {
+        nombre: 'asc',
+      },
+    });
   }
 
   async findOne(id: string) {
