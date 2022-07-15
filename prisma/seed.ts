@@ -1002,7 +1002,7 @@ async function main() {
       asesorId: 4,
       nombre_usuario_final: 'Isla Solorzano',
       titulo_ticket:
-        '20lts de gasolina para Isla 20lts de gasolina para Isla20lts de gasolina para Isla20lts de gasolina para Isla',
+        '20lts de gasolina para Isla 20lts de gasolina',
       asistenciaId: 2,
       aseguradoraId: 1,
       problematica: 'Llevar 20 lts de gasolina a usuaria',

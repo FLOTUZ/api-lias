@@ -115,7 +115,7 @@ model Ticket {
   titulo_ticket          String              @db.VarChar(100)
   asistenciaId           Int
   aseguradoraId          Int
-  problematica           String              @db.VarChar(500)
+  problematica           String
   ciudadId               Int
   colonia                String
   calle                  String
@@ -201,29 +201,32 @@ model AcuerdoConformidad {
   ticketId                   Int           @unique
   usuarioFinalId             Int?
   img_solucionId             Int?          @unique
+  aprobado_por_usuarioId     Int?
   createdAt                  DateTime?     @default(now())
   updatedAt                  DateTime?     @updatedAt
   UsuarioFinal               UsuarioFinal? @relation(fields: [usuarioFinalId], references: [id])
   Ticket                     Ticket        @relation(fields: [ticketId], references: [id])
   Img_solucion               Imagen?       @relation("ImgSolucion", fields: [img_solucionId], references: [id])
+  Usuario_Aprobador           Usuario?      @relation(fields: [aprobado_por_usuarioId], references: [id])
 }
 
 model Usuario {
-  id                    Int                 @id @unique @default(autoincrement())
-  usuario               String              @unique @db.VarChar(20)
-  email                 String              @unique @db.VarChar(100)
+  id                    Int                  @id @unique @default(autoincrement())
+  usuario               String               @unique @db.VarChar(20)
+  email                 String               @unique @db.VarChar(100)
   password              String
-  inactivo              Boolean?            @default(false)
-  createdAt             DateTime?           @default(now())
-  updatedAt             DateTime?           @updatedAt
-  rol                   String              @default("USUARIO")
+  inactivo              Boolean?             @default(false)
+  createdAt             DateTime?            @default(now())
+  updatedAt             DateTime?            @updatedAt
+  rol                   String               @default("USUARIO")
   hashedRt              String?
   img_perfilId          Int?
   Seguimiento           Seguimiento[]
   Tecnico               Tecnico?
   Ticket                Ticket[]
   CotizacionesAprobadas CotizacionTecnico[]
-  Imagen                Imagen?             @relation(fields: [img_perfilId], references: [id])
+  Imagen                Imagen?              @relation(fields: [img_perfilId], references: [id])
+  AcuerdosAprobados     AcuerdoConformidad[]
 }
 
 model UsuarioFinal {
@@ -231,7 +234,7 @@ model UsuarioFinal {
   nombre             String               @db.VarChar(50)
   apellido_paterno   String               @db.VarChar(50)
   apellido_materno   String               @db.VarChar(50)
-  correo             String?              @db.VarChar(100)
+  correo             String?              @db.VarChar(60)
   telefono           String               @unique @db.VarChar(10)
   AcuerdoConformidad AcuerdoConformidad[]
   createdAt          DateTime?            @default(now())

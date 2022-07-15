@@ -41,23 +41,24 @@ export class AcuerdosConformidadService {
 
   async findOne(id: string) {
     try {
-      const response = await this.prisma.acuerdoConformidad.findUnique({
+      return await this.prisma.acuerdoConformidad.findUnique({
         where: { id: Number(id) },
+        include: {
+          Usuario_Aprobador: true,
+        },
       });
-      if (response == null) {
-        return new NotFoundException();
-      } else {
-        return response;
-      }
     } catch (error) {
       throw new NotFoundException();
     }
   }
 
-  update(id: string, updateDTO: UpdateAcuerdosConformidadDto) {
-    return this.prisma.acuerdoConformidad.update({
+  async update(id: string, updateDTO: UpdateAcuerdosConformidadDto) {
+    return await this.prisma.acuerdoConformidad.update({
       where: { id: Number(id) },
       data: updateDTO,
+      include: {
+        Usuario_Aprobador: true,
+      },
     });
   }
 
@@ -68,6 +69,9 @@ export class AcuerdosConformidadService {
   async getByIdTicket(idTicket: string) {
     return await this.prisma.acuerdoConformidad.findUnique({
       where: { ticketId: Number(idTicket) },
+      include: {
+        Usuario_Aprobador: true,
+      },
     });
   }
 

@@ -1,3 +1,4 @@
+import { ConflictException, NotFoundException } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { AcuerdoConformidad } from '@prisma/client';
 
@@ -44,6 +45,9 @@ export class AcuerdoConformidadEntity implements AcuerdoConformidad {
   @ApiProperty({ required: false })
   img_solucionId: number;
 
+  @ApiProperty({ required: false })
+  aprobado_por_usuarioId: number;
+
   @ApiProperty()
   ticketId: number;
 
@@ -52,4 +56,8 @@ export class AcuerdoConformidadEntity implements AcuerdoConformidad {
 
   @ApiProperty()
   updatedAt: Date;
+
+  constructor(partial: Partial<AcuerdoConformidadEntity | NotFoundException | ConflictException>) {
+    Object.assign(this, partial);
+  }
 }

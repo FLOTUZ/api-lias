@@ -57,19 +57,23 @@ export class AcuerdosConformidadController {
   @ApiOkResponse({
     type: AcuerdoConformidadEntity,
   })
-  findOne(@Param('id') id: string) {
-    return this.acuerdosConformidadService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    return new AcuerdoConformidadAllEntity(
+      await this.acuerdosConformidadService.findOne(id),
+    );
   }
 
   @Patch(':id')
   @ApiOkResponse({
-    type: AcuerdoConformidadEntity,
+    type: AcuerdoConformidadAllEntity,
   })
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateDto: UpdateAcuerdosConformidadDto,
   ) {
-    return this.acuerdosConformidadService.update(id, updateDto);
+    return new AcuerdoConformidadAllEntity(
+      await this.acuerdosConformidadService.update(id, updateDto),
+    );
   }
 
   @Delete(':id')
@@ -87,8 +91,10 @@ export class AcuerdosConformidadController {
   @ApiOkResponse({
     type: AcuerdoConformidadEntity,
   })
-  getByIdTicket(@Param('id') id: string) {
-    return this.acuerdosConformidadService.getByIdTicket(id);
+  async getByIdTicket(@Param('id') id: string) {
+    return new AcuerdoConformidadAllEntity(
+      await this.acuerdosConformidadService.getByIdTicket(id),
+    );
   }
 
   @ApiOkResponse({ type: AcuerdoConformidadAllEntity })

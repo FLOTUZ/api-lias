@@ -53,4 +53,8 @@ export class CreateAcuerdosConformidadDto {
   @IsOptional()
   @ApiProperty({ required: false })
   img_solucionId: number;
+
+  @IsOptional()
+  @ApiProperty({ required: false })
+  aprobado_por_usuarioId: number;
 }
