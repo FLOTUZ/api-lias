@@ -71,12 +71,19 @@ export class TecnicosService {
     return await this.prisma.tecnico.delete({ where: { id: Number(id) } });
   }
 
-  agregarServiciosATecnico(idTecnico: string, servicios: number[]) {
-    return this.prisma.tecnico.update({
-      include: { Servicio: true },
+  async addServicesAndCiudadesCoberturaToTecnico(
+    idTecnico: string,
+    servicios: number[],
+    ciudades_cobertura: number[],
+  ) {
+    return await this.prisma.tecnico.update({
+      include: { Servicio: true, Ciudades_Cobertura: true },
       where: { id: Number(idTecnico) },
       data: {
         Servicio: { connect: servicios.map((id) => ({ id: Number(id) })) },
+        Ciudades_Cobertura: {
+          connect: ciudades_cobertura.map((id) => ({ id: Number(id) })),
+        },
       },
     });
   }
