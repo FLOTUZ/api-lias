@@ -30,7 +30,7 @@ export class TecnicosService {
           },
         },
         Servicio: true,
-        Ciudad: true,
+        Ciudades_Cobertura: true,
       },
     });
   }
@@ -42,7 +42,7 @@ export class TecnicosService {
         include: {
           ViveEn: true,
           Servicio: true,
-          Ciudad: true,
+          Ciudades_Cobertura: true,
         },
       });
 
@@ -95,7 +95,7 @@ export class TecnicosService {
         include: {
           ViveEn: true,
           Servicio: true,
-          Ciudad: true,
+          Ciudades_Cobertura: true,
         },
       });
 
