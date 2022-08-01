@@ -81,16 +81,16 @@ export class TecnicosController {
   @ApiOperation({
     summary: 'Agregar servicios y ciudades de cobertura a un tecnico',
   })
-  async addServicesAndCiudadesCoberturaToTecnico(
+  async addAndEditServicesAndCiudadesCoberturaToTecnico(
     @Param('id') id: string,
     @Body()
-    { servicios, ciudades_cobertura }: CreateServiciosCiudadesCoberturaDto,
+    createServiciosCiudadesCoberturaDto: CreateServiciosCiudadesCoberturaDto,
   ) {
     return new TecnicoRelatedEntity(
-      await this.tecnicosService.addServicesAndCiudadesCoberturaToTecnico(
+      await this.tecnicosService.addAndEditServicesAndCiudadesCoberturaToTecnico(
         id,
-        servicios,
-        ciudades_cobertura,
+        createServiciosCiudadesCoberturaDto.servicios,
+        createServiciosCiudadesCoberturaDto.ciudades_cobertura,
       ),
     );
   }
