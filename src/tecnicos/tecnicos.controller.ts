@@ -16,6 +16,7 @@ import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { TecnicoEntity } from './entities/tecnico.entity';
 import { TecnicoRelatedEntity } from './entities/tecnicoRelated.entity';
 import { ServicesOfTecnicoEntity } from './entities/services-of-tecnico.entity';
+import { CreateServiciosCiudadesCoberturaDto } from './dto/create-servicios-ciudades-cobertura.dto';
 
 @Controller('tecnicos')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -76,24 +77,21 @@ export class TecnicosController {
     return new TecnicoEntity(await this.tecnicosService.remove(id));
   }
 
-  @Post(':id/servicios')
+  @Patch(':tecnicoId/servicios-ciudadescobertura')
   @ApiOperation({
-    summary: 'Agregar servicios a un tecnico',
+    summary: 'Agregar o editar servicios y ciudades de cobertura a un tecnico',
   })
-  addServicesToTecnico(@Param('id') id: string, @Body() servicios: number[]) {
-    return this.tecnicosService.agregarServiciosATecnico(id, servicios);
-  }
-
-  @Patch(':id/servicios')
-  @ApiOperation({
-    summary: 'Editar los servicios a un tecnico',
-  })
-  async editarServiciosDeTecnico(
-    @Param('id') id: string,
-    @Body() servicios: number[],
+  async addAndEditServicesAndCiudadesCoberturaToTecnico(
+    @Param('tecnicoId') id: string,
+    @Body()
+    createServiciosCiudadesCoberturaDto: CreateServiciosCiudadesCoberturaDto,
   ) {
     return new TecnicoRelatedEntity(
-      await this.tecnicosService.editarServiciosDeTecnico(id, servicios),
+      await this.tecnicosService.addAndEditServicesAndCiudadesCoberturaToTecnico(
+        id,
+        createServiciosCiudadesCoberturaDto.servicios,
+        createServiciosCiudadesCoberturaDto.ciudades_cobertura,
+      ),
     );
   }
 

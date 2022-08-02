@@ -86,22 +86,22 @@ model Servicio {
 }
 
 model Tecnico {
-  id               Int                 @id @unique @default(autoincrement())
-  nombre           String              @db.VarChar(50)
-  apellido_paterno String              @db.VarChar(50)
-  apellido_materno String?              @db.VarChar(50)
-  calificacion     Decimal             @default(0.0) @db.Decimal(2, 1)
-  telefono         String              @db.VarChar(10)
-  usuarioId        Int                 @unique
-  ciudadId         Int
-  createdAt        DateTime?           @default(now())
-  updatedAt        DateTime?           @updatedAt
-  Usuario          Usuario             @relation(fields: [usuarioId], references: [id])
-  Ciudad           Ciudad[] //Ciudades que atiende
-  Servicio         Servicio[]
-  Cotizaciones     CotizacionTecnico[]
-  ViveEn           Ciudad?             @relation("ResideEn", fields: [ciudadId], references: [id])
-  Ticket           Ticket[]
+  id                 Int                 @id @unique @default(autoincrement())
+  nombre             String              @db.VarChar(50)
+  apellido_paterno   String              @db.VarChar(50)
+  apellido_materno   String?             @db.VarChar(50)
+  calificacion       Decimal             @default(0.0) @db.Decimal(2, 1)
+  telefono           String              @db.VarChar(10)
+  usuarioId          Int                 @unique
+  ciudadId           Int
+  createdAt          DateTime?           @default(now())
+  updatedAt          DateTime?           @updatedAt
+  Usuario            Usuario             @relation(fields: [usuarioId], references: [id])
+  Ciudades_Cobertura Ciudad[] //Ciudades que atiende
+  Servicio           Servicio[]
+  Cotizaciones       CotizacionTecnico[]
+  ViveEn             Ciudad?             @relation("ResideEn", fields: [ciudadId], references: [id])
+  Ticket             Ticket[]
 }
 
 model Ticket {
@@ -207,7 +207,7 @@ model AcuerdoConformidad {
   UsuarioFinal               UsuarioFinal? @relation(fields: [usuarioFinalId], references: [id])
   Ticket                     Ticket        @relation(fields: [ticketId], references: [id])
   Img_solucion               Imagen?       @relation("ImgSolucion", fields: [img_solucionId], references: [id])
-  Usuario_Aprobador           Usuario?      @relation(fields: [aprobado_por_usuarioId], references: [id])
+  Usuario_Aprobador          Usuario?      @relation(fields: [aprobado_por_usuarioId], references: [id])
 }
 
 model Usuario {

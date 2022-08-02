@@ -30,7 +30,7 @@ export class TecnicosService {
           },
         },
         Servicio: true,
-        Ciudad: true,
+        Ciudades_Cobertura: true,
       },
     });
   }
@@ -42,7 +42,7 @@ export class TecnicosService {
         include: {
           ViveEn: true,
           Servicio: true,
-          Ciudad: true,
+          Ciudades_Cobertura: true,
         },
       });
 
@@ -71,14 +71,57 @@ export class TecnicosService {
     return await this.prisma.tecnico.delete({ where: { id: Number(id) } });
   }
 
-  agregarServiciosATecnico(idTecnico: string, servicios: number[]) {
-    return this.prisma.tecnico.update({
-      include: { Servicio: true },
+  async addAndEditServicesAndCiudadesCoberturaToTecnico(
+    idTecnico: string,
+    servicios: number[],
+    ciudades_cobertura: number[],
+  ) {
+    //Se consultan el tecnico incluyendo sus servicios y ciudades de cobertura
+    const tecnico = await this.prisma.tecnico.findUnique({
+      where: { id: Number(idTecnico) },
+      include: { Servicio: true, Ciudades_Cobertura: true },
+    });
+
+    //Se crea un arreglo solo con los ids de los servicios que se desean eliminar
+    const servs_anteriores = tecnico.Servicio.map((servicio) => {
+      return servicio.id;
+    });
+
+    //Se crea un arreglo solo con los ids de los Ciudades de cobertura que se desean eliminar
+    const ciudades_anteriores = tecnico.Ciudades_Cobertura.map((ciudad) => {
+      return ciudad.id;
+    });
+
+    //Se eliminan los servicios y Ciudades de cobertura actuales del tecnico
+    await this.prisma.tecnico.update({
+      where: { id: Number(idTecnico) },
+      data: {
+        Servicio: {
+          disconnect: servs_anteriores.map((id) => ({
+            id: Number(id),
+          })),
+        },
+        Ciudades_Cobertura: {
+          disconnect: ciudades_anteriores.map((id) => ({
+            id: Number(id),
+          })),
+        },
+      },
+    });
+
+    //Se agregan los servicios nuevos al tecnico
+    const nuevos_servicios_ciudades = await this.prisma.tecnico.update({
+      include: { Servicio: true, Ciudades_Cobertura: true },
       where: { id: Number(idTecnico) },
       data: {
         Servicio: { connect: servicios.map((id) => ({ id: Number(id) })) },
+        Ciudades_Cobertura: {
+          connect: ciudades_cobertura.map((id) => ({ id: Number(id) })),
+        },
       },
     });
+
+    return nuevos_servicios_ciudades;
   }
 
   async getServicesOfTecnico(idTecnico: string) {
@@ -95,7 +138,7 @@ export class TecnicosService {
         include: {
           ViveEn: true,
           Servicio: true,
-          Ciudad: true,
+          Ciudades_Cobertura: true,
         },
       });
 
@@ -107,41 +150,5 @@ export class TecnicosService {
     } catch (error) {
       throw new NotFoundException();
     }
-  }
-
-  async editarServiciosDeTecnico(id: string, servicios: number[]) {
-    //Se consultan el tecnico incluyendo sus servicios
-    const serviciosAnteriores = await this.prisma.tecnico.findUnique({
-      where: { id: Number(id) },
-      include: { Servicio: true },
-    });
-
-    //Se crea un arreglo solo con los ids de los servicios que se desean eliminar
-    const servis = serviciosAnteriores.Servicio.map((servicio) => {
-      return servicio.id;
-    });
-    //=========================================================================
-    //Se eliminan los servicios actuales del tecnico
-    await this.prisma.tecnico.update({
-      where: { id: Number(id) },
-      data: {
-        Servicio: {
-          disconnect: servis.map((id) => ({
-            id: Number(id),
-          })),
-        },
-      },
-    });
-
-    //Se agregan los servicios nuevos al tecnico
-    const serviciosNuevos = await this.prisma.tecnico.update({
-      where: { id: Number(id) },
-      include: { Servicio: true },
-      data: {
-        Servicio: { connect: servicios.map((id) => ({ id: Number(id) })) },
-      },
-    });
-
-    return serviciosNuevos;
   }
 }

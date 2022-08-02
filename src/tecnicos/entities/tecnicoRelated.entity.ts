@@ -12,7 +12,7 @@ export class TecnicoRelatedEntity extends TecnicoEntity {
   @ApiProperty({
     type: [CiudadEntity],
   })
-  Ciudad: CiudadEntity[];
+  Ciudades_Cobertura: CiudadEntity[];
 
   @ApiProperty({
     type: CiudadEntity,
