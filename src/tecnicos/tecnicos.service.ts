@@ -151,40 +151,4 @@ export class TecnicosService {
       throw new NotFoundException();
     }
   }
-
-  async editarServiciosDeTecnico(id: string, servicios: number[]) {
-    //Se consultan el tecnico incluyendo sus servicios
-    const serviciosAnteriores = await this.prisma.tecnico.findUnique({
-      where: { id: Number(id) },
-      include: { Servicio: true },
-    });
-
-    //Se crea un arreglo solo con los ids de los servicios que se desean eliminar
-    const servis = serviciosAnteriores.Servicio.map((servicio) => {
-      return servicio.id;
-    });
-    //=========================================================================
-    //Se eliminan los servicios actuales del tecnico
-    await this.prisma.tecnico.update({
-      where: { id: Number(id) },
-      data: {
-        Servicio: {
-          disconnect: servis.map((id) => ({
-            id: Number(id),
-          })),
-        },
-      },
-    });
-
-    //Se agregan los servicios nuevos al tecnico
-    const serviciosNuevos = await this.prisma.tecnico.update({
-      where: { id: Number(id) },
-      include: { Servicio: true },
-      data: {
-        Servicio: { connect: servicios.map((id) => ({ id: Number(id) })) },
-      },
-    });
-
-    return serviciosNuevos;
-  }
 }

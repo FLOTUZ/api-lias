@@ -77,12 +77,12 @@ export class TecnicosController {
     return new TecnicoEntity(await this.tecnicosService.remove(id));
   }
 
-  @Post(':id/servicios-ciudadescobertura')
+  @Patch(':tecnicoId/servicios-ciudadescobertura')
   @ApiOperation({
-    summary: 'Agregar servicios y ciudades de cobertura a un tecnico',
+    summary: 'Agregar o editar servicios y ciudades de cobertura a un tecnico',
   })
   async addAndEditServicesAndCiudadesCoberturaToTecnico(
-    @Param('id') id: string,
+    @Param('tecnicoId') id: string,
     @Body()
     createServiciosCiudadesCoberturaDto: CreateServiciosCiudadesCoberturaDto,
   ) {
@@ -92,19 +92,6 @@ export class TecnicosController {
         createServiciosCiudadesCoberturaDto.servicios,
         createServiciosCiudadesCoberturaDto.ciudades_cobertura,
       ),
-    );
-  }
-
-  @Patch(':id/servicios')
-  @ApiOperation({
-    summary: 'Editar los servicios a un tecnico',
-  })
-  async editarServiciosDeTecnico(
-    @Param('id') id: string,
-    @Body() servicios: number[],
-  ) {
-    return new TecnicoRelatedEntity(
-      await this.tecnicosService.editarServiciosDeTecnico(id, servicios),
     );
   }
 
