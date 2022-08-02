@@ -67,8 +67,12 @@ export class TicketsService {
 
     const tickets = await this.prisma.ticket.findMany({
       where: {
-        ciudadId: tecnico.ciudadId,
         estado: 'NUEVO',
+        Ciudad: {
+          id: {
+            in: tecnico.Ciudades_Cobertura.map((ciudad) => ciudad.id),
+          },
+        },
         Servicio: {
           some: {
             id: {

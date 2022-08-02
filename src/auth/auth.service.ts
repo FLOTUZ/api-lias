@@ -17,7 +17,11 @@ export class AuthService {
     const user = await this.userService.getUserByUser(loginUser.usuario);
     //Compare encrypted password with the login password
 
-    if (user && (await argon2.verify(user.password, loginUser.password))) {
+    if (
+      user && //Si existe el usuario
+      !user.inactivo && //Si esta activo
+      (await argon2.verify(user.password, loginUser.password)) //Si la contraseña es correcta
+    ) {
       //Generate a new token
       return await this.generateAccessToken(user.id);
     } else {
