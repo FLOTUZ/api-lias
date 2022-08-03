@@ -33,7 +33,7 @@ export class EstadosService {
         where: { id: Number(id) },
       });
       if (response == null) {
-        return new NotFoundException(`This register did #${id} not exist`);
+        throw new NotFoundException(`This register did #${id} not exist`);
       } else {
         return response;
       }

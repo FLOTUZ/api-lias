@@ -20,6 +20,8 @@ import { RolesGuard } from './autorization/guards/permissions.guard';
 import { AutorizationModule } from './autorization/autorization.module';
 import { AuthService } from './auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
+import { TipoDeConceptosModule } from './tipo-de-conceptos/tipo-de-conceptos.module';
+import { ConceptosModule } from './conceptos/conceptos.module';
 
 @Module({
   imports: [
@@ -40,6 +42,8 @@ import { JwtService } from '@nestjs/jwt';
     AsesoresModule,
     AuthModule,
     AutorizationModule,
+    TipoDeConceptosModule,
+    ConceptosModule,
   ],
   providers: [
     AuthService,

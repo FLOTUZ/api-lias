@@ -76,13 +76,36 @@ model Seguimiento {
 }
 
 model Servicio {
-  id        Int       @id @unique @default(autoincrement())
-  nombre    String    @unique @db.VarChar(100)
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
-  tipo      String
-  Ticket    Ticket[]
-  Tecnico   Tecnico[]
+  id           Int            @id @unique @default(autoincrement())
+  nombre       String         @unique @db.VarChar(100)
+  createdAt    DateTime?      @default(now())
+  updatedAt    DateTime?      @updatedAt
+  tipo         String
+  Ticket       Ticket[]
+  Tecnico      Tecnico[]
+  TipoConcepto TipoConcepto[]
+}
+
+//Catalogo de los servicios con costo preestablecido
+model TipoConcepto {
+  id         Int        @id @unique @default(autoincrement())
+  nombre     String     @unique @db.VarChar(100)
+  servicioId Int
+  createdAt  DateTime?  @default(now())
+  updatedAt  DateTime?  @updatedAt
+  Servicio   Servicio?  @relation(fields: [servicioId], references: [id])
+  Conceptos  Concepto[]
+}
+
+//Conceptos que pueden ser agregados a un ticket
+model Concepto {
+  id              Int           @id @unique @default(autoincrement())
+  nombre          String        @unique @db.VarChar(100)
+  costo_mano_obra Decimal?      @db.Money
+  tipo_conceptoId Int
+  createdAt       DateTime?     @default(now())
+  updatedAt       DateTime?     @updatedAt
+  TipoConcepto    TipoConcepto? @relation(fields: [tipo_conceptoId], references: [id])
 }
 
 model Tecnico {
