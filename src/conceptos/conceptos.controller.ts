@@ -7,8 +7,9 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  BadRequestException,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ConceptosService } from './conceptos.service';
 import { CreateConceptoDto } from './dto/create-concepto.dto';
 import { UpdateConceptoDto } from './dto/update-concepto.dto';
@@ -46,5 +47,20 @@ export class ConceptosController {
   @Delete(':id')
   async remove(@Param('id', ParseIntPipe) id: number) {
     return new ConceptoEntity(await this.service.remove(id));
+  }
+
+  @Post('/tipo-concepto')
+  @ApiResponse({ status: 201, type: [ConceptoEntity] })
+  @ApiOperation({
+    summary: 'Consulta conceptos por tipo de conceptos',
+  })
+  async conceptosByTipoConcepto(@Body() tipoConceptos: number[]) {
+    try {
+      tipoConceptos = tipoConceptos.map((item) => Number(item));
+    } catch (error) {
+      throw new BadRequestException('Tipo de tecnico invalido');
+    }
+    const rows = await this.service.conceptosByTipoConcepto(tipoConceptos);
+    return rows.map((row) => new ConceptoEntity(row));
   }
 }

@@ -47,4 +47,22 @@ export class TipoDeConceptosService {
   async remove(id: number) {
     return await this.prisma.tipoConcepto.delete({ where: { id } });
   }
+
+  async getTipoConceptosByServicios(tipoTecnico: number[]) {
+    const response = await this.prisma.tipoConcepto.findMany({
+      orderBy: {
+        nombre: 'asc',
+      },
+      where: {
+        Servicio: {
+          id: {
+            in: tipoTecnico.map((id) => id),
+          },
+        },
+      },
+      include: { Conceptos: true },
+    });
+
+    return response;
+  }
 }

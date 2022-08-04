@@ -15,6 +15,7 @@ export class CreateConceptoDto {
   costo_mano_obra: Decimal;
 
   @ApiProperty()
+  @IsPositive()
   @IsNotEmpty()
   tipo_conceptoId: number;
 }

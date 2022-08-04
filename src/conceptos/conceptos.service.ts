@@ -47,4 +47,19 @@ export class ConceptosService {
   async remove(id: number) {
     return await this.prisma.concepto.delete({ where: { id } });
   }
+
+  async conceptosByTipoConcepto(tipoConcepto: number[]) {
+    return await this.prisma.concepto.findMany({
+      orderBy: {
+        nombre: 'asc',
+      },
+      where: {
+        TipoConcepto: {
+          id: {
+            in: tipoConcepto.map((id) => id),
+          },
+        },
+      },
+    });
+  }
 }
