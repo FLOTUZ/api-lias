@@ -753,290 +753,292 @@ async function main() {
     },
   });
 
-  //--------------ASESOR------------------
-  // await prisma.asesor.create({
-  //   data: {
-  //     nombre: 'Juan',
-  //     aseguradoraId: 1,
-  //   },
-  // });
-  // await prisma.asesor.create({
-  //   data: {
-  //     nombre: 'Maria',
-  //     aseguradoraId: 4,
-  //   },
-  // });
-  // await prisma.asesor.create({
-  //   data: {
-  //     nombre: 'Ana Juarez',
-  //     aseguradoraId: 2,
-  //   },
-  // });
-  // await prisma.asesor.create({
-  //   data: {
-  //     nombre: 'Eloisa',
-  //     aseguradoraId: 1,
-  //   },
-  // });
+  // --------------ASESOR------------------
+  await prisma.asesor.create({
+    data: {
+      nombre: 'Juan',
+      aseguradoraId: 1,
+    },
+  });
+  await prisma.asesor.create({
+    data: {
+      nombre: 'Maria',
+      aseguradoraId: 4,
+    },
+  });
+  await prisma.asesor.create({
+    data: {
+      nombre: 'Ana Juarez',
+      aseguradoraId: 2,
+    },
+  });
+  await prisma.asesor.create({
+    data: {
+      nombre: 'Eloisa',
+      aseguradoraId: 1,
+    },
+  });
 
-  //--------------TECNICO------------------
+  // --------------TECNICO------------------
 
-  // await prisma.usuario.create({
-  //   data: {
-  //     usuario: 'emmanuel',
-  //     email: 'emmanuel@mail.com',
-  //     password:
-  //       '$argon2i$v=19$m=4096,t=3,p=1$oEeQ0Y4CA5tpQAJoRUzM+g$s68618qhpkV76r/18xwlu1ji9iu5aHpnoPSjjDfKpKo',
-  //     inactivo: false,
-  //     rol: 'TECNICO',
-  //     hashedRt: null,
-  //   },
-  // });
+  await prisma.usuario.create({
+    data: {
+      usuario: 'emmanuel',
+      email: 'emmanuel@mail.com',
+      password:
+        '$argon2i$v=19$m=4096,t=3,p=1$oEeQ0Y4CA5tpQAJoRUzM+g$s68618qhpkV76r/18xwlu1ji9iu5aHpnoPSjjDfKpKo',
+      inactivo: false,
+      rol: 'TECNICO',
+      hashedRt: null,
+    },
+  });
 
-  // await prisma.tecnico.create({
-  //   data: {
-  //     nombre: 'Emmanuel',
-  //     apellido_paterno: 'Esquivel',
-  //     apellido_materno: 'Pardo',
-  //     calificacion: 0,
-  //     telefono: '4433110399',
-  //     usuarioId: 4,
-  //     ciudadId: 1,
-  //   },
-  // });
+  await prisma.tecnico.create({
+    data: {
+      nombre: 'Emmanuel',
+      apellido_paterno: 'Esquivel',
+      apellido_materno: 'Pardo',
+      calificacion: 0,
+      telefono: '4433110399',
+      usuarioId: 4,
+      ciudadId: 1,
+    },
+  });
 
-  // await prisma.tecnico.update({
-  //   where: {
-  //     id: 1,
-  //   },
-  //   data: {
-  //     ciudadId: 1,
-  //     Servicio: {
-  //       connect: [3, 4].map((id) => ({ id: Number(id) })),
-  //     },
-  //   },
-  // });
+  await prisma.tecnico.update({
+    where: {
+      id: 1,
+    },
+    data: {
+      ciudadId: 1,
+      Servicio: {
+        connect: [3, 4].map((id) => ({ id: Number(id) })),
+      },
+    },
+  });
 
-  // await prisma.usuario.create({
-  //   data: {
-  //     usuario: 'jose',
-  //     email: 'jose@mail.com',
-  //     password:
-  //       '$argon2i$v=19$m=4096,t=3,p=1$qouxPiS06Hb4T6BXyEdOqA$ckCISFqrmaKhhAaKf5takyIwSsIeIE4o0iIJUpvQLh0',
-  //     inactivo: false,
-  //     createdAt: '2022-06-15T16:42:42.415Z',
-  //     updatedAt: '2022-06-15T16:50:09.517Z',
-  //     rol: 'TECNICO',
-  //   },
-  // });
+  await prisma.usuario.create({
+    data: {
+      usuario: 'jose',
+      email: 'jose@mail.com',
+      password:
+        '$argon2i$v=19$m=4096,t=3,p=1$qouxPiS06Hb4T6BXyEdOqA$ckCISFqrmaKhhAaKf5takyIwSsIeIE4o0iIJUpvQLh0',
+      inactivo: false,
+      createdAt: '2022-06-15T16:42:42.415Z',
+      updatedAt: '2022-06-15T16:50:09.517Z',
+      rol: 'TECNICO',
+    },
+  });
 
-  // await prisma.tecnico.create({
-  //   data: {
-  //     nombre: 'Jose',
-  //     apellido_paterno: 'Lopez',
-  //     apellido_materno: 'Mancilla',
-  //     calificacion: 0,
-  //     telefono: '4433110399',
-  //     usuarioId: 5,
-  //     ciudadId: 3,
-  //   },
-  // });
+  await prisma.tecnico.create({
+    data: {
+      nombre: 'Jose',
+      apellido_paterno: 'Lopez',
+      apellido_materno: 'Mancilla',
+      calificacion: 0,
+      telefono: '4433110399',
+      usuarioId: 5,
+      ciudadId: 3,
+    },
+  });
 
-  // await prisma.tecnico.update({
-  //   where: {
-  //     id: 2,
-  //   },
-  //   data: {
-  //     ciudadId: 2,
-  //     Servicio: {
-  //       connect: [1, 5].map((id) => ({ id: Number(id) })),
-  //     },
-  //   },
-  // });
+  await prisma.tecnico.update({
+    where: {
+      id: 2,
+    },
+    data: {
+      ciudadId: 2,
+      Servicio: {
+        connect: [1, 5].map((id) => ({ id: Number(id) })),
+      },
+    },
+  });
 
-  //-----------------------Usuarios Finales-------------------------------
+  // -----------------------Usuarios Finales-------------------------------
 
-  // await prisma.usuarioFinal.create({
-  //   data: {
-  //     nombre: 'Maria',
-  //     apellido_paterno: 'Dolores',
-  //     apellido_materno: 'Morales',
-  //     correo: 'mam@mail.com',
-  //     telefono: '4433113099',
-  //   },
-  // });
+  await prisma.usuarioFinal.create({
+    data: {
+      nombre: 'Maria',
+      apellido_paterno: 'Dolores',
+      apellido_materno: 'Morales',
+      correo: 'mam@mail.com',
+      telefono: '4433113099',
+    },
+  });
 
-  //-----------------------TICKETS-------------------------------
-  // await prisma.ticket.create({
-  //   data: {
-  //     num_expediente: '201410241',
-  //     asistencia_vial: true,
-  //     fecha_llamada: '2022-05-28T02:30:00.000Z',
-  //     nombre_asesor_gpo_lias: 'Aleejandro',
-  //     nombre_usuario_final: 'Patricio',
-  //     titulo_ticket: 'Auto barado en carretera',
-  //     aseguradoraId: 2,
-  //     asistenciaId: 4,
-  //     asesorId: 1,
-  //     problematica: 'auto barado en carretera por llanta pinchada',
-  //     ciudadId: 1,
-  //     colonia: '',
-  //     calle: '19.731813, -101.200281',
-  //     numero_domicilio: '0',
-  //     banderazo: 100.1,
-  //     total_salida: 100.12,
-  //     costo_gpo_lias: 300,
-  //     cobertura: 1000.31,
-  //     cotizacion_gpo_lias: 'Sin informacion adicional',
-  //     deducible: 41.4,
-  //     kilometraje: 10,
-  //     costo_de_kilometraje: 13,
-  //     costo_por_caseta: 140.12,
-  //     casetas: 2,
-  //     total: 530.12,
-  //     anticipo: 260.1,
-  //     estado: 'NUEVO',
-  //     num_interior: '',
-  //     modelo_carro: '3',
-  //     placas_carro: 'XYZ 234',
-  //     color_carro: 'Rojo vino',
-  //     marca_carro: 'Mazda',
-  //     is_servicio_domestico: false,
-  //     is_servicio_foraneo: false,
-  //     Servicio: {
-  //       connect: [3, 4].map((id) => ({ id: Number(id) })),
-  //     },
-  //   },
-  // });
-  // await prisma.ticket.create({
-  //   data: {
-  //     num_expediente: 'p1200301',
-  //     asistencia_vial: false,
-  //     fecha_llamada: '2022-06-16T04:59:00.000Z',
-  //     nombre_asesor_gpo_lias: 'Emmanuel',
-  //     asesorId: 1,
-  //     nombre_usuario_final: 'Abril Jasive Zamora Estrada',
-  //     titulo_ticket: 'Llave de puerta principal quebrada',
-  //     asistenciaId: 2,
-  //     aseguradoraId: 1,
-  //     problematica: 'La usuaria Abril se quedo afuera de su casa',
-  //     ciudadId: 1,
-  //     colonia: 'Vasco de Quiroga',
-  //     calle: 'Carpinteros de Paracho LB',
-  //     numero_domicilio: '157',
-  //     banderazo: 0,
-  //     total_salida: 100,
-  //     cobertura: 1000,
-  //     cotizacion_gpo_lias: 'La casa está al lado del auto lavado',
-  //     deducible: 0,
-  //     kilometraje: 10,
-  //     costo_de_kilometraje: 10,
-  //     costo_por_caseta: 0,
-  //     total: 300,
-  //     anticipo: 180,
-  //     hora_cierre: null,
-  //     casetas: 0,
-  //     costo_gpo_lias: 200,
-  //     estado: 'NUEVO',
-  //     num_interior: '',
-  //     modelo_carro: '',
-  //     placas_carro: '',
-  //     color_carro: '',
-  //     marca_carro: '',
-  //     is_servicio_domestico: true,
-  //     is_servicio_foraneo: false,
-  //     Servicio: {
-  //       connect: [7].map((id) => ({ id: Number(id) })),
-  //     },
-  //   },
-  // });
-  // await prisma.ticket.create({
-  //   data: {
-  //     num_expediente: 'A1245321',
-  //     asistencia_vial: false,
-  //     fecha_llamada: '2022-06-16T05:10:00.000Z',
-  //     nombre_asesor_gpo_lias: 'Miguel Angel Solorzano',
-  //     asesorId: 1,
-  //     nombre_usuario_final: 'Regina Lomelí',
-  //     titulo_ticket: 'Ventana rota Regina',
-  //     asistenciaId: 1,
-  //     aseguradoraId: 1,
-  //     problematica: 'reemplazo de ventana rota',
-  //     ciudadId: 1,
-  //     colonia: 'Sin Nombre',
-  //     calle: 'Cam. de La Arboleda',
-  //     numero_domicilio: '8',
-  //     banderazo: 0,
-  //     total_salida: 356,
-  //     cobertura: 1000,
-  //     cotizacion_gpo_lias: 'Tecnologico de morelia campus 2',
-  //     deducible: 0,
-  //     kilometraje: 12,
-  //     costo_de_kilometraje: 13,
-  //     costo_por_caseta: 200,
-  //     total: 556,
-  //     anticipo: 213.6,
-  //     hora_cierre: null,
-  //     casetas: 1,
-  //     costo_gpo_lias: 200,
-  //     estado: 'NUEVO',
-  //     num_interior: '',
-  //     modelo_carro: '',
-  //     placas_carro: '',
-  //     color_carro: '',
-  //     marca_carro: '',
-  //     is_servicio_domestico: true,
-  //     is_servicio_foraneo: true,
-  //     tecnicoId: null,
-  //     Servicio: {
-  //       connect: [5, 6].map((id) => ({ id: Number(id) })),
-  //     },
-  //   },
-  // });
-  // await prisma.ticket.create({
-  //   data: {
-  //     num_expediente: '11141241a-211',
-  //     asistencia_vial: true,
-  //     fecha_llamada: '2022-06-16T05:48:00.000Z',
-  //     nombre_asesor_gpo_lias: 'Emmanuel',
-  //     asesorId: 4,
-  //     nombre_usuario_final: 'Isla Solorzano',
-  //     titulo_ticket:
-  //       '20lts de gasolina para Isla 20lts de gasolina',
-  //     asistenciaId: 2,
-  //     aseguradoraId: 1,
-  //     problematica: 'Llevar 20 lts de gasolina a usuaria',
-  //     ciudadId: 1,
-  //     colonia: '',
-  //     calle: '19.7033025,-101.1916141',
-  //     numero_domicilio: '',
-  //     banderazo: 100,
-  //     total_salida: 510,
-  //     cobertura: 1000,
-  //     cotizacion_gpo_lias: 'El cliente necesita el servicio urgentemente',
-  //     deducible: 400,
-  //     kilometraje: 20,
-  //     costo_de_kilometraje: 20,
-  //     costo_por_caseta: 10,
-  //     total: 2010,
-  //     anticipo: 900,
-  //     hora_cierre: null,
-  //     casetas: 1,
-  //     costo_gpo_lias: 1000,
-  //     estado: 'NUEVO',
-  //     num_interior: '',
-  //     modelo_carro: ' BMW M340i xDrive Sedán 2023',
-  //     placas_carro: 'WLU 94 69',
-  //     color_carro: 'Negro',
-  //     marca_carro: 'Mazda',
-  //     is_servicio_domestico: false,
-  //     is_servicio_foraneo: true,
-  //     tecnicoId: null,
-  //     Servicio: {
-  //       connect: [3, 4, 13].map((id) => ({ id: Number(id) })),
-  //     },
-  //   },
-  // });
+  // -----------------------TICKETS-------------------------------
+  await prisma.ticket.create({
+    data: {
+      num_expediente: '201410241',
+      asistencia_vial: true,
+      fecha_llamada: '2022-05-28T02:30:00.000Z',
+      nombre_asesor_gpo_lias: 'Aleejandro',
+      nombre_usuario_final: 'Patricio',
+      titulo_ticket: 'Auto barado en carretera',
+      aseguradoraId: 2,
+      asistenciaId: 4,
+      asesorId: 1,
+      problematica: 'auto barado en carretera por llanta pinchada',
+      costo_recomendado: 100,
+      ciudadId: 1,
+      colonia: '',
+      calle: '19.731813, -101.200281',
+      numero_domicilio: '0',
+      banderazo: 100.1,
+      total_salida: 100.12,
+      costo_gpo_lias: 300,
+      cobertura: 1000.31,
+      cotizacion_gpo_lias: 'Sin informacion adicional',
+      deducible: 41.4,
+      kilometraje: 10,
+      costo_de_kilometraje: 13,
+      costo_por_caseta: 140.12,
+      casetas: 2,
+      total: 530.12,
+      anticipo: 260.1,
+      estado: 'NUEVO',
+      num_interior: '',
+      modelo_carro: '3',
+      placas_carro: 'XYZ 234',
+      color_carro: 'Rojo vino',
+      marca_carro: 'Mazda',
+      is_servicio_domestico: false,
+      is_servicio_foraneo: false,
+      Servicio: {
+        connect: [3, 4].map((id) => ({ id: Number(id) })),
+      },
+    },
+  });
+  await prisma.ticket.create({
+    data: {
+      num_expediente: 'p1200301',
+      asistencia_vial: false,
+      fecha_llamada: '2022-06-16T04:59:00.000Z',
+      nombre_asesor_gpo_lias: 'Emmanuel',
+      asesorId: 1,
+      nombre_usuario_final: 'Abril Jasive Zamora Estrada',
+      titulo_ticket: 'Llave de puerta principal quebrada',
+      asistenciaId: 2,
+      aseguradoraId: 1,
+      problematica: 'La usuaria Abril se quedo afuera de su casa',
+      costo_recomendado: 100,
+      ciudadId: 1,
+      colonia: 'Vasco de Quiroga',
+      calle: 'Carpinteros de Paracho LB',
+      numero_domicilio: '157',
+      banderazo: 0,
+      total_salida: 100,
+      cobertura: 1000,
+      cotizacion_gpo_lias: 'La casa está al lado del auto lavado',
+      deducible: 0,
+      kilometraje: 10,
+      costo_de_kilometraje: 10,
+      costo_por_caseta: 0,
+      total: 300,
+      anticipo: 180,
+      hora_cierre: null,
+      casetas: 0,
+      costo_gpo_lias: 200,
+      estado: 'NUEVO',
+      num_interior: '',
+      modelo_carro: '',
+      placas_carro: '',
+      color_carro: '',
+      marca_carro: '',
+      is_servicio_domestico: true,
+      is_servicio_foraneo: false,
+      Servicio: {
+        connect: [7].map((id) => ({ id: Number(id) })),
+      },
+    },
+  });
+  await prisma.ticket.create({
+    data: {
+      num_expediente: 'A1245321',
+      asistencia_vial: false,
+      fecha_llamada: '2022-06-16T05:10:00.000Z',
+      nombre_asesor_gpo_lias: 'Miguel Angel Solorzano',
+      asesorId: 1,
+      nombre_usuario_final: 'Regina Lomelí',
+      titulo_ticket: 'Ventana rota Regina',
+      asistenciaId: 1,
+      aseguradoraId: 1,
+      problematica: 'reemplazo de ventana rota',
+      costo_recomendado: 100,
+      ciudadId: 1,
+      colonia: 'Sin Nombre',
+      calle: 'Cam. de La Arboleda',
+      numero_domicilio: '8',
+      banderazo: 0,
+      total_salida: 356,
+      cobertura: 1000,
+      cotizacion_gpo_lias: 'Tecnologico de morelia campus 2',
+      deducible: 0,
+      kilometraje: 12,
+      costo_de_kilometraje: 13,
+      costo_por_caseta: 200,
+      total: 556,
+      anticipo: 213.6,
+      hora_cierre: null,
+      casetas: 1,
+      costo_gpo_lias: 200,
+      estado: 'NUEVO',
+      num_interior: '',
+      modelo_carro: '',
+      placas_carro: '',
+      color_carro: '',
+      marca_carro: '',
+      is_servicio_domestico: true,
+      is_servicio_foraneo: true,
+      tecnicoId: null,
+      Servicio: {
+        connect: [5, 6].map((id) => ({ id: Number(id) })),
+      },
+    },
+  });
+  await prisma.ticket.create({
+    data: {
+      num_expediente: '11141241a-211',
+      asistencia_vial: true,
+      fecha_llamada: '2022-06-16T05:48:00.000Z',
+      nombre_asesor_gpo_lias: 'Emmanuel',
+      asesorId: 4,
+      nombre_usuario_final: 'Isla Solorzano',
+      titulo_ticket: '20lts de gasolina para Isla 20lts de gasolina',
+      asistenciaId: 2,
+      aseguradoraId: 1,
+      problematica: 'Llevar 20 lts de gasolina a usuaria',
+      ciudadId: 1,
+      colonia: '',
+      calle: '19.7033025,-101.1916141',
+      numero_domicilio: '',
+      banderazo: 100,
+      total_salida: 510,
+      cobertura: 1000,
+      cotizacion_gpo_lias: 'El cliente necesita el servicio urgentemente',
+      deducible: 400,
+      kilometraje: 20,
+      costo_de_kilometraje: 20,
+      costo_por_caseta: 10,
+      total: 2010,
+      anticipo: 900,
+      hora_cierre: null,
+      casetas: 1,
+      costo_gpo_lias: 1000,
+      estado: 'NUEVO',
+      num_interior: '',
+      modelo_carro: ' BMW M340i xDrive Sedán 2023',
+      placas_carro: 'WLU 94 69',
+      color_carro: 'Negro',
+      marca_carro: 'Mazda',
+      is_servicio_domestico: false,
+      is_servicio_foraneo: true,
+      tecnicoId: null,
+      Servicio: {
+        connect: [3, 4, 13].map((id) => ({ id: Number(id) })),
+      },
+    },
+  });
 }
 
 main()

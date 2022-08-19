@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Decimal } from '@prisma/client/runtime';
+import { Type } from 'class-transformer';
 import { IsInt, IsNotEmpty, IsOptional } from 'class-validator';
 import { TecnicoEntity } from '../entities/tecnico.entity';
 
@@ -18,6 +19,7 @@ export class CreateTecnicoDto {
 
   @IsOptional()
   @ApiProperty({ type: 'number', required: false })
+  @Type(() => Number)
   calificacion: Decimal;
 
   @ApiProperty()

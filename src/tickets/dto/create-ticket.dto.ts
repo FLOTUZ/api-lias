@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Decimal } from '@prisma/client/runtime';
+import { Type } from 'class-transformer';
 
 import {
   IsBoolean,
@@ -64,6 +65,11 @@ export class CreateTicketDto {
   @IsNotEmpty()
   @ApiProperty()
   problematica: string;
+
+  @ApiProperty({ type: 'number' })
+  @IsNotEmpty()
+  @Type(() => Number)
+  costo_conceptos: Decimal;
 
   @IsNotEmpty()
   @ApiProperty()

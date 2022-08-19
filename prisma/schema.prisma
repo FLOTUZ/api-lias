@@ -139,6 +139,7 @@ model Ticket {
   asistenciaId           Int
   aseguradoraId          Int
   problematica           String
+  costo_conceptos        Decimal?            @db.Money
   ciudadId               Int
   colonia                String
   calle                  String

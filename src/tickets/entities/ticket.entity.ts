@@ -38,6 +38,10 @@ export class TicketEntity implements Ticket {
   @ApiProperty()
   problematica: string;
 
+  @ApiProperty({ type: 'number' })
+  @Type(() => Number)
+  costo_conceptos: Decimal;
+
   @ApiProperty()
   ciudadId: number;
 
@@ -137,7 +141,9 @@ export class TicketEntity implements Ticket {
   @ApiProperty()
   is_facturado: boolean;
 
-  constructor(partial: Partial<TicketEntity | NotFoundException | ConflictException>) {
+  constructor(
+    partial: Partial<TicketEntity | NotFoundException | ConflictException>,
+  ) {
     Object.assign(this, partial);
   }
 }
